@@ -64,7 +64,7 @@ Key settings in a topic file:
 | `hidden_tags` | Tags hidden on the site by default. Viewers can show them again. |
 | `retention_days` | Default 30. Older articles move to `docs/data/<slug>/archive/YYYY-MM.json`. The site's **All time** option loads the archive on demand. |
 
-A keyword group is either a list of terms, or `{scope: headline, terms: [...]}`. A headline-scoped group only checks the title, summary, and categories, so a passing word deep in an article doesn't tag it (UA uses this for Sports and the other facet tags).
+A keyword group is either a list of terms, or `{scope: headline, terms: [...]}`. A single term can override its group's scope with `{term: ..., scope: headline}`. UA uses this so the bare acronym "UA" only counts in headlines, because in article text it can also mean United Artists or United Airlines. A headline-scoped group only checks the title, summary, and categories, so a passing word deep in an article doesn't tag it (UA uses this for Sports and the other facet tags).
 
 Keyword syntax: plain text is case-insensitive and whole-word. A trailing `*` is a prefix wildcard. `/regex/` is a raw regex and is case-sensitive, which is how `/\bA\.?I\.?\b/` matches "AI" and "A.I." but not "ai".
 

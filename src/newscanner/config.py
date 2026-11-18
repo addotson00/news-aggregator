@@ -26,9 +26,15 @@ class Source:
 
 
 @dataclass
-class KeywordGroup:
-    terms: list[str]
+class Term:
+    text: str
     scope: str = "all"  # "all" = headline + article text; "headline" = title/summary/categories only
+
+
+@dataclass
+class KeywordGroup:
+    terms: list[Term]
+    scope: str = "all"  # default scope for the group's terms
 
 
 @dataclass
@@ -66,13 +72,16 @@ def load_topic(path: Path) -> Topic:
 
     keywords: dict[str, KeywordGroup] = {}
     for name, spec in (raw.get("keywords") or {}).items():
-        if isinstance(spec, dict):
-            group = KeywordGroup(terms=[str(t) for t in spec.get("terms") or []], scope=spec.get("scope", "all"))
-        else:
-            group = KeywordGroup(terms=[str(t) for t in (spec or [])])
-        if group.scope not in ("all", "headline"):
-            raise ValueError(f"{path.name}: keyword group {name!r} scope must be 'all' or 'headline'")
-        keywords[str(name)] = group
+        group_scope = spec.get("scope", "all") if isinstance(spec, dict) else "all"
+        raw_terms = (spec.get("terms") if isinstance(spec, dict) else spec) or []
+        terms = []
+        for t in raw_terms:
+            # a term is a string, or {term: ..., scope: headline|all} to override the group scope
+            term = Term(str(t["term"]), t.get("scope", group_scope)) if isinstance(t, dict) else Term(str(t), group_scope)
+            if term.scope not in ("all", "headline"):
+                raise ValueError(f"{path.name}: keyword group {name!r}: scope must be 'all' or 'headline'")
+            terms.append(term)
+        keywords[str(name)] = KeywordGroup(terms=terms, scope=group_scope)
     match_groups = raw.get("match_groups") or list(keywords)
     unknown = set(match_groups) - set(keywords)
     if unknown:

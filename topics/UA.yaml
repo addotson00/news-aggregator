@@ -168,7 +168,11 @@ sources:
 keywords:
   UA system:
     - University of Alaska
-    - /\bUA\b(?!\s+(?:[Ff]lights?|[Oo]utages?|[Aa]irlines?|[Pp]ilots?))/  # not United Airlines
+    # Bare "UA" is reliable in Alaska headlines, but in article bodies it also means
+    # United Artists, United Airlines, Under Armour... so in text require UA phrasing.
+    - term: /\bUA\b(?!\s+(?:[Ff]lights?|[Oo]utages?|[Aa]irlines?|[Pp]ilots?))/
+      scope: headline
+    - /\bUA(?:'s)? (?:system|[Bb]oard|[Rr]egents?|[Pp]resident|[Ff]oundation|[Ss]tatewide|campus(?:es)?|budget|faculty|students?|leadership|administration)\b/
     - UA Foundation
     - UA Board of Regents
     - University of Alaska Board of Regents

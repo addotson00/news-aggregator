@@ -53,7 +53,7 @@ def snippets(text: str, spans: list[tuple[int, int]]) -> list[str]:
 class Tagger:
     def __init__(self, topic: Topic):
         self.groups = {
-            name: (g.scope, [compile_term(t) for t in g.terms]) for name, g in topic.keywords.items()
+            name: [(t.scope, compile_term(t.text)) for t in g.terms] for name, g in topic.keywords.items()
         }
         self.match_groups = set(topic.match_groups)
         self.exclude = [compile_term(t) for t in topic.exclude]
@@ -68,9 +68,9 @@ class Tagger:
 
         tags, terms, spans = [], [], []
         head_hit = body_hit = False
-        for group, (scope, patterns) in self.groups.items():
+        for group, patterns in self.groups.items():
             hit = False
-            for p in patterns:
+            for scope, p in patterns:
                 if m := p.search(head):
                     hit = True
                     terms.append(m.group(0))
