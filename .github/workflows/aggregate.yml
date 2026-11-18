@@ -1,0 +1,36 @@
+# Optional: run the pipeline on GitHub's servers instead of (or as a backup to)
+# your own machine. The schedule is commented out so it won't race with a
+# local Hermes/cron job. Enable ONE scheduler, not both.
+#
+# Runners have no persistent disk, so each run must commit its data and fetch
+# state. That means one commit per run. Every 2 hours is a reasonable
+# trade-off between catching fast feeds and keeping git history small.
+name: aggregate
+
+on:
+  workflow_dispatch: {}          # "Run workflow" button in the Actions tab
+  # schedule:
+  #   - cron: "7 */2 * * *"      # every 2 hours at :07
+
+permissions:
+  contents: write
+
+concurrency:
+  group: aggregate
+  cancel-in-progress: false
+
+jobs:
+  aggregate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - name: Fetch and tag
+        run: uv run newscanner run
+      - name: Commit data
+        run: |
+          git config user.name "newscanner-bot"
+          git config user.email "newscanner-bot@users.noreply.github.com"
+          git add docs/data state
+          git diff --cached --quiet || git commit -m "data: update $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push

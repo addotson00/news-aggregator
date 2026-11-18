@@ -1,0 +1,253 @@
+{
+ "generated_at": "2026-11-18T20:42:19Z",
+ "topics": [
+  {
+   "slug": "AI-HE",
+   "title": "AI in Higher Education",
+   "description": "Artificial intelligence coverage from higher-ed and education news outlets.",
+   "mode": "tag",
+   "retention_days": 30,
+   "tags": [
+    "AI (general)",
+    "Generative AI & LLMs",
+    "Teaching & learning",
+    "Academic integrity",
+    "Policy & governance",
+    "Workforce & jobs"
+   ],
+   "match_groups": [
+    "AI (general)",
+    "Generative AI & LLMs"
+   ],
+   "article_count": 216,
+   "match_count": 40,
+   "archive": [
+    {
+     "month": "2026-10",
+     "count": 29
+    },
+    {
+     "month": "2026-09",
+     "count": 37
+    },
+    {
+     "month": "2026-06",
+     "count": 2
+    }
+   ],
+   "updated_at": "2026-11-18T20:42:19Z",
+   "sources": [
+    {
+     "id": "insidehighered",
+     "name": "Inside Higher Ed",
+     "homepage": "https://www.insidehighered.com/",
+     "type": "rss",
+     "state": "ok",
+     "not_modified": true,
+     "checked": "2026-11-18T20:42:08Z",
+     "fetched": 0,
+     "new": 0,
+     "last_ok": "2026-11-18T20:42:08Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "highereddive",
+     "name": "Higher Ed Dive",
+     "homepage": "https://www.highereddive.com/",
+     "type": "rss",
+     "state": "ok",
+     "not_modified": true,
+     "checked": "2026-11-18T20:42:08Z",
+     "fetched": 0,
+     "new": 0,
+     "last_ok": "2026-11-18T20:42:08Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "hechinger",
+     "name": "The Hechinger Report",
+     "homepage": "https://hechingerreport.org/",
+     "type": "rss",
+     "state": "ok",
+     "not_modified": true,
+     "checked": "2026-11-18T20:42:09Z",
+     "fetched": 0,
+     "new": 0,
+     "last_ok": "2026-11-18T20:42:09Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "edsurge",
+     "name": "EdSurge",
+     "homepage": "https://www.edsurge.com/",
+     "type": "rss",
+     "state": "ok",
+     "checked": "2026-11-18T20:42:09Z",
+     "fetched": 50,
+     "pages": 1,
+     "new": 0,
+     "duplicates": 0,
+     "last_ok": "2026-11-18T20:42:09Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "thepienews",
+     "name": "The PIE News",
+     "homepage": "https://thepienews.com/",
+     "type": "rss",
+     "state": "ok",
+     "checked": "2026-11-18T20:42:10Z",
+     "fetched": 30,
+     "pages": 3,
+     "new": 0,
+     "duplicates": 0,
+     "last_ok": "2026-11-18T20:42:10Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "nyt-education",
+     "name": "New York Times – Education",
+     "homepage": "https://www.nytimes.com/section/education",
+     "type": "rss",
+     "state": "ok",
+     "checked": "2026-11-18T20:42:12Z",
+     "fetched": 20,
+     "pages": 1,
+     "new": 0,
+     "duplicates": 0,
+     "last_ok": "2026-11-18T20:42:12Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "the",
+     "name": "Times Higher Education",
+     "homepage": "https://www.timeshighereducation.com/academic/news",
+     "type": "news_sitemap",
+     "state": "ok",
+     "not_modified": true,
+     "checked": "2026-11-18T20:42:12Z",
+     "fetched": 0,
+     "new": 0,
+     "last_ok": "2026-11-18T20:42:12Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "chronicle",
+     "name": "The Chronicle of Higher Education",
+     "homepage": "https://www.chronicle.com/",
+     "type": "rss",
+     "state": "ok",
+     "checked": "2026-11-18T20:42:13Z",
+     "fetched": 10,
+     "pages": 1,
+     "new": 0,
+     "duplicates": 0,
+     "last_ok": "2026-11-18T20:42:13Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "diverse",
+     "name": "Diverse: Issues in Higher Education",
+     "homepage": "https://diverseeducation.com/",
+     "type": "rss",
+     "state": "ok",
+     "not_modified": true,
+     "checked": "2026-11-18T20:42:13Z",
+     "fetched": 0,
+     "new": 0,
+     "last_ok": "2026-11-18T20:42:13Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "ecampusnews",
+     "name": "eCampus News",
+     "homepage": "https://www.ecampusnews.com/",
+     "type": "rss",
+     "state": "ok",
+     "not_modified": true,
+     "checked": "2026-11-18T20:42:14Z",
+     "fetched": 0,
+     "new": 0,
+     "last_ok": "2026-11-18T20:42:14Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "campustechnology",
+     "name": "Campus Technology",
+     "homepage": "https://campustechnology.com/",
+     "type": "rss",
+     "state": "ok",
+     "checked": "2026-11-18T20:42:14Z",
+     "fetched": 50,
+     "pages": 1,
+     "new": 0,
+     "duplicates": 0,
+     "last_ok": "2026-11-18T20:42:14Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "conversation-education",
+     "name": "The Conversation – Education",
+     "homepage": "https://theconversation.com/us/education",
+     "type": "rss",
+     "state": "ok",
+     "checked": "2026-11-18T20:42:15Z",
+     "fetched": 25,
+     "pages": 1,
+     "new": 0,
+     "duplicates": 0,
+     "last_ok": "2026-11-18T20:42:15Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "nsc-research",
+     "name": "National Student Clearinghouse Research Center",
+     "homepage": "https://nscresearchcenter.org/",
+     "type": "rss",
+     "state": "ok",
+     "not_modified": true,
+     "checked": "2026-11-18T20:42:15Z",
+     "fetched": 0,
+     "new": 0,
+     "last_ok": "2026-11-18T20:42:15Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "ccrc",
+     "name": "Community College Research Center",
+     "homepage": "https://ccrc.tc.columbia.edu/",
+     "type": "rss",
+     "state": "ok",
+     "not_modified": true,
+     "checked": "2026-11-18T20:42:18Z",
+     "fetched": 0,
+     "new": 0,
+     "last_ok": "2026-11-18T20:42:18Z",
+     "gaps_total": 0,
+     "last_gap": null
+    },
+    {
+     "id": "universityworldnews",
+     "name": "University World News",
+     "homepage": "https://www.universityworldnews.com/",
+     "type": "html",
+     "state": "disabled",
+     "note": "No RSS or news sitemap found; needs a scraper."
+    }
+   ]
+  }
+ ]
+}

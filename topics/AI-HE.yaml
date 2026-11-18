@@ -1,0 +1,177 @@
+# One file per aggregator ("topic"). The slug becomes the data folder name.
+slug: AI-HE
+title: AI in Higher Education
+description: Artificial intelligence coverage from higher-ed and education news outlets.
+
+# tag   = keep every article from the sources, mark the ones matching keywords
+#         (the site lets you toggle "matches only" vs "all articles")
+# filter = only store articles that match at least one keyword group
+mode: tag
+
+# Articles older than this (by publish date) move to monthly archive files
+# (data/<slug>/archive/YYYY-MM.json). The site loads the archive on demand.
+retention_days: 30
+
+sources:
+  - id: insidehighered
+    name: Inside Higher Ed
+    homepage: https://www.insidehighered.com/
+    type: rss
+    url: https://www.insidehighered.com/rss.xml
+
+  - id: highereddive
+    name: Higher Ed Dive
+    homepage: https://www.highereddive.com/
+    type: rss
+    url: https://www.highereddive.com/feeds/news/
+
+  - id: hechinger
+    name: The Hechinger Report
+    homepage: https://hechingerreport.org/
+    type: rss
+    url: https://hechingerreport.org/feed/
+    pages: 2  # WordPress feed paging (?paged=2) for overlap between runs
+
+  - id: edsurge
+    name: EdSurge
+    homepage: https://www.edsurge.com/
+    type: rss
+    url: https://www.edsurge.com/articles_rss
+
+  - id: thepienews
+    name: The PIE News
+    homepage: https://thepienews.com/
+    type: rss
+    url: https://thepienews.com/feed/
+    pages: 3  # ~10 posts/page, ~7 posts/day
+
+  - id: nyt-education
+    name: New York Times – Education
+    homepage: https://www.nytimes.com/section/education
+    type: rss
+    url: https://rss.nytimes.com/services/xml/rss/nyt/Education.xml
+
+  - id: the
+    name: Times Higher Education
+    homepage: https://www.timeshighereducation.com/academic/news
+    type: news_sitemap
+    url: https://www.timeshighereducation.com/googlenews.xml
+
+  - id: chronicle
+    name: The Chronicle of Higher Education
+    homepage: https://www.chronicle.com/
+    type: rss  # Atom feed; the rss fetcher handles RSS and Atom
+    url: https://www.chronicle.com/index.atom
+
+  # --- Added from the earlier Hermes project's feeds.opml (re-verified URLs) ---
+  - id: diverse
+    name: "Diverse: Issues in Higher Education"
+    homepage: https://diverseeducation.com/
+    type: rss
+    url: https://diverseeducation.com/feed/
+
+  - id: ecampusnews
+    name: eCampus News
+    homepage: https://www.ecampusnews.com/
+    type: rss
+    url: https://www.ecampusnews.com/feed/
+
+  - id: campustechnology
+    name: Campus Technology
+    homepage: https://campustechnology.com/
+    type: rss
+    url: https://campustechnology.com/rss
+
+  - id: conversation-education
+    name: The Conversation – Education
+    homepage: https://theconversation.com/us/education
+    type: rss
+    url: https://theconversation.com/us/education/articles.atom
+
+  - id: nsc-research
+    name: National Student Clearinghouse Research Center
+    homepage: https://nscresearchcenter.org/
+    type: rss
+    url: https://nscresearchcenter.org/feed/
+
+  - id: ccrc
+    name: Community College Research Center
+    homepage: https://ccrc.tc.columbia.edu/
+    type: rss
+    url: https://ccrc.tc.columbia.edu/feed/
+
+  # No machine-readable feed reachable yet; candidate for the scraping phase.
+  - id: universityworldnews
+    name: University World News
+    homepage: https://www.universityworldnews.com/
+    type: html
+    url: https://www.universityworldnews.com/
+    enabled: false
+    note: No RSS or news sitemap found; needs a scraper.
+
+# Keyword groups become filter tags on the site. Terms are checked against the
+# title, summary, and the outlet's own category labels.
+#
+# An article counts as a "match" only if one of the groups in `match_groups`
+# hits. The other groups act as facet tags. For example, a cheating story with
+# no AI angle gets the "Academic integrity" tag but isn't counted as a match.
+# Leave match_groups out to let every group count.
+#
+# Term syntax:
+#   plain text     case-insensitive, whole-word ("machine learning")
+#   trailing *     word-prefix wildcard ("chatbot*" -> chatbot, chatbots)
+#   /regex/        raw Python regex, case-SENSITIVE unless you add (?i)
+keywords:
+  AI (general):
+    - /\bA\.?I\.?\b/
+    - artificial intelligence
+    - machine learning
+    - deep learning
+    - neural network*
+  Generative AI & LLMs:
+    - generative AI
+    - /(?i)\bgen ?AI\b/
+    - ChatGPT
+    - GPT-*
+    - OpenAI
+    - Anthropic
+    - Claude
+    - Gemini
+    - Copilot
+    - large language model*
+    - /\bLLMs?\b/
+    - chatbot*
+    - AI agent*
+    - agentic
+  Teaching & learning:
+    - AI literacy
+    - AI tutor*
+    - AI-powered
+    - AI tools
+    - AI in the classroom
+    - personalized learning
+  Academic integrity:
+    - AI detection
+    - AI detector*
+    - plagiarism
+    - cheating
+    - academic integrity
+  Policy & governance:
+    - AI policy
+    - AI policies
+    - AI regulation
+    - AI guidance
+    - AI ethics
+    - responsible AI
+  Workforce & jobs:
+    - automation
+    - AI skills
+    - future of work
+    - AI workforce
+
+match_groups:
+  - AI (general)
+  - Generative AI & LLMs
+
+# Matches here veto an article even if a group matched.
+exclude: []

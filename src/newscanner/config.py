@@ -1,0 +1,89 @@
+"""Load topic YAML files into typed objects."""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass, field
+from pathlib import Path
+
+import yaml
+
+SOURCE_TYPES = {"rss", "news_sitemap", "html"}
+
+
+@dataclass
+class Source:
+    id: str
+    name: str
+    url: str
+    type: str = "rss"
+    homepage: str = ""
+    enabled: bool = True
+    note: str = ""
+    pages: int = 1  # >1 reads extra feed pages via ?<page_param>=N (WordPress feeds)
+    page_param: str = "paged"
+
+
+@dataclass
+class Topic:
+    slug: str
+    title: str
+    description: str = ""
+    mode: str = "tag"  # "tag" keeps everything; "filter" keeps matches only
+    retention_days: int = 30
+    sources: list[Source] = field(default_factory=list)
+    keywords: dict[str, list[str]] = field(default_factory=dict)
+    match_groups: list[str] = field(default_factory=list)
+    exclude: list[str] = field(default_factory=list)
+    path: Path | None = None
+
+
+def load_topic(path: Path) -> Topic:
+    raw = yaml.safe_load(path.read_text()) or {}
+    sources = []
+    for s in raw.get("sources", []):
+        src = Source(**s)
+        if src.type not in SOURCE_TYPES:
+            raise ValueError(f"{path.name}: source {src.id!r} has unknown type {src.type!r}")
+        sources.append(src)
+
+    ids = [s.id for s in sources]
+    if len(ids) != len(set(ids)):
+        raise ValueError(f"{path.name}: duplicate source ids")
+
+    keywords = {str(k): [str(t) for t in (v or [])] for k, v in (raw.get("keywords") or {}).items()}
+    match_groups = raw.get("match_groups") or list(keywords)
+    unknown = set(match_groups) - set(keywords)
+    if unknown:
+        raise ValueError(f"{path.name}: match_groups not defined in keywords: {sorted(unknown)}")
+
+    mode = raw.get("mode", "tag")
+    if mode not in ("tag", "filter"):
+        raise ValueError(f"{path.name}: mode must be 'tag' or 'filter'")
+
+    slug = str(raw["slug"])
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", slug) or slug in ("assets", "data"):
+        raise ValueError(f"{path.name}: slug {slug!r} must be letters/digits/-/_ and not 'assets' or 'data'")
+
+    return Topic(
+        slug=slug,
+        title=raw.get("title", raw["slug"]),
+        description=raw.get("description", ""),
+        mode=mode,
+        retention_days=int(raw.get("retention_days", 30)),
+        sources=sources,
+        keywords=keywords,
+        match_groups=list(match_groups),
+        exclude=[str(t) for t in (raw.get("exclude") or [])],
+        path=path,
+    )
+
+
+def load_topics(topics_dir: Path, only: list[str] | None = None) -> list[Topic]:
+    topics = [load_topic(p) for p in sorted(topics_dir.glob("*.y*ml"))]
+    if only:
+        missing = set(only) - {t.slug for t in topics}
+        if missing:
+            raise SystemExit(f"Unknown topic(s): {', '.join(sorted(missing))}")
+        topics = [t for t in topics if t.slug in only]
+    return topics
