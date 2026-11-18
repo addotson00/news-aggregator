@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI in Higher Education</title>
   <meta name="description" content="Artificial intelligence coverage from higher-ed and education news outlets.">
-  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/style.css?v=9dc6a6a7f0">
 </head>
 <body>
   <header class="site-header">
@@ -37,6 +37,15 @@
           <div class="seg" role="radiogroup" id="show-seg">
             <button type="button" data-show="match" aria-pressed="true">Keyword matches</button>
             <button type="button" data-show="all" aria-pressed="false">All articles</button>
+          </div>
+        </section>
+
+        <section class="filter-block" hidden>
+          <h2>Mentioned in</h2>
+          <div class="seg" id="where-seg">
+            <button type="button" data-where="">Anywhere</button>
+            <button type="button" data-where="headline">Headline</button>
+            <button type="button" data-where="text">Article text</button>
           </div>
         </section>
 
@@ -82,6 +91,6 @@
     <p class="muted small">Headlines and short excerpts link to the original publishers. Updated <span id="updated">—</span>.</p>
   </footer>
 
-  <script src="assets/app.js"></script>
+  <script src="assets/app.js?v=9dc6a6a7f0"></script>
 </body>
 </html>

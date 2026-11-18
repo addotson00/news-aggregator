@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import functools
+import hashlib
 import html
 import json
 import http.server
@@ -235,10 +236,22 @@ def run_topic(topic: Topic, out_dir: Path, state_dir: Path, client, force: bool 
 SITE_TEMPLATE = Path(__file__).parent / "site" / "topic.html"
 
 
+def asset_version(out_dir: Path) -> str:
+    """Short content hash of the shared JS/CSS, appended as ?v= so browsers and
+    the Pages CDN (max-age=600) pick up changes immediately."""
+    h = hashlib.sha1()
+    for name in ("app.js", "style.css"):
+        p = out_dir / "assets" / name
+        if p.exists():
+            h.update(p.read_bytes())
+    return h.hexdigest()[:10]
+
+
 def write_topic_page(out_dir: Path, topic: Topic) -> None:
     """docs/<slug>/index.html: the per-aggregator page, served at <site>/<slug>/."""
     page = (
         SITE_TEMPLATE.read_text()
+        .replace("{{ASSET_VERSION}}", asset_version(out_dir))
         .replace("{{SLUG}}", html.escape(topic.slug))
         .replace("{{TITLE}}", html.escape(topic.title))
         .replace("{{DESCRIPTION}}", html.escape(topic.description))
