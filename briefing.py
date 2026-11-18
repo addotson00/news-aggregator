@@ -76,10 +76,14 @@ class BriefingGenerator:
                     if pub_date and pub_date < datetime.now(timezone.utc) - timedelta(hours=48):
                         continue  # Skip items older than 48 hours
 
+                    # Clean summary - strip HTML tags and images
+                    raw_summary = entry.get("summary", entry.get("description", ""))
+                    clean_summary = self._clean_summary(raw_summary)
+
                     item = {
                         "title": html.unescape(entry.get("title", "")).strip(),
                         "link": entry.get("link", ""),
-                        "summary": html.unescape(entry.get("summary", entry.get("description", ""))).strip(),
+                        "summary": clean_summary,
                         "published": pub_date.isoformat() if pub_date else None,
                         "source": feed["title"],
                         "source_url": feed.get("html_url", ""),
@@ -117,6 +121,36 @@ class BriefingGenerator:
                 except (ValueError, TypeError):
                     continue
         return None
+
+    def _clean_summary(self, raw_summary):
+        """Strip HTML tags, images, and clean up summary text."""
+        if not raw_summary:
+            return ""
+        
+        # Decode HTML entities first
+        text = html.unescape(raw_summary)
+        
+        # Remove <img> tags and their variants
+        text = re.sub(r'<img[^>]*>', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'<figure[^>]*>.*?</figure>', '', text, flags=re.IGNORECASE | re.DOTALL)
+        text = re.sub(r'<div[^>]*class=["\'][^"\']*image[^"\']*["\'][^>]*>.*?</div>', '', text, flags=re.IGNORECASE | re.DOTALL)
+        text = re.sub(r'<div[^>]*class=["\'][^"\']*figure[^"\']*["\'][^>]*>.*?</div>', '', text, flags=re.IGNORECASE | re.DOTALL)
+        
+        # Remove all remaining HTML tags
+        text = re.sub(r'<[^>]+>', '', text)
+        
+        # Decode any remaining HTML entities
+        text = html.unescape(text)
+        
+        # Clean up whitespace
+        text = re.sub(r'\s+', ' ', text)
+        text = text.strip()
+        
+        # Remove common boilerplate patterns
+        text = re.sub(r'^\s*[\[\(]?\s*(image|photo|picture|video|gallery)\s*[\]\)]?\s*', '', text, flags=re.IGNORECASE)
+        text = re.sub(r'\s{2,}', ' ', text)
+        
+        return text.strip()
 
     def dedupe_items(self, items):
         """Deduplicate items by hash and title similarity."""
