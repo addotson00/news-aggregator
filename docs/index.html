@@ -6,24 +6,91 @@
     <title>Higher Ed + AI Daily Briefing — November 18, 2026</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            /* Light mode (default) — refined professional palette */
+            --bg-primary: #f5f5f4;           /* warm off-white */
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e7e5e4;           /* stone-200 */
+            --text-primary: #1c1917;          --text-secondary: #44403c;       --text-muted: #78716c;            --text-subtle: #a8a29e;          --border-color: #d6d3d1;          --accent-primary: #1e40af;        --accent-hover: #1e3a8a;         --accent-bg: #dbeafe;            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.08);
+            --ai-badge-bg: #fef9c3;          --ai-badge-text: #854d0e;        --top-signals-bg: linear-gradient(135deg, #fef9c3 0%, #fef08a 100%);
+            --top-signals-text: #854d0e;     --stats-bg: #f5f5f4;             --header-border: #d6d3d1;
+            --tag-bg: #eff6ff;               --tag-text: #1e40af;             --ai-score-bg: #fef9c3;
+            --ai-score-text: #854d0e;        --meta-bg: #f5f5f4;
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode — refined professional palette */
+            --bg-primary: #0c0a09;           --bg-secondary: #1c1917;         --bg-tertiary: #292524;          --text-primary: #fafaf9;           --text-secondary: #d6d3d1;       --text-muted: #a8a29e;          --text-subtle: #78716c;          --border-color: #292524;         --accent-primary: #60a5fa;       --accent-hover: #93c5fd;        --accent-bg: #1e3a5f;            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --ai-badge-bg: #713f12;          --ai-badge-text: #fde047;        --top-signals-bg: linear-gradient(135deg, #713f12 0%, #a16207 100%);
+            --top-signals-text: #fde047;     --stats-bg: #1c1917;             --header-border: #292524;
+            --tag-bg: #1e3a5f;               --tag-text: #93c5fd;             --ai-score-bg: #713f12;
+            --ai-score-text: #fde047;        --meta-bg: #1c1917;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: #1a1a2e;
-            background: #f8f9fa;
+            line-height: 1.65;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             max-width: 900px;
             margin: 0 auto;
             padding: 2rem 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
+        /* Prevent any images from breaking layout */
+        .article-summary img,
+        .article-item img,
+        .article-summary figure,
+        .article-item figure {
+            display: none !important;
+        }
+
         header {
             text-align: center;
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
-            border-bottom: 2px solid #e0e0e0;
+            border-bottom: 2px solid var(--header-border);
+            position: relative;
         }
-        h1 { font-size: 2.2rem; color: #1a1a2e; margin-bottom: 0.5rem; }
-        .subtitle { color: #666; font-size: 1.1rem; }
-        .meta { color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+        }
+
+        .theme-toggle:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        h1 { font-size: 2.2rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; }
+        .meta { color: var(--text-subtle); font-size: 0.9rem; margin-top: 0.5rem; }
 
         .stats-bar {
             display: flex;
@@ -31,14 +98,14 @@
             gap: 2rem;
             margin: 1.5rem 0;
             padding: 1rem;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
             flex-wrap: wrap;
         }
         .stat { text-align: center; }
-        .stat-value { font-size: 1.5rem; font-weight: 700; color: #2563eb; }
-        .stat-label { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { font-size: 1.6rem; font-weight: 700; color: var(--accent-primary); }
+        .stat-label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
         .section { margin: 2.5rem 0; }
         .section-header {
@@ -47,95 +114,88 @@
             gap: 0.75rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--header-border);
         }
-        .section-header h2 { font-size: 1.4rem; color: #1a1a2e; }
-        .theme-badge {
-            background: #2563eb;
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
+        .section-header h2 { font-size: 1.35rem; color: var(--text-primary); font-weight: 600; }
+        .theme-count { color: var(--text-subtle); font-size: 0.8rem; margin-left: 0.5rem; }
 
         .article-list { list-style: none; }
         .article-item {
-            background: white;
-            border-radius: 8px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
             padding: 1.25rem;
             margin-bottom: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border-left: 4px solid #2563eb;
-            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            border-left: 4px solid var(--accent-primary);
+            transition: transform 0.15s, box-shadow 0.15s, background-color 0.3s;
         }
         .article-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
         .article-title {
             font-size: 1.05rem;
             font-weight: 600;
-            color: #1a1a2e;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
             line-height: 1.4;
         }
         .article-title a { color: inherit; text-decoration: none; }
-        .article-title a:hover { color: #2563eb; text-decoration: underline; }
+        .article-title a:hover { color: var(--accent-hover); text-decoration: underline; }
         .article-meta {
             display: flex;
             flex-wrap: wrap;
-            gap: 1rem;
-            font-size: 0.8rem;
-            color: #666;
+            gap: 0.75rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
         }
         .meta-tag {
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
-            background: #f0f4f8;
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.7rem;
+            background: var(--tag-bg);
+            padding: 0.2rem 0.55rem;
+            border-radius: 9999px;
+            font-size: 0.68rem;
             font-weight: 500;
-            color: #2563eb;
+            color: var(--tag-text);
         }
         .ai-score {
-            background: #fef3c7;
-            color: #92400e;
+            background: var(--ai-score-bg);
+            color: var(--ai-score-text);
         }
         .article-summary {
-            font-size: 0.9rem;
-            color: #444;
-            line-height: 1.5;
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
         }
 
         .top-signals {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-            border-radius: 12px;
+            background: var(--top-signals-bg);
+            border-radius: 14px;
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
-        .top-signals h2 { color: #92400e; margin-bottom: 1rem; }
+        .top-signals h2 { color: var(--top-signals-text); margin-bottom: 1rem; font-size: 1.2rem; }
 
         .stats-summary {
-            background: #f0f4f8;
-            border-radius: 8px;
-            padding: 1rem;
+            background: var(--stats-bg);
+            border-radius: 10px;
+            padding: 1rem 1.25rem;
             margin: 1.5rem 0;
             font-size: 0.9rem;
-            color: #444;
+            color: var(--text-secondary);
         }
-        .stats-summary strong { color: #1a1a2e; }
+        .stats-summary strong { color: var(--text-primary); }
 
         .ai-badge {
             display: inline-block;
-            background: #fef3c7;
-            color: #92400e;
-            padding: 0.15rem 0.5rem;
-            border-radius: 3px;
-            font-size: 0.7rem;
+            background: var(--ai-badge-bg);
+            color: var(--ai-badge-text);
+            padding: 0.15rem 0.55rem;
+            border-radius: 9999px;
+            font-size: 0.68rem;
             font-weight: 600;
             margin-left: 0.5rem;
         }
@@ -143,29 +203,34 @@
         footer {
             margin-top: 3rem;
             padding-top: 1.5rem;
-            border-top: 2px solid #e0e0e0;
+            border-top: 2px solid var(--header-border);
             text-align: center;
-            color: #888;
+            color: var(--text-subtle);
             font-size: 0.85rem;
         }
-        footer a { color: #2563eb; text-decoration: none; }
+        footer a { color: var(--accent-primary); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
 
-        .theme-count { color: #888; font-size: 0.8rem; margin-left: 0.5rem; }
+        .theme-count { color: var(--text-subtle); font-size: 0.8rem; margin-left: 0.5rem; }
 
         @media (max-width: 600px) {
-            body { padding: 1rem; }
-            h1 { font-size: 1.8rem; }
+            body { padding: 1.25rem 1rem; }
+            h1 { font-size: 1.9rem; }
             .stats-bar { gap: 1rem; }
             .article-item { padding: 1rem; }
+            .theme-toggle { font-size: 0.75rem; padding: 0.4rem 0.75rem; }
         }
     </style>
 </head>
 <body>
     <header>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">Dark</span>
+        </button>
         <h1>Higher Ed + AI Daily Briefing</h1>
         <div class="subtitle">November 18, 2026</div>
-        <div class="meta">Generated 2026-11-18 03:45 UTC</div>
+        <div class="meta">Generated 2026-11-18 04:32 UTC</div>
     </header>
 
     <div class="stats-bar">
@@ -212,38 +277,6 @@
             
             <li class="article-item">
                 <div class="article-title">
-                    <a href="https://www.insidehighered.com/news/government/student-aid-policy/2026/11/17/trump-admin-consolidate-student-aid-data-treasury" target="_blank" rel="noopener">Trump Admin Moves to Consolidate Student Aid Data at Treasury</a>
-                    <span class="ai-badge">AI Score: 7</span>
-                </div>
-                <div class="article-meta">
-                    <span>📰 Inside Higher Ed</span>
-                    <span class="meta-tag ai-score">AI Score: 7</span>
-                    
-                    <span class="meta-tag">Infrastructure, Compute & Partnerships</span>
-                    
-                    <span class="meta-tag">Equity, Access & Ethics</span>
-                    
-                </div>
-            </li>
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.insidehighered.com/news/student-success/academic-life/2026/11/17/ai-changing-college-old-challenges-persist" target="_blank" rel="noopener">As AI Changes How Students Approach College, Old Challenges Persist</a>
-                    <span class="ai-badge">AI Score: 7</span>
-                </div>
-                <div class="article-meta">
-                    <span>📰 Inside Higher Ed</span>
-                    <span class="meta-tag ai-score">AI Score: 7</span>
-                    
-                    <span class="meta-tag">AI Research & Funding</span>
-                    
-                    <span class="meta-tag">Student Experience & Affairs</span>
-                    
-                </div>
-            </li>
-            
-            <li class="article-item">
-                <div class="article-title">
                     <a href="https://www.highereddive.com/news/international-student-enrollment-fell-27-in-2025-26/874661/" target="_blank" rel="noopener">International student enrollment fell 2.7% in 2025-26</a>
                     <span class="ai-badge">AI Score: 7</span>
                 </div>
@@ -254,6 +287,34 @@
                     <span class="meta-tag">AI in Operations & Administration</span>
                     
                     <span class="meta-tag">Finance, Enrollment & Business Models</span>
+                    
+                </div>
+            </li>
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.insidehighered.com/news/government/student-aid-policy/2026/11/17/trump-admin-consolidate-student-aid-data-treasury" target="_blank" rel="noopener">Trump Admin Moves to Consolidate Student Aid Data at Treasury</a>
+                    <span class="ai-badge">AI Score: 6</span>
+                </div>
+                <div class="article-meta">
+                    <span>📰 Inside Higher Ed</span>
+                    <span class="meta-tag ai-score">AI Score: 6</span>
+                    
+                    <span class="meta-tag">Equity, Access & Ethics</span>
+                    
+                </div>
+            </li>
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.insidehighered.com/news/student-success/academic-life/2026/11/17/ai-changing-college-old-challenges-persist" target="_blank" rel="noopener">As AI Changes How Students Approach College, Old Challenges Persist</a>
+                    <span class="ai-badge">AI Score: 6</span>
+                </div>
+                <div class="article-meta">
+                    <span>📰 Inside Higher Ed</span>
+                    <span class="meta-tag ai-score">AI Score: 6</span>
+                    
+                    <span class="meta-tag">Student Experience & Affairs</span>
                     
                 </div>
             </li>
@@ -335,28 +396,15 @@
                     <span>🕐 2026-11-17 08:00 UTC</span>
                     
                     
-                    <span class="meta-tag ai-score">AI: 7</span>
+                    <span class="meta-tag ai-score">AI: 6</span>
                     
-                    
-                    <span class="meta-tag">AI Research & Funding</span>
                     
                     <span class="meta-tag">Student Experience & Affairs</span>
                     
                 </div>
                 
                 <div class="article-summary">
-                    As AI Changes How Students Approach College, Old Challenges Persist
-
-              
-
-
-      
-colleen.flaherty
-
-Tue, 11/17/2026 - 03:00 AM
-
-The student experience is in transition, but unmet financial needs and mental health continue to limit students’ success, according to new Student Voice data.
-  ...
+                    As AI Changes How Students Approach College, Old Challenges Persist colleen.flaherty Tue, 11/17/2026 - 03:00 AM The student experience is in transition, but unmet financial needs and mental health continue to limit students’ success, according to new Student Voice data. Byline(s) Colleen Flaherty As...
                 </div>
                 
             </li>
@@ -414,7 +462,7 @@ The student experience is in transition, but unmet financial needs and mental he
                 </div>
                 
                 <div class="article-summary">
-                    <figure><div><img src="https://imgproxy.divecdn.com/Zakk90H8Y-fWsalWCZ9yB6gvzeLTZS_WMsu8mpM3ijw/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMDMzMDkxNjBfMS5qcGc=.webp" /></div></figure><p>The U.S. Department of Justice recently threatened an antitrust probe ove...
+                    The U.S. Department of Justice recently threatened an antitrust probe over the requirement, arguing that it drives up legal education costs.
                 </div>
                 
             </li>
@@ -482,7 +530,7 @@ The student experience is in transition, but unmet financial needs and mental he
                 </div>
                 
                 <div class="article-summary">
-                    <p>The annual Open Doors report also found signs losses are poised to continue, with the number of new foreign students plummeting 17.7% from the prior year.</p>
+                    The annual Open Doors report also found signs losses are poised to continue, with the number of new foreign students plummeting 17.7% from the prior year.
                 </div>
                 
             </li>
@@ -506,7 +554,7 @@ The student experience is in transition, but unmet financial needs and mental he
                 </div>
                 
                 <div class="article-summary">
-                    <p>We’re rounding up last week’s most interesting stories, from financial woes at major institutions to college campus takeovers in Pennsylvania and Florida.</p>
+                    We’re rounding up last week’s most interesting stories, from financial woes at major institutions to college campus takeovers in Pennsylvania and Florida.
                 </div>
                 
             </li>
@@ -574,7 +622,7 @@ The student experience is in transition, but unmet financial needs and mental he
                 </div>
                 
                 <div class="article-summary">
-                    <p>The annual Open Doors report also found signs losses are poised to continue, with the number of new foreign students plummeting 17.7% from the prior year.</p>
+                    The annual Open Doors report also found signs losses are poised to continue, with the number of new foreign students plummeting 17.7% from the prior year.
                 </div>
                 
             </li>
@@ -584,8 +632,8 @@ The student experience is in transition, but unmet financial needs and mental he
     
     <section class="section">
         <div class="section-header">
-            <h2>Infrastructure, Compute & Partnerships</h2>
-            <span class="theme-count">3 articles</span>
+            <h2>Equity, Access & Ethics</h2>
+            <span class="theme-count">1 article</span>
         </div>
         <ul class="article-list">
             
@@ -602,33 +650,28 @@ The student experience is in transition, but unmet financial needs and mental he
                     <span>🕐 2026-11-17 08:00 UTC</span>
                     
                     
-                    <span class="meta-tag ai-score">AI: 7</span>
+                    <span class="meta-tag ai-score">AI: 6</span>
                     
-                    
-                    <span class="meta-tag">Infrastructure, Compute & Partnerships</span>
                     
                     <span class="meta-tag">Equity, Access & Ethics</span>
                     
                 </div>
                 
                 <div class="article-summary">
-                    Trump Admin Moves to Consolidate Student Aid Data at Treasury
-
-              
-
-
-      
-jessica.blake@…
-
-Tue, 11/17/2026 - 03:00 AM
-
-Higher education legal experts and student advocates argue this latest move violates federal privacy law. An ED official dismissed their concerns.
-  
-    Byline(s)
-    ...
+                    Trump Admin Moves to Consolidate Student Aid Data at Treasury jessica.blake@… Tue, 11/17/2026 - 03:00 AM Higher education legal experts and student advocates argue this latest move violates federal privacy law. An ED official dismissed their concerns. Byline(s) Jessica Blake Trump Admin Moves to Con...
                 </div>
                 
             </li>
+            
+        </ul>
+    </section>
+    
+    <section class="section">
+        <div class="section-header">
+            <h2>Legal, Compliance & Regulation</h2>
+            <span class="theme-count">2 articles</span>
+        </div>
+        <ul class="article-list">
             
             <li class="article-item">
                 <div class="article-title">
@@ -653,7 +696,73 @@ Higher education legal experts and student advocates argue this latest move viol
                 </div>
                 
                 <div class="article-summary">
-                    <p>A group of students, faculty and alumni said the historically Black institution has been discriminated against and shortchanged $6 billion since its founding.</p>
+                    A group of students, faculty and alumni said the historically Black institution has been discriminated against and shortchanged $6 billion since its founding.
+                </div>
+                
+            </li>
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.highereddive.com/news/aba-accreditation-arm-moves-to-nix-full-time-faculty-standard-for-first-yea/874998/" target="_blank" rel="noopener">ABA accreditation arm moves to nix full-time faculty standard for first-year classes</a>
+                    
+                    <span class="ai-badge">AI</span>
+                    
+                </div>
+                <div class="article-meta">
+                    <span>📰 Higher Ed Dive</span>
+                    
+                    <span>🕐 2026-11-18 00:07 UTC</span>
+                    
+                    
+                    <span class="meta-tag ai-score">AI: 2</span>
+                    
+                    
+                    <span class="meta-tag">Student Experience & Affairs</span>
+                    
+                    <span class="meta-tag">Legal, Compliance & Regulation</span>
+                    
+                </div>
+                
+                <div class="article-summary">
+                    The U.S. Department of Justice recently threatened an antitrust probe over the requirement, arguing that it drives up legal education costs.
+                </div>
+                
+            </li>
+            
+        </ul>
+    </section>
+    
+    <section class="section">
+        <div class="section-header">
+            <h2>Infrastructure, Compute & Partnerships</h2>
+            <span class="theme-count">2 articles</span>
+        </div>
+        <ul class="article-list">
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.highereddive.com/news/lawsuit-alleges-chronic-underfunding-of-university-of-maryland-eastern-shor/874815/" target="_blank" rel="noopener">Lawsuit alleges chronic underfunding of University of Maryland Eastern Shore</a>
+                    
+                    <span class="ai-badge">AI</span>
+                    
+                </div>
+                <div class="article-meta">
+                    <span>📰 Higher Ed Dive</span>
+                    
+                    <span>🕐 2026-11-16 22:52 UTC</span>
+                    
+                    
+                    <span class="meta-tag ai-score">AI: 4</span>
+                    
+                    
+                    <span class="meta-tag">Infrastructure, Compute & Partnerships</span>
+                    
+                    <span class="meta-tag">Legal, Compliance & Regulation</span>
+                    
+                </div>
+                
+                <div class="article-summary">
+                    A group of students, faculty and alumni said the historically Black institution has been discriminated against and shortchanged $6 billion since its founding.
                 </div>
                 
             </li>
@@ -693,284 +802,6 @@ Higher education legal experts and student advocates argue this latest move viol
     
     <section class="section">
         <div class="section-header">
-            <h2>Equity, Access & Ethics</h2>
-            <span class="theme-count">1 article</span>
-        </div>
-        <ul class="article-list">
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.insidehighered.com/news/government/student-aid-policy/2026/11/17/trump-admin-consolidate-student-aid-data-treasury" target="_blank" rel="noopener">Trump Admin Moves to Consolidate Student Aid Data at Treasury</a>
-                    
-                    <span class="ai-badge">AI</span>
-                    
-                </div>
-                <div class="article-meta">
-                    <span>📰 Inside Higher Ed</span>
-                    
-                    <span>🕐 2026-11-17 08:00 UTC</span>
-                    
-                    
-                    <span class="meta-tag ai-score">AI: 7</span>
-                    
-                    
-                    <span class="meta-tag">Infrastructure, Compute & Partnerships</span>
-                    
-                    <span class="meta-tag">Equity, Access & Ethics</span>
-                    
-                </div>
-                
-                <div class="article-summary">
-                    Trump Admin Moves to Consolidate Student Aid Data at Treasury
-
-              
-
-
-      
-jessica.blake@…
-
-Tue, 11/17/2026 - 03:00 AM
-
-Higher education legal experts and student advocates argue this latest move violates federal privacy law. An ED official dismissed their concerns.
-  
-    Byline(s)
-    ...
-                </div>
-                
-            </li>
-            
-        </ul>
-    </section>
-    
-    <section class="section">
-        <div class="section-header">
-            <h2>AI Research & Funding</h2>
-            <span class="theme-count">5 articles</span>
-        </div>
-        <ul class="article-list">
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.insidehighered.com/news/student-success/academic-life/2026/11/17/ai-changing-college-old-challenges-persist" target="_blank" rel="noopener">As AI Changes How Students Approach College, Old Challenges Persist</a>
-                    
-                    <span class="ai-badge">AI</span>
-                    
-                </div>
-                <div class="article-meta">
-                    <span>📰 Inside Higher Ed</span>
-                    
-                    <span>🕐 2026-11-17 08:00 UTC</span>
-                    
-                    
-                    <span class="meta-tag ai-score">AI: 7</span>
-                    
-                    
-                    <span class="meta-tag">AI Research & Funding</span>
-                    
-                    <span class="meta-tag">Student Experience & Affairs</span>
-                    
-                </div>
-                
-                <div class="article-summary">
-                    As AI Changes How Students Approach College, Old Challenges Persist
-
-              
-
-
-      
-colleen.flaherty
-
-Tue, 11/17/2026 - 03:00 AM
-
-The student experience is in transition, but unmet financial needs and mental health continue to limit students’ success, according to new Student Voice data.
-  ...
-                </div>
-                
-            </li>
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.insidehighered.com/opinion/views/2026/11/17/research-questions-we-ask-matter-opinion" target="_blank" rel="noopener">What if the Justice Department Studied ‘Mar-a-Lago Face’ and Violent Crime?</a>
-                    
-                    <span class="ai-badge">AI</span>
-                    
-                </div>
-                <div class="article-meta">
-                    <span>📰 Inside Higher Ed</span>
-                    
-                    <span>🕐 2026-11-17 08:00 UTC</span>
-                    
-                    
-                    <span class="meta-tag ai-score">AI: 2</span>
-                    
-                    
-                    <span class="meta-tag">AI Research & Funding</span>
-                    
-                </div>
-                
-                <div class="article-summary">
-                    What if the Justice Department Studied ‘Mar-a-Lago Face’ and Violent Crime?
-
-              
-
-
-      
-Elizabeth Redden
-
-Tue, 11/17/2026 - 03:00 AM
-
-It would make as much sense as a new federal grant opportunity for research linking gender dysphoria and violent crime.
-  
-    Byline(s)
-          
-     ...
-                </div>
-                
-            </li>
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.ecampusnews.com/teaching-learning/2026/11/16/what-detective-fiction-can-teach-us-about-becoming-better-researchers/" target="_blank" rel="noopener">What detective fiction can teach us about becoming better researchers</a>
-                    
-                </div>
-                <div class="article-meta">
-                    <span>📰 eCampus News</span>
-                    
-                    <span>🕐 2026-11-16 10:00 UTC</span>
-                    
-                    
-                    <span class="meta-tag ai-score">AI: 1</span>
-                    
-                    
-                    <span class="meta-tag">AI Research & Funding</span>
-                    
-                </div>
-                
-                <div class="article-summary">
-                    <p><img alt="Ten works of fiction that help graduate students and faculty develop critical thinking, evaluate evidence, and strengthen research habits." class="attachment- size- wp-post-image" height="286" src="https://www.ecampusnews.com/files/2026/11/students-research.jpg" style="float: left; marg...
-                </div>
-                
-            </li>
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.theeduledger.com/on-the-move/article/16424350/ezemenari-m-obasi" target="_blank" rel="noopener">Ezemenari M. Obasi</a>
-                    
-                </div>
-                <div class="article-meta">
-                    <span>📰 Diverse: Issues in Higher Education</span>
-                    
-                    <span>🕐 2026-11-16 12:15 UTC</span>
-                    
-                    
-                    <span class="meta-tag ai-score">AI: 1</span>
-                    
-                    
-                    <span class="meta-tag">AI Research & Funding</span>
-                    
-                </div>
-                
-                <div class="article-summary">
-                    Ezemenari M. Obasi, vice president for research and innovation and professor of family medicine and public health sciences at...
-                </div>
-                
-            </li>
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.highereddive.com/news/supreme-court-declines-trump-bid-to-revive-dei-research-funding-cuts/874788/" target="_blank" rel="noopener">Supreme Court declines Trump bid to revive DEI research funding cuts</a>
-                    
-                </div>
-                <div class="article-meta">
-                    <span>📰 Higher Ed Dive</span>
-                    
-                    <span>🕐 2026-11-16 23:07 UTC</span>
-                    
-                    
-                    <span class="meta-tag ai-score">AI: 1</span>
-                    
-                    
-                    <span class="meta-tag">AI Research & Funding</span>
-                    
-                </div>
-                
-                <div class="article-summary">
-                    <figure><div><img src="https://imgproxy.divecdn.com/JTNQAZHvbLChp4mlAMNCmL6emo6XpQCu6lgf2LMO148/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9TdXByZW1lX0NvdXJ0X0V4dGVybmFsXy5qcGc=.webp" /></div></figure><p>A lower court blocked the administration from pulling funding from Univer...
-                </div>
-                
-            </li>
-            
-        </ul>
-    </section>
-    
-    <section class="section">
-        <div class="section-header">
-            <h2>Legal, Compliance & Regulation</h2>
-            <span class="theme-count">2 articles</span>
-        </div>
-        <ul class="article-list">
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.highereddive.com/news/lawsuit-alleges-chronic-underfunding-of-university-of-maryland-eastern-shor/874815/" target="_blank" rel="noopener">Lawsuit alleges chronic underfunding of University of Maryland Eastern Shore</a>
-                    
-                    <span class="ai-badge">AI</span>
-                    
-                </div>
-                <div class="article-meta">
-                    <span>📰 Higher Ed Dive</span>
-                    
-                    <span>🕐 2026-11-16 22:52 UTC</span>
-                    
-                    
-                    <span class="meta-tag ai-score">AI: 4</span>
-                    
-                    
-                    <span class="meta-tag">Infrastructure, Compute & Partnerships</span>
-                    
-                    <span class="meta-tag">Legal, Compliance & Regulation</span>
-                    
-                </div>
-                
-                <div class="article-summary">
-                    <p>A group of students, faculty and alumni said the historically Black institution has been discriminated against and shortchanged $6 billion since its founding.</p>
-                </div>
-                
-            </li>
-            
-            <li class="article-item">
-                <div class="article-title">
-                    <a href="https://www.highereddive.com/news/aba-accreditation-arm-moves-to-nix-full-time-faculty-standard-for-first-yea/874998/" target="_blank" rel="noopener">ABA accreditation arm moves to nix full-time faculty standard for first-year classes</a>
-                    
-                    <span class="ai-badge">AI</span>
-                    
-                </div>
-                <div class="article-meta">
-                    <span>📰 Higher Ed Dive</span>
-                    
-                    <span>🕐 2026-11-18 00:07 UTC</span>
-                    
-                    
-                    <span class="meta-tag ai-score">AI: 2</span>
-                    
-                    
-                    <span class="meta-tag">Student Experience & Affairs</span>
-                    
-                    <span class="meta-tag">Legal, Compliance & Regulation</span>
-                    
-                </div>
-                
-                <div class="article-summary">
-                    <figure><div><img src="https://imgproxy.divecdn.com/Zakk90H8Y-fWsalWCZ9yB6gvzeLTZS_WMsu8mpM3ijw/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xMDMzMDkxNjBfMS5qcGc=.webp" /></div></figure><p>The U.S. Department of Justice recently threatened an antitrust probe ove...
-                </div>
-                
-            </li>
-            
-        </ul>
-    </section>
-    
-    <section class="section">
-        <div class="section-header">
             <h2>Faculty Development & Labor</h2>
             <span class="theme-count">2 articles</span>
         </div>
@@ -997,19 +828,7 @@ It would make as much sense as a new federal grant opportunity for research link
                 </div>
                 
                 <div class="article-summary">
-                    Office for Civil Rights Probes Teacher Prep Programs
-
-              
-
-
-      
-kathryn.palmer…
-
-Tue, 11/17/2026 - 03:00 AM
-
-One government official accused some programs of seemingly “recruiting and training ‘minority’ candidates rather than evaluating candidates based solely on merit.”
-  
-    Byline...
+                    Office for Civil Rights Probes Teacher Prep Programs kathryn.palmer… Tue, 11/17/2026 - 03:00 AM One government official accused some programs of seemingly “recruiting and training ‘minority’ candidates rather than evaluating candidates based solely on merit.” Byline(s) Kathryn Palmer Office for Civi...
                 </div>
                 
             </li>
@@ -1033,24 +852,7 @@ One government official accused some programs of seemingly “recruiting and tra
                 </div>
                 
                 <div class="article-summary">
-                    Defending Academic Freedom Requires Confronting Its Limits
-
-Sara Brady
-
-Mon, 11/16/2026 - 07:43 PM
-
-
-  
-    Byline(s)
-          
-              Letters to the Editor
-              
-      
-<span>Defending Academic Freedom Requires Confronting Its Limits</span>
-
-<span><span>Sara Brady</span></span>
-
-<s...
+                    Defending Academic Freedom Requires Confronting Its Limits Sara Brady Mon, 11/16/2026 - 07:43 PM Byline(s) Letters to the Editor Defending Academic Freedom Requires Confronting Its Limits Sara Brady Mon, 11/16/2026 - 07:43 PM Byline(s) Letters to the Editor
                 </div>
                 
             </li>
@@ -1126,21 +928,7 @@ Mon, 11/16/2026 - 07:43 PM
                 </div>
                 
                 <div class="article-summary">
-                    Federal Health Care Cuts Could Have Devastating Effects on College Students
-
-              
-
-
-      
-Sara Brady
-
-Tue, 11/17/2026 - 03:00 AM
-
-Medicare and Medicaid cuts threaten college students’ health, financial security and ability to graduate.
-  
-    Byline(s)
-          
-              Shaun Harpe...
+                    Federal Health Care Cuts Could Have Devastating Effects on College Students Sara Brady Tue, 11/17/2026 - 03:00 AM Medicare and Medicaid cuts threaten college students’ health, financial security and ability to graduate. Byline(s) Shaun Harper Federal Health Care Cuts Could Have Devastating Effects o...
                 </div>
                 
             </li>
@@ -1166,21 +954,7 @@ Medicare and Medicaid cuts threaten college students’ health, financial securi
                 </div>
                 
                 <div class="article-summary">
-                    ‘Breakneck,’ China and Campus Construction Projects
-
-              
-
-
-      
-joshua.m.kim@d…
-
-Tue, 11/17/2026 - 03:00 AM
-
-A list of big university construction projects inspired by a fantastic book explaining why China is better at building big than the U.S.
-  
-    Byline(s)
-          
-             ...
+                    ‘Breakneck,’ China and Campus Construction Projects joshua.m.kim@d… Tue, 11/17/2026 - 03:00 AM A list of big university construction projects inspired by a fantastic book explaining why China is better at building big than the U.S. Byline(s) Joshua Kim ‘Breakneck,’ China and Campus Construction Proj...
                 </div>
                 
             </li>
@@ -1206,7 +980,7 @@ A list of big university construction projects inspired by a fantastic book expl
                 </div>
                 
                 <div class="article-summary">
-                    <figure><div><img src="https://imgproxy.divecdn.com/TStR3thHkBWzdUY1eo_pFAnTJWJSvOMHLafkjZfMuaM/g:nowe:1985:178/c:3675:2076/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xODQ5MjM0MTYuanBn.webp" /></div></figure><p>The agency said diversification efforts disregard "mer...
+                    The agency said diversification efforts disregard "merit," but critics say the programs level the playing field for historically excluded candidates.
                 </div>
                 
             </li>
@@ -1228,7 +1002,7 @@ A list of big university construction projects inspired by a fantastic book expl
                 </div>
                 
                 <div class="article-summary">
-                    <p>How intentional design makes self-paced learning rigorous, flexible and effective.</p>
+                    How intentional design makes self-paced learning rigorous, flexible and effective.
                 </div>
                 
             </li>
@@ -1250,7 +1024,139 @@ A list of big university construction projects inspired by a fantastic book expl
                 </div>
                 
                 <div class="article-summary">
-                    <figure><div><img src="https://imgproxy.divecdn.com/5mNdPV-uwGPcu4A5vioNvRGk9kSX9TlYWdlGdNH8bDQ/g:ce/rs:fill:1600:900:1/Z3M6Ly9kaXZlc2l0ZS1zdG9yYWdlL2RpdmVpbWFnZS9HZXR0eUltYWdlcy0xNzU0NTQ2ODYuanBn.webp" /></div></figure><p>The increases in dual credit and Advanced Placement participation in Illinois...
+                    The increases in dual credit and Advanced Placement participation in Illinois were particularly notable for Black students and students with disabilities.
+                </div>
+                
+            </li>
+            
+        </ul>
+    </section>
+    
+    <section class="section">
+        <div class="section-header">
+            <h2>AI Research & Funding</h2>
+            <span class="theme-count">5 articles</span>
+        </div>
+        <ul class="article-list">
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.insidehighered.com/opinion/views/2026/11/17/research-questions-we-ask-matter-opinion" target="_blank" rel="noopener">What if the Justice Department Studied ‘Mar-a-Lago Face’ and Violent Crime?</a>
+                    
+                    <span class="ai-badge">AI</span>
+                    
+                </div>
+                <div class="article-meta">
+                    <span>📰 Inside Higher Ed</span>
+                    
+                    <span>🕐 2026-11-17 08:00 UTC</span>
+                    
+                    
+                    <span class="meta-tag ai-score">AI: 2</span>
+                    
+                    
+                    <span class="meta-tag">AI Research & Funding</span>
+                    
+                </div>
+                
+                <div class="article-summary">
+                    What if the Justice Department Studied ‘Mar-a-Lago Face’ and Violent Crime? Elizabeth Redden Tue, 11/17/2026 - 03:00 AM It would make as much sense as a new federal grant opportunity for research linking gender dysphoria and violent crime. Byline(s) Omi Salas-SantaCruz What if the Justice Department...
+                </div>
+                
+            </li>
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.ecampusnews.com/teaching-learning/2026/11/16/what-detective-fiction-can-teach-us-about-becoming-better-researchers/" target="_blank" rel="noopener">What detective fiction can teach us about becoming better researchers</a>
+                    
+                </div>
+                <div class="article-meta">
+                    <span>📰 eCampus News</span>
+                    
+                    <span>🕐 2026-11-16 10:00 UTC</span>
+                    
+                    
+                    <span class="meta-tag ai-score">AI: 1</span>
+                    
+                    
+                    <span class="meta-tag">AI Research & Funding</span>
+                    
+                </div>
+                
+                <div class="article-summary">
+                    Research methodology courses typically introduce students to research design, sampling, validity, reliability, data analysis, and scholarly writing. These are essential competencies, but teaching the mechanics of research does not necessarily teach students how to think like researchers. The post Wh...
+                </div>
+                
+            </li>
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.theeduledger.com/on-the-move/article/16424350/ezemenari-m-obasi" target="_blank" rel="noopener">Ezemenari M. Obasi</a>
+                    
+                </div>
+                <div class="article-meta">
+                    <span>📰 Diverse: Issues in Higher Education</span>
+                    
+                    <span>🕐 2026-11-16 12:15 UTC</span>
+                    
+                    
+                    <span class="meta-tag ai-score">AI: 1</span>
+                    
+                    
+                    <span class="meta-tag">AI Research & Funding</span>
+                    
+                </div>
+                
+                <div class="article-summary">
+                    Ezemenari M. Obasi, vice president for research and innovation and professor of family medicine and public health sciences at...
+                </div>
+                
+            </li>
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.highereddive.com/news/supreme-court-declines-trump-bid-to-revive-dei-research-funding-cuts/874788/" target="_blank" rel="noopener">Supreme Court declines Trump bid to revive DEI research funding cuts</a>
+                    
+                </div>
+                <div class="article-meta">
+                    <span>📰 Higher Ed Dive</span>
+                    
+                    <span>🕐 2026-11-16 23:07 UTC</span>
+                    
+                    
+                    <span class="meta-tag ai-score">AI: 1</span>
+                    
+                    
+                    <span class="meta-tag">AI Research & Funding</span>
+                    
+                </div>
+                
+                <div class="article-summary">
+                    A lower court blocked the administration from pulling funding from University of California researchers over project topics it opposed.
+                </div>
+                
+            </li>
+            
+            <li class="article-item">
+                <div class="article-title">
+                    <a href="https://www.highereddive.com/news/dhs-4-year-cap-on-student-visa-stays-struck-down-by-federal-judge/874977/" target="_blank" rel="noopener">DHS’ 4-year cap on student visa stays struck down by federal judge</a>
+                    
+                </div>
+                <div class="article-meta">
+                    <span>📰 Higher Ed Dive</span>
+                    
+                    <span>🕐 2026-11-17 23:32 UTC</span>
+                    
+                    
+                    <span class="meta-tag ai-score">AI: 1</span>
+                    
+                    
+                    <span class="meta-tag">AI Research & Funding</span>
+                    
+                </div>
+                
+                <div class="article-summary">
+                    The law does not grant the agency “such broad and open-ended authority to undermine” the student visa program, the judge wrote.
                 </div>
                 
             </li>
@@ -1260,9 +1166,57 @@ A list of big university construction projects inspired by a fantastic book expl
     
 
     <footer>
-        <p>Generated by <a href="https://github.com/addotson00/news-aggregator" target="_blank" rel="noopener">Higher Ed + AI Briefing</a> on 2026-11-18 03:45 UTC</p>
-        <p>Sources: 19 RSS feeds | Taxonomy: v1</p>
+        <p>Generated by <a href="https://github.com/addotson00/news-aggregator" target="_blank" rel="noopener">Higher Ed + AI Briefing</a> on 2026-11-18 04:32 UTC</p>
+        <p>Sources: 19 RSS feeds | Taxonomy: v1.2</p>
         <p><a href="briefing.json" target="_blank">Raw JSON Data</a> | <a href="feeds.opml" target="_blank">Feed List (OPML)</a> | <a href="taxonomy.yaml" target="_blank">Taxonomy Config</a></p>
     </footer>
+
+    <script>
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            const html = document.documentElement;
+
+            // Check for saved preference or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            function applyTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (theme === 'dark') {
+                    icon.textContent = '☀️';
+                    text.textContent = 'Light';
+                } else {
+                    icon.textContent = '🌙';
+                    text.textContent = 'Dark';
+                }
+            }
+
+            // Initialize
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+
+            // Toggle handler
+            toggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            // Listen for system preference changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+    </script>
 </body>
 </html>

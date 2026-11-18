@@ -281,7 +281,7 @@
         <strong>Themes identified:</strong> {{ theme_groups|length }}
     </div>
 
-    {% for theme, items in theme_groups %}
+    {% for theme, items in theme_groups.items() %}
     <section class="section">
         <div class="section-header">
             <h2>{{ theme }}</h2>

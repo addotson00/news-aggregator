@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feeds & Configuration — Higher Ed + AI Daily Briefing</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-primary: #f5f5f4;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e7e5e4;
+            --text-primary: #1c1917;
+            --text-secondary: #44403c;
+            --text-muted: #78716c;
+            --text-subtle: #a8a29e;
+            --border-color: #d6d3d1;
+            --accent-primary: #1e40af;
+            --accent-hover: #1e3a8a;
+            --accent-bg: #dbeafe;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.08);
+            --ai-badge-bg: #fef9c3;
+            --ai-badge-text: #854d0e;
+            --stats-bg: #f5f5f4;
+            --header-border: #d6d3d1;
+            --tag-bg: #eff6ff;
+            --tag-text: #1e40af;
+            --ai-score-bg: #fef9c3;
+            --ai-score-text: #854d0e;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0c0a09;
+            --bg-secondary: #1c1917;
+            --bg-tertiary: #292524;
+            --text-primary: #fafaf9;
+            --text-secondary: #d6d3d1;
+            --text-muted: #a8a29e;
+            --text-subtle: #78716c;
+            --border-color: #292524;
+            --accent-primary: #60a5fa;
+            --accent-hover: #93c5fd;
+            --accent-bg: #1e3a5f;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --ai-badge-bg: #713f12;
+            --ai-badge-text: #fde047;
+            --stats-bg: #1c1917;
+            --header-border: #292524;
+            --tag-bg: #1e3a5f;
+            --tag-text: #93c5fd;
+            --ai-score-bg: #713f12;
+            --ai-score-text: #fde047;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.65;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 100%;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--header-border);
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+        }
+
+        h1 { font-size: 2rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); font-size: 1rem; }
+
+        .section { margin-bottom: 3rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--header-border);
+        }
+        .section-header h2 { font-size: 1.5rem; color: var(--text-primary); font-weight: 600; }
+
+        .feed-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1rem;
+        }
+
+        .feed-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
+        }
+        .feed-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+        .feed-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .feed-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+        .feed-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.4rem 0.75rem;
+            background: var(--accent-bg);
+            color: var(--accent-primary);
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .feed-link:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .theme-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            transition: transform 0.15s, box-shadow 0.15s, border-color 0.2s;
+        }
+        .theme-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+        .theme-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        .theme-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            font-size: 0.75rem;
+        }
+        .keyword-tag {
+            background: var(--tag-bg);
+            color: var(--tag-text);
+            padding: 0.15rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .yaml-block {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.25rem;
+            overflow-x: auto;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .section { margin-bottom: 3rem; }
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--header-border);
+        }
+        .section-header h2 { font-size: 1.5rem; color: var(--text-primary); font-weight: 600; }
+        .section-header .count { color: var(--text-muted); font-size: 0.9rem; font-weight: 400; }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-primary); }
+        .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+        }
+
+        h1 { font-size: 2rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); font-size: 1rem; }
+        .meta { color: var(--text-subtle); font-size: 0.9rem; margin-top: 0.5rem; }
+
+        @media (max-width: 900px) {
+            .app-container { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                position: relative;
+                height: auto;
+            }
+            .main-content { padding: 1.5rem 1rem; }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div style="margin-bottom: 1.5rem;">
+                <h1 style="font-size: 1.3rem; margin-bottom: 0.25rem;">Higher Ed + AI</h1>
+                <div class="subtitle">Daily Briefing</div>
+            </div>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span id="themeIcon">🌙</span>
+                <span id="themeText">Dark</span>
+            </button>
+
+            <nav style="margin-top: 1.5rem;">
+                <a href="index.html" style="display: block; padding: 0.5rem 0; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color);">
+                    🎯 AI Briefing
+                </a>
+                <a href="all.html" style="display: block; padding: 0.5rem 0; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color);">
+                    📚 All Articles
+                </a>
+                <a href="theme.html" style="display: block; padding: 0.5rem 0; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color);">
+                    🏷️ By Theme
+                </a>
+                <a href="config.html" style="display: block; padding: 0.5rem 0; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color); font-weight: 600;">
+                    ⚙️ Feeds & Config
+                </a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>Feeds & Configuration</h1>
+                <div class="subtitle">Manage feeds, view taxonomy, and customize the briefing</div>
+            </header>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-value">19</div>
+                    <div class="stat-label">Total Feeds</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">19</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">11</div>
+                    <div class="stat-label">Themes</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">19</div>
+                    <div class="stat-label">AI Keywords</div>
+                </div>
+            </div>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2>📡 RSS Feeds by Category</h2>
+                    <span class="count">19 feeds</span>
+                </div>
+                <div class="feed-grid">
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Inside Higher Ed</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">Inside Higher Ed</div>
+                                <div class="feed-meta">
+                                    <span>📂 Inside Higher Ed</span>
+                                </div>
+                                
+                                <a href="https://www.insidehighered.com" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.insidehighered.com/rss.xml" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Chronicle of Higher Education</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">Chronicle of Higher Education</div>
+                                <div class="feed-meta">
+                                    <span>📂 Chronicle of Higher Education</span>
+                                </div>
+                                
+                                <a href="https://www.chronicle.com" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.chronicle.com/rss.xml" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Times Higher Education (THE)</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">Times Higher Education (THE)</div>
+                                <div class="feed-meta">
+                                    <span>📂 Times Higher Education (THE)</span>
+                                </div>
+                                
+                                <a href="https://www.timeshighereducation.com" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.timeshighereducation.com/rss" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">University World News</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">University World News</div>
+                                <div class="feed-meta">
+                                    <span>📂 University World News</span>
+                                </div>
+                                
+                                <a href="https://www.universityworldnews.com" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.universityworldnews.com/rss.xml" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Higher Ed Dive</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">Higher Ed Dive</div>
+                                <div class="feed-meta">
+                                    <span>📂 Higher Ed Dive</span>
+                                </div>
+                                
+                                <a href="https://www.highereddive.com" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.highereddive.com/feeds/news/" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">EdSurge Higher Ed</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">EdSurge Higher Ed</div>
+                                <div class="feed-meta">
+                                    <span>📂 EdSurge Higher Ed</span>
+                                </div>
+                                
+                                <a href="https://www.edsurge.com/highered" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.edsurge.com/rss/highered" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Diverse: Issues in Higher Education</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">Diverse: Issues in Higher Education</div>
+                                <div class="feed-meta">
+                                    <span>📂 Diverse: Issues in Higher Education</span>
+                                </div>
+                                
+                                <a href="https://diverseeducation.com" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://diverseeducation.com/feed/" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">ACE (American Council on Education)</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">ACE (American Council on Education)</div>
+                                <div class="feed-meta">
+                                    <span>📂 ACE (American Council on Education)</span>
+                                </div>
+                                
+                                <a href="https://www.acenet.edu" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.acenet.edu/news-room/Pages/RSS.aspx" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">NACUBO</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">NACUBO</div>
+                                <div class="feed-meta">
+                                    <span>📂 NACUBO</span>
+                                </div>
+                                
+                                <a href="https://www.nacubo.org" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.nacubo.org/News/News-RSS" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">AAUP</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">AAUP</div>
+                                <div class="feed-meta">
+                                    <span>📂 AAUP</span>
+                                </div>
+                                
+                                <a href="https://www.aaup.org" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.aaup.org/rss.xml" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Community College Research Center</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">Community College Research Center</div>
+                                <div class="feed-meta">
+                                    <span>📂 Community College Research Center</span>
+                                </div>
+                                
+                                <a href="https://ccrc.tc.columbia.edu" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://ccrc.tc.columbia.edu/rss.xml" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">National Student Clearinghouse Research</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">National Student Clearinghouse Research</div>
+                                <div class="feed-meta">
+                                    <span>📂 National Student Clearinghouse Research</span>
+                                </div>
+                                
+                                <a href="https://nscresearchcenter.org" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://nscresearchcenter.org/feed/" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">Campus Technology</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">Campus Technology</div>
+                                <div class="feed-meta">
+                                    <span>📂 Campus Technology</span>
+                                </div>
+                                
+                                <a href="https://campustechnology.com" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://campustechnology.com/rss/rss.aspx" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">eCampus News</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">eCampus News</div>
+                                <div class="feed-meta">
+                                    <span>📂 eCampus News</span>
+                                </div>
+                                
+                                <a href="https://www.ecampusnews.com" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.ecampusnews.com/feed/" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">The Conversation (Education)</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">The Conversation (Education)</div>
+                                <div class="feed-meta">
+                                    <span>📂 The Conversation (Education)</span>
+                                </div>
+                                
+                                <a href="https://theconversation.com/us/topics/education-104" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://theconversation.com/us/topics/education-104/articles.rss" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">NSF Awards</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">NSF Awards</div>
+                                <div class="feed-meta">
+                                    <span>📂 NSF Awards</span>
+                                </div>
+                                
+                                <a href="https://www.nsf.gov/awards/" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.nsf.gov/rss/rss_awards.xml" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">NIH Grants</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">NIH Grants</div>
+                                <div class="feed-meta">
+                                    <span>📂 NIH Grants</span>
+                                </div>
+                                
+                                <a href="https://grants.nih.gov/grants/guide/" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://grants.nih.gov/grants/guide/rss.xml" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">NEH Grants</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">NEH Grants</div>
+                                <div class="feed-meta">
+                                    <span>📂 NEH Grants</span>
+                                </div>
+                                
+                                <a href="https://www.neh.gov/grants" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://www.neh.gov/grants/rss" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="feed-card" style="grid-column: 1 / -1; background: var(--bg-tertiary); border-left: 4px solid var(--accent-primary);">
+                        <h3 style="font-size: 1rem; font-weight: 600; color: var(--text-primary); margin-bottom: 0.75rem;">AI + Higher Education</h3>
+                        <div class="feed-grid">
+                            
+                            <div class="feed-card">
+                                <div class="feed-title">AI + Higher Ed</div>
+                                <div class="feed-meta">
+                                    <span>📂 AI + Higher Education</span>
+                                </div>
+                                
+                                <a href="https://scholar.google.com/scholar?q=%22artificial+intelligence%22+%22higher+education%22" target="_blank" rel="noopener" class="feed-link">Visit Site</a>
+                                
+                                
+                                <a href="https://scholar.google.com/scholar?q=%22artificial+intelligence%22+%22higher+education%22&hl=en&as_sdt=0,5&as_vis=1&output=rss" target="_blank" rel="noopener" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-muted);">RSS Feed</a>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2>🏷️ Theme Taxonomy</h2>
+                    <span class="count">11 themes</span>
+                </div>
+                <div class="theme-grid">
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">AI in Teaching & Learning</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">tutoring</span>
+                            
+                            <span class="keyword-tag">grading</span>
+                            
+                            <span class="keyword-tag">personalized</span>
+                            
+                            <span class="keyword-tag">adaptive</span>
+                            
+                            <span class="keyword-tag">courseware</span>
+                            
+                            <span class="keyword-tag">intelligent tutoring</span>
+                            
+                            <span class="keyword-tag">learning analytics</span>
+                            
+                            <span class="keyword-tag">adaptive learning</span>
+                            
+                            <span class="keyword-tag">personalized learning</span>
+                            
+                            <span class="keyword-tag">automated feedback</span>
+                            
+                            <span class="keyword-tag">learning pathways</span>
+                            
+                            <span class="keyword-tag">competency-based</span>
+                            
+                            <span class="keyword-tag">mastery learning</span>
+                            
+                            <span class="keyword-tag">AI tutor</span>
+                            
+                            <span class="keyword-tag">AI teaching assistant</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">AI Policy & Governance</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">policy</span>
+                            
+                            <span class="keyword-tag">integrity</span>
+                            
+                            <span class="keyword-tag">ethics</span>
+                            
+                            <span class="keyword-tag">committee</span>
+                            
+                            <span class="keyword-tag">guideline</span>
+                            
+                            <span class="keyword-tag">syllabus</span>
+                            
+                            <span class="keyword-tag">academic integrity</span>
+                            
+                            <span class="keyword-tag">AI policy</span>
+                            
+                            <span class="keyword-tag">governance</span>
+                            
+                            <span class="keyword-tag">oversight</span>
+                            
+                            <span class="keyword-tag">responsible AI</span>
+                            
+                            <span class="keyword-tag">AI ethics</span>
+                            
+                            <span class="keyword-tag">algorithmic bias</span>
+                            
+                            <span class="keyword-tag">transparency</span>
+                            
+                            <span class="keyword-tag">accountability</span>
+                            
+                            <span class="keyword-tag">AI committee</span>
+                            
+                            <span class="keyword-tag">generative AI policy</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">AI Research & Funding</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">grant</span>
+                            
+                            <span class="keyword-tag">NSF</span>
+                            
+                            <span class="keyword-tag">NIH</span>
+                            
+                            <span class="keyword-tag">research</span>
+                            
+                            <span class="keyword-tag">foundation model</span>
+                            
+                            <span class="keyword-tag">benchmarks</span>
+                            
+                            <span class="keyword-tag">AI research</span>
+                            
+                            <span class="keyword-tag">machine learning research</span>
+                            
+                            <span class="keyword-tag">federal funding</span>
+                            
+                            <span class="keyword-tag">research grant</span>
+                            
+                            <span class="keyword-tag">AI institute</span>
+                            
+                            <span class="keyword-tag">computing resources</span>
+                            
+                            <span class="keyword-tag">HPC</span>
+                            
+                            <span class="keyword-tag">GPU allocation</span>
+                            
+                            <span class="keyword-tag">research partnership</span>
+                            
+                            <span class="keyword-tag">industry collaboration</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">AI in Operations & Administration</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">admissions</span>
+                            
+                            <span class="keyword-tag">enrollment</span>
+                            
+                            <span class="keyword-tag">retention</span>
+                            
+                            <span class="keyword-tag">advising</span>
+                            
+                            <span class="keyword-tag">chatbot</span>
+                            
+                            <span class="keyword-tag">CRM</span>
+                            
+                            <span class="keyword-tag">student success</span>
+                            
+                            <span class="keyword-tag">predictive analytics</span>
+                            
+                            <span class="keyword-tag">early alert</span>
+                            
+                            <span class="keyword-tag">enrollment management</span>
+                            
+                            <span class="keyword-tag">financial aid</span>
+                            
+                            <span class="keyword-tag">registrar</span>
+                            
+                            <span class="keyword-tag">IT services</span>
+                            
+                            <span class="keyword-tag">help desk</span>
+                            
+                            <span class="keyword-tag">virtual assistant</span>
+                            
+                            <span class="keyword-tag">administrative AI</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">Workforce, Curriculum & Skills</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">curriculum</span>
+                            
+                            <span class="keyword-tag">certificate</span>
+                            
+                            <span class="keyword-tag">microcredential</span>
+                            
+                            <span class="keyword-tag">career</span>
+                            
+                            <span class="keyword-tag">employer</span>
+                            
+                            <span class="keyword-tag">workforce</span>
+                            
+                            <span class="keyword-tag">skills gap</span>
+                            
+                            <span class="keyword-tag">AI literacy</span>
+                            
+                            <span class="keyword-tag">AI curriculum</span>
+                            
+                            <span class="keyword-tag">AI degree</span>
+                            
+                            <span class="keyword-tag">AI minor</span>
+                            
+                            <span class="keyword-tag">prompt engineering</span>
+                            
+                            <span class="keyword-tag">AI certificate</span>
+                            
+                            <span class="keyword-tag">industry partnership</span>
+                            
+                            <span class="keyword-tag">career services</span>
+                            
+                            <span class="keyword-tag">job market</span>
+                            
+                            <span class="keyword-tag">upskilling</span>
+                            
+                            <span class="keyword-tag">reskilling</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">Infrastructure, Compute & Partnerships</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">GPU</span>
+                            
+                            <span class="keyword-tag">cloud</span>
+                            
+                            <span class="keyword-tag">data center</span>
+                            
+                            <span class="keyword-tag">HPC</span>
+                            
+                            <span class="keyword-tag">partnership</span>
+                            
+                            <span class="keyword-tag">NVIDIA</span>
+                            
+                            <span class="keyword-tag">Microsoft</span>
+                            
+                            <span class="keyword-tag">Google Cloud</span>
+                            
+                            <span class="keyword-tag">AWS</span>
+                            
+                            <span class="keyword-tag">Azure</span>
+                            
+                            <span class="keyword-tag">compute</span>
+                            
+                            <span class="keyword-tag">infrastructure</span>
+                            
+                            <span class="keyword-tag">AI cluster</span>
+                            
+                            <span class="keyword-tag">supercomputer</span>
+                            
+                            <span class="keyword-tag">compute credits</span>
+                            
+                            <span class="keyword-tag">cloud credits</span>
+                            
+                            <span class="keyword-tag">hardware</span>
+                            
+                            <span class="keyword-tag">accelerator</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">Equity, Access & Ethics</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">bias</span>
+                            
+                            <span class="keyword-tag">digital divide</span>
+                            
+                            <span class="keyword-tag">accessibility</span>
+                            
+                            <span class="keyword-tag">underserved</span>
+                            
+                            <span class="keyword-tag">equity</span>
+                            
+                            <span class="keyword-tag">inclusion</span>
+                            
+                            <span class="keyword-tag">algorithmic fairness</span>
+                            
+                            <span class="keyword-tag">digital access</span>
+                            
+                            <span class="keyword-tag">rural broadband</span>
+                            
+                            <span class="keyword-tag">first-generation</span>
+                            
+                            <span class="keyword-tag">underrepresented</span>
+                            
+                            <span class="keyword-tag">ethical AI</span>
+                            
+                            <span class="keyword-tag">responsible innovation</span>
+                            
+                            <span class="keyword-tag">privacy</span>
+                            
+                            <span class="keyword-tag">data protection</span>
+                            
+                            <span class="keyword-tag">student privacy</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">Faculty Development & Labor</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">training</span>
+                            
+                            <span class="keyword-tag">professional development</span>
+                            
+                            <span class="keyword-tag">workload</span>
+                            
+                            <span class="keyword-tag">displacement</span>
+                            
+                            <span class="keyword-tag">upskilling</span>
+                            
+                            <span class="keyword-tag">faculty training</span>
+                            
+                            <span class="keyword-tag">AI literacy</span>
+                            
+                            <span class="keyword-tag">teaching with AI</span>
+                            
+                            <span class="keyword-tag">faculty senate</span>
+                            
+                            <span class="keyword-tag">collective bargaining</span>
+                            
+                            <span class="keyword-tag">adjunct</span>
+                            
+                            <span class="keyword-tag">contingent faculty</span>
+                            
+                            <span class="keyword-tag">tenure</span>
+                            
+                            <span class="keyword-tag">academic freedom</span>
+                            
+                            <span class="keyword-tag">instructional design</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">Student Experience & Affairs</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">mental health</span>
+                            
+                            <span class="keyword-tag">counseling</span>
+                            
+                            <span class="keyword-tag">student life</span>
+                            
+                            <span class="keyword-tag">housing</span>
+                            
+                            <span class="keyword-tag">food insecurity</span>
+                            
+                            <span class="keyword-tag">basic needs</span>
+                            
+                            <span class="keyword-tag">student success</span>
+                            
+                            <span class="keyword-tag">belonging</span>
+                            
+                            <span class="keyword-tag">engagement</span>
+                            
+                            <span class="keyword-tag">retention</span>
+                            
+                            <span class="keyword-tag">graduation</span>
+                            
+                            <span class="keyword-tag">first-year</span>
+                            
+                            <span class="keyword-tag">transfer</span>
+                            
+                            <span class="keyword-tag">international students</span>
+                            
+                            <span class="keyword-tag">online learning</span>
+                            
+                            <span class="keyword-tag">hybrid</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">Legal, Compliance & Regulation</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">Title IX</span>
+                            
+                            <span class="keyword-tag">FERPA</span>
+                            
+                            <span class="keyword-tag">accreditation</span>
+                            
+                            <span class="keyword-tag">compliance</span>
+                            
+                            <span class="keyword-tag">regulation</span>
+                            
+                            <span class="keyword-tag">federal rule</span>
+                            
+                            <span class="keyword-tag">state law</span>
+                            
+                            <span class="keyword-tag">court ruling</span>
+                            
+                            <span class="keyword-tag">lawsuit</span>
+                            
+                            <span class="keyword-tag">investigation</span>
+                            
+                            <span class="keyword-tag">OCR</span>
+                            
+                            <span class="keyword-tag">Title IV</span>
+                            
+                            <span class="keyword-tag">gainful employment</span>
+                            
+                            <span class="keyword-tag">borrower defense</span>
+                            
+                            <span class="keyword-tag">student loans</span>
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="theme-card">
+                        <div class="theme-title">Finance, Enrollment & Business Models</div>
+                        <div class="theme-keywords">
+                            
+                            <span class="keyword-tag">tuition</span>
+                            
+                            <span class="keyword-tag">enrollment</span>
+                            
+                            <span class="keyword-tag">budget</span>
+                            
+                            <span class="keyword-tag">deficit</span>
+                            
+                            <span class="keyword-tag">revenue</span>
+                            
+                            <span class="keyword-tag">endowment</span>
+                            
+                            <span class="keyword-tag">fundraising</span>
+                            
+                            <span class="keyword-tag">philanthropy</span>
+                            
+                            <span class="keyword-tag">merger</span>
+                            
+                            <span class="keyword-tag">acquisition</span>
+                            
+                            <span class="keyword-tag">closure</span>
+                            
+                            <span class="keyword-tag">consolidation</span>
+                            
+                            <span class="keyword-tag">public funding</span>
+                            
+                            <span class="keyword-tag">state appropriation</span>
+                            
+                            <span class="keyword-tag">MOE</span>
+                            
+                            <span class="keyword-tag">financial sustainability</span>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2>🤖 AI Boost Keywords</h2>
+                    <span class="count">19 keywords</span>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">artificial intelligence</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">AI</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">machine learning</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">generative AI</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">large language model</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">LLM</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">ChatGPT</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">copilot</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">copilots</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">foundation model</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">retrieval augmented generation</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">RAG</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">prompt engineering</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">fine-tuning</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">AI agent</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">AI system</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">AI tool</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">AI platform</span>
+                    
+                    <span class="keyword-tag" style="background: var(--ai-badge-bg); color: var(--ai-badge-text);">AI model</span>
+                    
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2>⚙️ Scoring Configuration</h2>
+                </div>
+                <div class="yaml-block">
+scoring:
+  title_match_boost: 3
+  ai_keyword_weight: 2
+  theme_keyword_weight: 1
+  min_ai_score_for_ai_section: 2
+                </div>
+            </section>
+
+            <section class="section">
+                <div class="section-header">
+                    <h2>📥 Export / Import</h2>
+                </div>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="feeds.opml" download class="feed-link" style="background: var(--accent-bg); color: var(--accent-primary);">Download feeds.opml</a>
+                    <a href="taxonomy.yaml" download class="feed-link" style="background: var(--bg-tertiary); color: var(--text-primary);">Download taxonomy.yaml</a>
+                    <a href="briefing.json" target="_blank" class="feed-link" style="background: var(--bg-tertiary); color: var(--text-primary);">View briefing.json</a>
+                </div>
+            </section>
+
+            <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid var(--header-border); text-align: center; color: var(--text-subtle); font-size: 0.85rem;">
+                <p>Generated by <a href="https://github.com/addotson00/news-aggregator" target="_blank" rel="noopener">Higher Ed + AI Briefing</a> on 2026-11-18 04:32 UTC</p>
+                <p><a href="index.html">AI Briefing</a> | <a href="all.html">All Articles</a> | <a href="theme.html">By Theme</a> | <a href="briefing.json" target="_blank">JSON Data</a></p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            const html = document.documentElement;
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            function applyTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (theme === 'dark') {
+                    icon.textContent = '☀️';
+                    text.textContent = 'Light';
+                } else {
+                    icon.textContent = '🌙';
+                    text.textContent = 'Dark';
+                }
+            }
+
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+
+            document.getElementById('themeToggle').addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

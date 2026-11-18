@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Articles — Higher Ed + AI Daily Briefing</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg-primary: #f5f5f4;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e7e5e4;
+            --text-primary: #1c1917;
+            --text-secondary: #44403c;
+            --text-muted: #78716c;
+            --text-subtle: #a8a29e;
+            --border-color: #d6d3d1;
+            --accent-primary: #1e40af;
+            --accent-hover: #1e3a8a;
+            --accent-bg: #dbeafe;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.08);
+            --ai-badge-bg: #fef9c3;
+            --ai-badge-text: #854d0e;
+            --stats-bg: #f5f5f4;
+            --header-border: #d6d3d1;
+            --tag-bg: #eff6ff;
+            --tag-text: #1e40af;
+            --ai-score-bg: #fef9c3;
+            --ai-score-text: #854d0e;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0c0a09;
+            --bg-secondary: #1c1917;
+            --bg-tertiary: #292524;
+            --text-primary: #fafaf9;
+            --text-secondary: #d6d3d1;
+            --text-muted: #a8a29e;
+            --text-subtle: #78716c;
+            --border-color: #292524;
+            --accent-primary: #60a5fa;
+            --accent-hover: #93c5fd;
+            --accent-bg: #1e3a5f;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.4);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.5);
+            --ai-badge-bg: #713f12;
+            --ai-badge-text: #fde047;
+            --stats-bg: #1c1917;
+            --header-border: #292524;
+            --tag-bg: #1e3a5f;
+            --tag-text: #93c5fd;
+            --ai-score-bg: #713f12;
+            --ai-score-text: #fde047;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.65;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            max-width: 100%;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2rem;
+            max-width: 100%;
+        }
+
+        header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--header-border);
+        }
+
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+        }
+
+        h1 { font-size: 2rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); font-size: 1rem; }
+
+        .filters {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .filter-group {
+            margin-bottom: 1rem;
+        }
+
+        .filter-group:last-child { margin-bottom: 0; }
+
+        .filter-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+
+        .filter-select {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            cursor: pointer;
+        }
+
+        .filter-select:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .search-box:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        .clear-filters {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .clear-filters:hover {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .stats-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .stat { text-align: center; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-primary); }
+        .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+
+        .article-list { list-style: none; }
+        .article-item {
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--accent-primary);
+            transition: transform 0.15s, box-shadow 0.15s, background-color 0.3s;
+        }
+        .article-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .article-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+        .article-title a { color: inherit; text-decoration: none; }
+        .article-title a:hover { color: var(--accent-hover); text-decoration: underline; }
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        .meta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            background: var(--tag-bg);
+            padding: 0.2rem 0.55rem;
+            border-radius: 9999px;
+            font-size: 0.68rem;
+            font-weight: 500;
+            color: var(--tag-text);
+        }
+        .ai-score { background: var(--ai-score-bg); color: var(--ai-score-text); }
+        .article-summary {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        .ai-badge {
+            display: inline-block;
+            background: var(--ai-badge-bg);
+            color: var(--ai-badge-text);
+            padding: 0.15rem 0.55rem;
+            border-radius: 9999px;
+            font-size: 0.68rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-muted);
+        }
+
+        .results-count {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .app-container { flex-direction: column; }
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                position: relative;
+                height: auto;
+            }
+            .main-content { padding: 1.5rem 1rem; }
+        }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div style="margin-bottom: 1.5rem;">
+                <h1 style="font-size: 1.3rem; margin-bottom: 0.25rem;">Higher Ed + AI</h1>
+                <div class="subtitle">Daily Briefing</div>
+            </div>
+
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                <span id="themeIcon">🌙</span>
+                <span id="themeText">Dark</span>
+            </button>
+
+            <nav style="margin-top: 1.5rem;">
+                <a href="index.html" style="display: block; padding: 0.5rem 0; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color);">
+                    🎯 AI Briefing
+                </a>
+                <a href="all.html" style="display: block; padding: 0.5rem 0; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color); font-weight: 600;">
+                    📚 All Articles
+                </a>
+                <a href="theme.html" style="display: block; padding: 0.5rem 0; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color);">
+                    🏷️ By Theme
+                </a>
+                <a href="config.html" style="display: block; padding: 0.5rem 0; color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--border-color);">
+                    ⚙️ Feeds & Config
+                </a>
+            </nav>
+
+            <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+                <div class="filter-group">
+                    <label class="filter-label">Search</label>
+                    <input type="text" class="search-box" id="searchInput" placeholder="Search articles...">
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Theme</label>
+                    <select class="filter-select" id="themeFilter">
+                        <option value="">All Themes</option>
+                        {% for theme in all_themes %}
+                        <option value="{{ theme }}">{{ theme }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">Source</label>
+                    <select class="filter-select" id="sourceFilter">
+                        <option value="">All Sources</option>
+                        {% for source in all_sources %}
+                        <option value="{{ source }}">{{ source }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label class="filter-label">AI Relevance</label>
+                    <select class="filter-select" id="aiFilter">
+                        <option value="">All</option>
+                        <option value="ai">AI-Relevant Only</option>
+                        <option value="non-ai">Non-AI</option>
+                    </select>
+                </div>
+                <button class="clear-filters" id="clearFilters">Clear Filters</button>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header>
+                <h1>All Articles</h1>
+                <div class="subtitle">All articles from {{ total_feeds }} feeds — {{ date }}</div>
+            </header>
+
+            <div class="stats-bar">
+                <div class="stat">
+                    <div class="stat-value" id="totalCount">{{ total_items }}</div>
+                    <div class="stat-label">Total Articles</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="aiCount">{{ ai_items }}</div>
+                    <div class="stat-label">AI-Relevant</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value">{{ all_sources|length }}</div>
+                    <div class="stat-label">Sources</div>
+                </div>
+            </div>
+
+            <div class="results-count" id="resultsCount">
+                Showing <span id="visibleCount">{{ total_items }}</span> of {{ total_items }} articles
+            </div>
+
+            <ul class="article-list" id="articleList">
+                {% for item in items %}
+                <li class="article-item" data-source="{{ item.source }}" data-themes="{{ item.tags|join(',') }}" data-ai="{{ 'ai' if item.is_ai_relevant else 'non-ai' }}">
+                    <div class="article-title">
+                        <a href="{{ item.link }}" target="_blank" rel="noopener">{{ item.title }}</a>
+                        {% if item.is_ai_relevant %}
+                        <span class="ai-badge">AI Score: {{ item.ai_score }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="article-meta">
+                        <span>📰 {{ item.source }}</span>
+                        {% if item.published %}
+                        <span>🕐 {{ item.published[:16].replace('T', ' ') }} UTC</span>
+                        {% endif %}
+                        {% if item.ai_score > 0 %}
+                        <span class="meta-tag ai-score">AI: {{ item.ai_score }}</span>
+                        {% endif %}
+                        {% for tag in item.tags[:5] %}
+                        <span class="meta-tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% if item.summary %}
+                    <div class="article-summary">
+                        {{ item.summary[:400] }}{% if item.summary|length > 400 %}...{% endif %}
+                    </div>
+                    {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+
+            {% if items|length == 0 %}
+            <div class="empty-state">
+                <h3>No articles match your filters</h3>
+                <p>Try adjusting your filters or search terms</p>
+            </div>
+            {% endif %}
+
+            <footer style="margin-top: 3rem; padding-top: 1.5rem; border-top: 2px solid var(--header-border); text-align: center; color: var(--text-subtle); font-size: 0.85rem;">
+                <p>Generated by <a href="https://github.com/addotson00/news-aggregator" target="_blank" rel="noopener">Higher Ed + AI Briefing</a> on {{ generated_utc }}</p>
+                <p>Sources: {{ total_feeds }} RSS feeds | <a href="config.html">Feeds & Config</a> | <a href="index.html">AI Briefing</a> | <a href="theme.html">By Theme</a></p>
+            </footer>
+        </main>
+    </div>
+
+    <script>
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            const html = document.documentElement;
+
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            function applyTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (theme === 'dark') {
+                    icon.textContent = '☀️';
+                    text.textContent = 'Light';
+                } else {
+                    icon.textContent = '🌙';
+                    text.textContent = 'Dark';
+                }
+            }
+
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+
+            document.getElementById('themeToggle').addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+
+            // Filtering logic
+            const articles = document.querySelectorAll('#articleList .article-item');
+            const searchInput = document.getElementById('searchInput');
+            const themeFilter = document.getElementById('themeFilter');
+            const sourceFilter = document.getElementById('sourceFilter');
+            const aiFilter = document.getElementById('aiFilter');
+            const clearFilters = document.getElementById('clearFilters');
+            const visibleCount = document.getElementById('visibleCount');
+            const totalCount = document.getElementById('totalCount');
+            const aiCount = document.getElementById('aiCount');
+
+            function filterArticles() {
+                const search = searchInput.value.toLowerCase().trim();
+                const theme = themeFilter.value;
+                const source = sourceFilter.value;
+                const ai = aiFilter.value;
+
+                let visible = 0;
+                let aiVisible = 0;
+
+                articles.forEach(article => {
+                    const title = article.querySelector('.article-title a').textContent.toLowerCase();
+                    const summary = article.querySelector('.article-summary')?.textContent?.toLowerCase() || '';
+                    const themes = article.dataset.themes.split(',');
+                    const source = article.dataset.source;
+                    const isAI = article.dataset.ai === 'ai';
+
+                    const matchesSearch = !search || title.includes(search) || summary.includes(search);
+                    const matchesTheme = !theme || themes.includes(theme);
+                    const matchesSource = !source || source === article.dataset.source;
+                    const matchesAI = !ai || (ai === 'ai' && isAI) || (ai === 'non-ai' && !isAI);
+
+                    const show = matchesSearch && matchesTheme && matchesSource && matchesAI;
+                    article.style.display = show ? '' : 'none';
+
+                    if (show) {
+                        visible++;
+                        if (isAI) aiVisible++;
+                    }
+                });
+
+                visibleCount.textContent = visible;
+                totalCount.textContent = document.querySelectorAll('#articleList .article-item').length;
+                aiCount.textContent = aiVisible;
+            }
+
+            searchInput.addEventListener('input', filterArticles);
+            themeFilter.addEventListener('change', filterArticles);
+            sourceFilter.addEventListener('change', filterArticles);
+            aiFilter.addEventListener('change', filterArticles);
+
+            clearFilters.addEventListener('click', function() {
+                searchInput.value = '';
+                themeFilter.value = '';
+                sourceFilter.value = '';
+                aiFilter.value = '';
+                filterArticles();
+            });
+
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

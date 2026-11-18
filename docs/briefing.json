@@ -1,297 +1,383 @@
 {
   "date": "2026-11-18",
-  "generated_utc": "2026-11-18T03:45:39.148896+00:00",
+  "generated_utc": "2026-11-18T04:32:01.777929+00:00",
   "stats": {
     "total_items": 28,
     "ai_relevant": 12,
     "themes": 10,
     "feeds_fetched": 19
   },
-  "top_ai": [
+  "items": [
     {
       "title": "Federal Health Care Cuts Could Have Devastating Effects on College Students",
       "link": "https://www.insidehighered.com/opinion/columns/resident-scholar/2026/11/17/federal-health-care-cuts-could-devastate-college",
       "source": "Inside Higher Ed",
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "Federal Health Care Cuts Could Have Devastating Effects on College Students Sara Brady Tue, 11/17/2026 - 03:00 AM Medicare and Medicaid cuts threaten college students\u2019 health, financial security and ability to graduate. Byline(s) Shaun Harper Federal Health Care Cuts Could Have Devastating Effects on College Students Sara Brady Tue, 11/17/2026 - 03:00 AM Medicare and Medicaid cuts threaten college students\u2019 health, financial security and ability to graduate. Byline(s) Shaun Harper",
       "ai_score": 2,
       "tags": [
         "General Higher Ed"
-      ]
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "Cornell President Promises Changes to Curb Sexual Violence",
+      "link": "https://www.insidehighered.com/news/quick-takes/2026/11/17/cornell-president-promises-changes-curb-sexual-violence",
+      "source": "Inside Higher Ed",
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "Cornell President Promises Changes to Curb Sexual Violence Susan H. Greenberg Tue, 11/17/2026 - 03:00 AM Byline(s) Susan H. Greenberg Cornell President Promises Changes to Curb Sexual Violence Susan H. Greenberg Tue, 11/17/2026 - 03:00 AM Byline(s) Susan H. Greenberg",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
     },
     {
       "title": "Office for Civil Rights Probes Teacher Prep Programs",
       "link": "https://www.insidehighered.com/news/government/2026/11/17/ed-probes-teacher-prep-programs",
       "source": "Inside Higher Ed",
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "Office for Civil Rights Probes Teacher Prep Programs kathryn.palmer\u2026 Tue, 11/17/2026 - 03:00 AM One government official accused some programs of seemingly \u201crecruiting and training \u2018minority\u2019 candidates rather than evaluating candidates based solely on merit.\u201d Byline(s) Kathryn Palmer Office for Civil Rights Probes Teacher Prep Programs kathryn.palmer\u2026 Tue, 11/17/2026 - 03:00 AM One government official accused some programs of seemingly \u201crecruiting and training \u2018minority\u2019 candidates rather than e",
       "ai_score": 3,
       "tags": [
         "Faculty Development & Labor"
-      ]
+      ],
+      "is_ai_relevant": true
     },
     {
       "title": "Trump Admin Moves to Consolidate Student Aid Data at Treasury",
       "link": "https://www.insidehighered.com/news/government/student-aid-policy/2026/11/17/trump-admin-consolidate-student-aid-data-treasury",
       "source": "Inside Higher Ed",
-      "ai_score": 7,
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "Trump Admin Moves to Consolidate Student Aid Data at Treasury jessica.blake@\u2026 Tue, 11/17/2026 - 03:00 AM Higher education legal experts and student advocates argue this latest move violates federal privacy law. An ED official dismissed their concerns. Byline(s) Jessica Blake Trump Admin Moves to Consolidate Student Aid Data at Treasury jessica.blake@\u2026 Tue, 11/17/2026 - 03:00 AM Higher education legal experts and student advocates argue this latest move violates federal privacy law. An ED officia",
+      "ai_score": 6,
       "tags": [
-        "Infrastructure, Compute & Partnerships",
         "Equity, Access & Ethics"
-      ]
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "Defamed MIT Professor Seeks to Block Accuser From Disposing of Assets",
+      "link": "https://www.insidehighered.com/news/quick-takes/2026/11/17/mit-professor-seeks-block-accuser-disposing-assets",
+      "source": "Inside Higher Ed",
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "Defamed MIT Professor Seeks to Block Accuser From Disposing of Assets Emma Whitford Tue, 11/17/2026 - 03:00 AM Byline(s) Emma Whitford Defamed MIT Professor Seeks to Block Accuser From Disposing of Assets Emma Whitford Tue, 11/17/2026 - 03:00 AM Byline(s) Emma Whitford",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "Former Foundation CEO Sues U of Memphis President",
+      "link": "https://www.insidehighered.com/news/quick-takes/2026/11/17/former-foundation-ceo-sues-memphis-president",
+      "source": "Inside Higher Ed",
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "Former Foundation CEO Sues U of Memphis President Josh Moody Tue, 11/17/2026 - 03:00 AM Byline(s) Josh Moody Former Foundation CEO Sues U of Memphis President Josh Moody Tue, 11/17/2026 - 03:00 AM Byline(s) Josh Moody",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
     },
     {
       "title": "As AI Changes How Students Approach College, Old Challenges Persist",
       "link": "https://www.insidehighered.com/news/student-success/academic-life/2026/11/17/ai-changing-college-old-challenges-persist",
       "source": "Inside Higher Ed",
-      "ai_score": 7,
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "As AI Changes How Students Approach College, Old Challenges Persist colleen.flaherty Tue, 11/17/2026 - 03:00 AM The student experience is in transition, but unmet financial needs and mental health continue to limit students\u2019 success, according to new Student Voice data. Byline(s) Colleen Flaherty As AI Changes How Students Approach College, Old Challenges Persist colleen.flaherty Tue, 11/17/2026 - 03:00 AM The student experience is in transition, but unmet financial needs and mental health conti",
+      "ai_score": 6,
       "tags": [
-        "AI Research & Funding",
         "Student Experience & Affairs"
-      ]
+      ],
+      "is_ai_relevant": true
     },
     {
       "title": "What if the Justice Department Studied \u2018Mar-a-Lago Face\u2019 and Violent Crime?",
       "link": "https://www.insidehighered.com/opinion/views/2026/11/17/research-questions-we-ask-matter-opinion",
       "source": "Inside Higher Ed",
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "What if the Justice Department Studied \u2018Mar-a-Lago Face\u2019 and Violent Crime? Elizabeth Redden Tue, 11/17/2026 - 03:00 AM It would make as much sense as a new federal grant opportunity for research linking gender dysphoria and violent crime. Byline(s) Omi Salas-SantaCruz What if the Justice Department Studied \u2018Mar-a-Lago Face\u2019 and Violent Crime? Elizabeth Redden Tue, 11/17/2026 - 03:00 AM It would make as much sense as a new federal grant opportunity for research linking gender dysphoria and viole",
       "ai_score": 2,
       "tags": [
         "AI Research & Funding"
-      ]
+      ],
+      "is_ai_relevant": true
     },
     {
       "title": "\u2018Breakneck,\u2019 China and Campus Construction Projects",
       "link": "https://www.insidehighered.com/opinion/columns/learning-innovation/2026/11/17/breakneck-china-and-campus-construction-projects",
       "source": "Inside Higher Ed",
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T08:00:00+00:00",
+      "summary": "\u2018Breakneck,\u2019 China and Campus Construction Projects joshua.m.kim@d\u2026 Tue, 11/17/2026 - 03:00 AM A list of big university construction projects inspired by a fantastic book explaining why China is better at building big than the U.S. Byline(s) Joshua Kim \u2018Breakneck,\u2019 China and Campus Construction Projects joshua.m.kim@d\u2026 Tue, 11/17/2026 - 03:00 AM A list of big university construction projects inspired by a fantastic book explaining why China is better at building big than the U.S. Byline(s) Joshu",
       "ai_score": 2,
       "tags": [
         "General Higher Ed"
-      ]
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "Defending Academic Freedom Requires Confronting Its Limits",
+      "link": "https://www.insidehighered.com/opinion/letters/2026/11/16/defending-academic-freedom-requires-confronting-its-limits",
+      "source": "Inside Higher Ed",
+      "source_url": "https://www.insidehighered.com",
+      "published": "2026-11-17T00:43:20+00:00",
+      "summary": "Defending Academic Freedom Requires Confronting Its Limits Sara Brady Mon, 11/16/2026 - 07:43 PM Byline(s) Letters to the Editor Defending Academic Freedom Requires Confronting Its Limits Sara Brady Mon, 11/16/2026 - 07:43 PM Byline(s) Letters to the Editor",
+      "ai_score": 1,
+      "tags": [
+        "Faculty Development & Labor"
+      ],
+      "is_ai_relevant": false
     },
     {
       "title": "ABA accreditation arm moves to nix full-time faculty standard for first-year classes",
       "link": "https://www.highereddive.com/news/aba-accreditation-arm-moves-to-nix-full-time-faculty-standard-for-first-yea/874998/",
       "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-18T00:07:33+00:00",
+      "summary": "The U.S. Department of Justice recently threatened an antitrust probe over the requirement, arguing that it drives up legal education costs.",
       "ai_score": 2,
       "tags": [
         "Student Experience & Affairs",
         "Legal, Compliance & Regulation"
-      ]
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "DHS\u2019 4-year cap on student visa stays struck down by federal judge",
+      "link": "https://www.highereddive.com/news/dhs-4-year-cap-on-student-visa-stays-struck-down-by-federal-judge/874977/",
+      "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-17T23:32:00+00:00",
+      "summary": "The law does not grant the agency \u201csuch broad and open-ended authority to undermine\u201d the student visa program, the judge wrote.",
+      "ai_score": 1,
+      "tags": [
+        "AI Research & Funding"
+      ],
+      "is_ai_relevant": false
     },
     {
       "title": "Teacher prep programs probed in Education Department\u2019s latest anti-DEI push",
       "link": "https://www.highereddive.com/news/teacher-prep-programs-probed-in-education-departments-latest-anti-dei-push/874831/",
       "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-17T10:00:00+00:00",
+      "summary": "The agency said diversification efforts disregard \"merit,\" but critics say the programs level the playing field for historically excluded candidates.",
       "ai_score": 2,
       "tags": [
         "General Higher Ed"
-      ]
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "Supreme Court declines Trump bid to revive DEI research funding cuts",
+      "link": "https://www.highereddive.com/news/supreme-court-declines-trump-bid-to-revive-dei-research-funding-cuts/874788/",
+      "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-16T23:07:00+00:00",
+      "summary": "A lower court blocked the administration from pulling funding from University of California researchers over project topics it opposed.",
+      "ai_score": 1,
+      "tags": [
+        "AI Research & Funding"
+      ],
+      "is_ai_relevant": false
     },
     {
       "title": "Lawsuit alleges chronic underfunding of University of Maryland Eastern Shore",
       "link": "https://www.highereddive.com/news/lawsuit-alleges-chronic-underfunding-of-university-of-maryland-eastern-shor/874815/",
       "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-16T22:52:00+00:00",
+      "summary": "A group of students, faculty and alumni said the historically Black institution has been discriminated against and shortchanged $6 billion since its founding.",
       "ai_score": 4,
       "tags": [
         "Infrastructure, Compute & Partnerships",
         "Legal, Compliance & Regulation"
-      ]
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "In modern higher ed, rigor is a function of design, not a delivery format",
+      "link": "https://www.highereddive.com/spons/in-modern-higher-ed-rigor-is-a-function-of-design-not-a-delivery-format/874263/",
+      "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-16T10:00:00+00:00",
+      "summary": "How intentional design makes self-paced learning rigorous, flexible and effective.",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "Rigorous course participation rose after 2021 law, University of Illinois report finds",
+      "link": "https://www.highereddive.com/news/rigorous-course-participation-rose-in-illinois-after-2021-law-report-finds/874604/",
+      "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-16T10:00:00+00:00",
+      "summary": "The increases in dual credit and Advanced Placement participation in Illinois were particularly notable for Black students and students with disabilities.",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "Week in review: Boston, Baylor and Penn State universities in budget holes",
+      "link": "https://www.highereddive.com/news/week-in-review-boston-baylor-and-penn-state-universities-in-budget-holes/874685/",
+      "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-16T10:00:00+00:00",
+      "summary": "We\u2019re rounding up last week\u2019s most interesting stories, from financial woes at major institutions to college campus takeovers in Pennsylvania and Florida.",
+      "ai_score": 1,
+      "tags": [
+        "Finance, Enrollment & Business Models"
+      ],
+      "is_ai_relevant": false
     },
     {
       "title": "International student enrollment fell 2.7% in 2025-26",
       "link": "https://www.highereddive.com/news/international-student-enrollment-fell-27-in-2025-26/874661/",
       "source": "Higher Ed Dive",
+      "source_url": "https://www.highereddive.com",
+      "published": "2026-11-16T05:05:00+00:00",
+      "summary": "The annual Open Doors report also found signs losses are poised to continue, with the number of new foreign students plummeting 17.7% from the prior year.",
       "ai_score": 7,
       "tags": [
         "AI in Operations & Administration",
         "Finance, Enrollment & Business Models"
-      ]
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "Higher Education Scholars Confront Questions of Power, Representation at ASHE Conference in Puerto Rico",
+      "link": "https://www.theeduledger.com/institutions/article/16541855/higher-education-scholars-confront-questions-of-power-representation-at-ashe-conference-in-puerto-rico",
+      "source": "Diverse: Issues in Higher Education",
+      "source_url": "https://diverseeducation.com",
+      "published": "2026-11-17T21:01:34+00:00",
+      "summary": "The Association for the Study of Higher Education's annual conference in Puerto Rico brought scholars together to examine institutional...",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "In Pennsylvania, Community Revitalization Is a Leadership Challenge",
+      "link": "https://www.theeduledger.com/opinion/article/16541853/in-pennsylvania-community-revitalization-is-a-leadership-challenge",
+      "source": "Diverse: Issues in Higher Education",
+      "source_url": "https://diverseeducation.com",
+      "published": "2026-11-17T19:55:09+00:00",
+      "summary": "Community revitalization requires more than housing, infrastructure, and economic development. Colleges, employers, and community...",
+      "ai_score": 3,
+      "tags": [
+        "Workforce, Curriculum & Skills",
+        "Infrastructure, Compute & Partnerships",
+        "Student Experience & Affairs"
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "School Phone Bans Slash Cellphone Use but Show Little Academic Benefit, Study Finds",
+      "link": "https://www.theeduledger.com/institutions/article/16541775/school-phone-bans-slash-cellphone-use-but-show-little-academic-benefit-study-finds",
+      "source": "Diverse: Issues in Higher Education",
+      "source_url": "https://diverseeducation.com",
+      "published": "2026-11-17T15:42:07+00:00",
+      "summary": "A national study found that school cellphone bans dramatically reduce student phone use but produce little improvement in test...",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "Bonnie Weir",
+      "link": "https://www.theeduledger.com/on-the-move/article/16424290/bonnie-weir",
+      "source": "Diverse: Issues in Higher Education",
+      "source_url": "https://diverseeducation.com",
+      "published": "2026-11-17T13:01:00+00:00",
+      "summary": "Bonnie Weir has been named the inaugural executive director of the Center for Peace and the Global Good at the Yale Jackson School...",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "Weber State Students Press to Restore Identity Centers Following DEI Law Response",
+      "link": "https://www.theeduledger.com/institutions/article/16541663/weber-state-students-press-to-restore-identity-centers-following-dei-law-response",
+      "source": "Diverse: Issues in Higher Education",
+      "source_url": "https://diverseeducation.com",
+      "published": "2026-11-16T21:32:32+00:00",
+      "summary": "Three Weber State University social work students gathered more than 500 signatures petitioning new President Chris Mallett to...",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "University of Maryland Eastern Shore Establishes Veterinary School",
+      "link": "https://www.theeduledger.com/institutions/article/16541587/university-of-maryland-eastern-shore-establishes-veterinary-school",
+      "source": "Diverse: Issues in Higher Education",
+      "source_url": "https://diverseeducation.com",
+      "published": "2026-11-16T17:00:33+00:00",
+      "summary": "The University of Maryland Eastern Shore is now accepting applications for its inaugural Doctor of Veterinary Medicine class starting...",
+      "ai_score": 0,
+      "tags": [
+        "General Higher Ed"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "International Student Enrollment at U.S. Colleges Falls 3% as New Arrivals Decline",
+      "link": "https://www.theeduledger.com/institutions/article/16541567/international-student-enrollment-at-us-colleges-falls-3-as-new-arrivals-decline",
+      "source": "Diverse: Issues in Higher Education",
+      "source_url": "https://diverseeducation.com",
+      "published": "2026-11-16T14:55:53+00:00",
+      "summary": "International enrollment at U.S. colleges and universities fell 3% in 2025-26, with new international students declining 18% and...",
+      "ai_score": 8,
+      "tags": [
+        "AI in Operations & Administration",
+        "Student Experience & Affairs",
+        "Finance, Enrollment & Business Models"
+      ],
+      "is_ai_relevant": true
+    },
+    {
+      "title": "Ezemenari M. Obasi",
+      "link": "https://www.theeduledger.com/on-the-move/article/16424350/ezemenari-m-obasi",
+      "source": "Diverse: Issues in Higher Education",
+      "source_url": "https://diverseeducation.com",
+      "published": "2026-11-16T12:15:00+00:00",
+      "summary": "Ezemenari M. Obasi, vice president for research and innovation and professor of family medicine and public health sciences at...",
+      "ai_score": 1,
+      "tags": [
+        "AI Research & Funding"
+      ],
+      "is_ai_relevant": false
+    },
+    {
+      "title": "What detective fiction can teach us about becoming better researchers",
+      "link": "https://www.ecampusnews.com/teaching-learning/2026/11/16/what-detective-fiction-can-teach-us-about-becoming-better-researchers/",
+      "source": "eCampus News",
+      "source_url": "https://www.ecampusnews.com",
+      "published": "2026-11-16T10:00:00+00:00",
+      "summary": "Research methodology courses typically introduce students to research design, sampling, validity, reliability, data analysis, and scholarly writing. These are essential competencies, but teaching the mechanics of research does not necessarily teach students how to think like researchers. The post What detective fiction can teach us about becoming better researchers appeared first on eCampus News.",
+      "ai_score": 1,
+      "tags": [
+        "AI Research & Funding"
+      ],
+      "is_ai_relevant": false
     }
-  ],
-  "by_theme": {
-    "Student Experience & Affairs": [
-      {
-        "title": "International Student Enrollment at U.S. Colleges Falls 3% as New Arrivals Decline",
-        "link": "https://www.theeduledger.com/institutions/article/16541567/international-student-enrollment-at-us-colleges-falls-3-as-new-arrivals-decline",
-        "source": "Diverse: Issues in Higher Education",
-        "ai_score": 8
-      },
-      {
-        "title": "As AI Changes How Students Approach College, Old Challenges Persist",
-        "link": "https://www.insidehighered.com/news/student-success/academic-life/2026/11/17/ai-changing-college-old-challenges-persist",
-        "source": "Inside Higher Ed",
-        "ai_score": 7
-      },
-      {
-        "title": "In Pennsylvania, Community Revitalization Is a Leadership Challenge",
-        "link": "https://www.theeduledger.com/opinion/article/16541853/in-pennsylvania-community-revitalization-is-a-leadership-challenge",
-        "source": "Diverse: Issues in Higher Education",
-        "ai_score": 3
-      },
-      {
-        "title": "ABA accreditation arm moves to nix full-time faculty standard for first-year classes",
-        "link": "https://www.highereddive.com/news/aba-accreditation-arm-moves-to-nix-full-time-faculty-standard-for-first-yea/874998/",
-        "source": "Higher Ed Dive",
-        "ai_score": 2
-      }
-    ],
-    "Finance, Enrollment & Business Models": [
-      {
-        "title": "International Student Enrollment at U.S. Colleges Falls 3% as New Arrivals Decline",
-        "link": "https://www.theeduledger.com/institutions/article/16541567/international-student-enrollment-at-us-colleges-falls-3-as-new-arrivals-decline",
-        "source": "Diverse: Issues in Higher Education",
-        "ai_score": 8
-      },
-      {
-        "title": "International student enrollment fell 2.7% in 2025-26",
-        "link": "https://www.highereddive.com/news/international-student-enrollment-fell-27-in-2025-26/874661/",
-        "source": "Higher Ed Dive",
-        "ai_score": 7
-      },
-      {
-        "title": "Week in review: Boston, Baylor and Penn State universities in budget holes",
-        "link": "https://www.highereddive.com/news/week-in-review-boston-baylor-and-penn-state-universities-in-budget-holes/874685/",
-        "source": "Higher Ed Dive",
-        "ai_score": 1
-      }
-    ],
-    "AI in Operations & Administration": [
-      {
-        "title": "International Student Enrollment at U.S. Colleges Falls 3% as New Arrivals Decline",
-        "link": "https://www.theeduledger.com/institutions/article/16541567/international-student-enrollment-at-us-colleges-falls-3-as-new-arrivals-decline",
-        "source": "Diverse: Issues in Higher Education",
-        "ai_score": 8
-      },
-      {
-        "title": "International student enrollment fell 2.7% in 2025-26",
-        "link": "https://www.highereddive.com/news/international-student-enrollment-fell-27-in-2025-26/874661/",
-        "source": "Higher Ed Dive",
-        "ai_score": 7
-      }
-    ],
-    "Infrastructure, Compute & Partnerships": [
-      {
-        "title": "Trump Admin Moves to Consolidate Student Aid Data at Treasury",
-        "link": "https://www.insidehighered.com/news/government/student-aid-policy/2026/11/17/trump-admin-consolidate-student-aid-data-treasury",
-        "source": "Inside Higher Ed",
-        "ai_score": 7
-      },
-      {
-        "title": "Lawsuit alleges chronic underfunding of University of Maryland Eastern Shore",
-        "link": "https://www.highereddive.com/news/lawsuit-alleges-chronic-underfunding-of-university-of-maryland-eastern-shor/874815/",
-        "source": "Higher Ed Dive",
-        "ai_score": 4
-      },
-      {
-        "title": "In Pennsylvania, Community Revitalization Is a Leadership Challenge",
-        "link": "https://www.theeduledger.com/opinion/article/16541853/in-pennsylvania-community-revitalization-is-a-leadership-challenge",
-        "source": "Diverse: Issues in Higher Education",
-        "ai_score": 3
-      }
-    ],
-    "Equity, Access & Ethics": [
-      {
-        "title": "Trump Admin Moves to Consolidate Student Aid Data at Treasury",
-        "link": "https://www.insidehighered.com/news/government/student-aid-policy/2026/11/17/trump-admin-consolidate-student-aid-data-treasury",
-        "source": "Inside Higher Ed",
-        "ai_score": 7
-      }
-    ],
-    "AI Research & Funding": [
-      {
-        "title": "As AI Changes How Students Approach College, Old Challenges Persist",
-        "link": "https://www.insidehighered.com/news/student-success/academic-life/2026/11/17/ai-changing-college-old-challenges-persist",
-        "source": "Inside Higher Ed",
-        "ai_score": 7
-      },
-      {
-        "title": "What if the Justice Department Studied \u2018Mar-a-Lago Face\u2019 and Violent Crime?",
-        "link": "https://www.insidehighered.com/opinion/views/2026/11/17/research-questions-we-ask-matter-opinion",
-        "source": "Inside Higher Ed",
-        "ai_score": 2
-      },
-      {
-        "title": "What detective fiction can teach us about becoming better researchers",
-        "link": "https://www.ecampusnews.com/teaching-learning/2026/11/16/what-detective-fiction-can-teach-us-about-becoming-better-researchers/",
-        "source": "eCampus News",
-        "ai_score": 1
-      },
-      {
-        "title": "Ezemenari M. Obasi",
-        "link": "https://www.theeduledger.com/on-the-move/article/16424350/ezemenari-m-obasi",
-        "source": "Diverse: Issues in Higher Education",
-        "ai_score": 1
-      },
-      {
-        "title": "Supreme Court declines Trump bid to revive DEI research funding cuts",
-        "link": "https://www.highereddive.com/news/supreme-court-declines-trump-bid-to-revive-dei-research-funding-cuts/874788/",
-        "source": "Higher Ed Dive",
-        "ai_score": 1
-      }
-    ],
-    "Legal, Compliance & Regulation": [
-      {
-        "title": "Lawsuit alleges chronic underfunding of University of Maryland Eastern Shore",
-        "link": "https://www.highereddive.com/news/lawsuit-alleges-chronic-underfunding-of-university-of-maryland-eastern-shor/874815/",
-        "source": "Higher Ed Dive",
-        "ai_score": 4
-      },
-      {
-        "title": "ABA accreditation arm moves to nix full-time faculty standard for first-year classes",
-        "link": "https://www.highereddive.com/news/aba-accreditation-arm-moves-to-nix-full-time-faculty-standard-for-first-yea/874998/",
-        "source": "Higher Ed Dive",
-        "ai_score": 2
-      }
-    ],
-    "Faculty Development & Labor": [
-      {
-        "title": "Office for Civil Rights Probes Teacher Prep Programs",
-        "link": "https://www.insidehighered.com/news/government/2026/11/17/ed-probes-teacher-prep-programs",
-        "source": "Inside Higher Ed",
-        "ai_score": 3
-      },
-      {
-        "title": "Defending Academic Freedom Requires Confronting Its Limits",
-        "link": "https://www.insidehighered.com/opinion/letters/2026/11/16/defending-academic-freedom-requires-confronting-its-limits",
-        "source": "Inside Higher Ed",
-        "ai_score": 1
-      }
-    ],
-    "Workforce, Curriculum & Skills": [
-      {
-        "title": "In Pennsylvania, Community Revitalization Is a Leadership Challenge",
-        "link": "https://www.theeduledger.com/opinion/article/16541853/in-pennsylvania-community-revitalization-is-a-leadership-challenge",
-        "source": "Diverse: Issues in Higher Education",
-        "ai_score": 3
-      }
-    ],
-    "General Higher Ed": [
-      {
-        "title": "Federal Health Care Cuts Could Have Devastating Effects on College Students",
-        "link": "https://www.insidehighered.com/opinion/columns/resident-scholar/2026/11/17/federal-health-care-cuts-could-devastate-college",
-        "source": "Inside Higher Ed",
-        "ai_score": 2
-      },
-      {
-        "title": "\u2018Breakneck,\u2019 China and Campus Construction Projects",
-        "link": "https://www.insidehighered.com/opinion/columns/learning-innovation/2026/11/17/breakneck-china-and-campus-construction-projects",
-        "source": "Inside Higher Ed",
-        "ai_score": 2
-      },
-      {
-        "title": "Teacher prep programs probed in Education Department\u2019s latest anti-DEI push",
-        "link": "https://www.highereddive.com/news/teacher-prep-programs-probed-in-education-departments-latest-anti-dei-push/874831/",
-        "source": "Higher Ed Dive",
-        "ai_score": 2
-      },
-      {
-        "title": "In modern higher ed, rigor is a function of design, not a delivery format",
-        "link": "https://www.highereddive.com/spons/in-modern-higher-ed-rigor-is-a-function-of-design-not-a-delivery-format/874263/",
-        "source": "Higher Ed Dive",
-        "ai_score": 0
-      },
-      {
-        "title": "Rigorous course participation rose after 2021 law, University of Illinois report finds",
-        "link": "https://www.highereddive.com/news/rigorous-course-participation-rose-in-illinois-after-2021-law-report-finds/874604/",
-        "source": "Higher Ed Dive",
-        "ai_score": 0
-      }
-    ]
-  }
+  ]
 }

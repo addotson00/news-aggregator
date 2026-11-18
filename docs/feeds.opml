@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<opml version="2.0">
+  <head>
+    <title>Higher Ed + AI News Feeds</title>
+    <dateCreated>2026-11-17T00:00:00Z</dateCreated>
+    <ownerName>Higher Ed AI Briefing</ownerName>
+  </head>
+  <body>
+    <outline text="Core Higher Ed Publications" title="Core Higher Ed Publications">
+      <outline type="rss" text="Inside Higher Ed" title="Inside Higher Ed" xmlUrl="https://www.insidehighered.com/rss.xml" htmlUrl="https://www.insidehighered.com" />
+      <outline type="rss" text="Chronicle of Higher Education" title="Chronicle of Higher Education" xmlUrl="https://www.chronicle.com/rss.xml" htmlUrl="https://www.chronicle.com" />
+      <outline type="rss" text="Times Higher Education (THE)" title="Times Higher Education (THE)" xmlUrl="https://www.timeshighereducation.com/rss" htmlUrl="https://www.timeshighereducation.com" />
+      <outline type="rss" text="University World News" title="University World News" xmlUrl="https://www.universityworldnews.com/rss.xml" htmlUrl="https://www.universityworldnews.com" />
+      <outline type="rss" text="Higher Ed Dive" title="Higher Ed Dive" xmlUrl="https://www.highereddive.com/feeds/news/" htmlUrl="https://www.highereddive.com" />
+      <outline type="rss" text="EdSurge Higher Ed" title="EdSurge Higher Ed" xmlUrl="https://www.edsurge.com/rss/highered" htmlUrl="https://www.edsurge.com/highered" />
+      <outline type="rss" text="Diverse: Issues in Higher Education" title="Diverse: Issues in Higher Education" xmlUrl="https://diverseeducation.com/feed/" htmlUrl="https://diverseeducation.com" />
+    </outline>
+    <outline text="Policy &amp; Research Organizations" title="Policy &amp; Research Organizations">
+      <outline type="rss" text="ACE (American Council on Education)" title="ACE (American Council on Education)" xmlUrl="https://www.acenet.edu/news-room/Pages/RSS.aspx" htmlUrl="https://www.acenet.edu" />
+      <outline type="rss" text="NACUBO" title="NACUBO" xmlUrl="https://www.nacubo.org/News/News-RSS" htmlUrl="https://www.nacubo.org" />
+      <outline type="rss" text="AAUP" title="AAUP" xmlUrl="https://www.aaup.org/rss.xml" htmlUrl="https://www.aaup.org" />
+      <outline type="rss" text="Community College Research Center" title="Community College Research Center" xmlUrl="https://ccrc.tc.columbia.edu/rss.xml" htmlUrl="https://ccrc.tc.columbia.edu" />
+      <outline type="rss" text="National Student Clearinghouse Research" title="National Student Clearinghouse Research" xmlUrl="https://nscresearchcenter.org/feed/" htmlUrl="https://nscresearchcenter.org" />
+    </outline>
+    <outline text="AI &amp; EdTech Focused" title="AI &amp; EdTech Focused">
+      <outline type="rss" text="Campus Technology" title="Campus Technology" xmlUrl="https://campustechnology.com/rss/rss.aspx" htmlUrl="https://campustechnology.com" />
+      <outline type="rss" text="eCampus News" title="eCampus News" xmlUrl="https://www.ecampusnews.com/feed/" htmlUrl="https://www.ecampusnews.com" />
+      <outline type="rss" text="The Conversation (Education)" title="The Conversation (Education)" xmlUrl="https://theconversation.com/us/topics/education-104/articles.rss" htmlUrl="https://theconversation.com/us/topics/education-104" />
+    </outline>
+    <outline text="Funding &amp; Grants" title="Funding &amp; Grants">
+      <outline type="rss" text="NSF Awards" title="NSF Awards" xmlUrl="https://www.nsf.gov/rss/rss_awards.xml" htmlUrl="https://www.nsf.gov/awards/" />
+      <outline type="rss" text="NIH Grants" title="NIH Grants" xmlUrl="https://grants.nih.gov/grants/guide/rss.xml" htmlUrl="https://grants.nih.gov/grants/guide/" />
+      <outline type="rss" text="NEH Grants" title="NEH Grants" xmlUrl="https://www.neh.gov/grants/rss" htmlUrl="https://www.neh.gov/grants" />
+    </outline>
+    <outline text="Google Scholar Alerts (add your own)" title="Google Scholar Alerts">
+      <outline type="rss" text="AI + Higher Education" title="AI + Higher Ed" xmlUrl="https://scholar.google.com/scholar?q=%22artificial+intelligence%22+%22higher+education%22&amp;hl=en&amp;as_sdt=0,5&amp;as_vis=1&amp;output=rss" htmlUrl="https://scholar.google.com/scholar?q=%22artificial+intelligence%22+%22higher+education%22" />
+    </outline>
+  </body>
+</opml>
