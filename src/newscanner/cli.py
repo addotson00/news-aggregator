@@ -297,9 +297,10 @@ def cmd_run(args) -> int:
     with make_client() as client:
         results = [run_topic(t, out, Path(args.state), client, args.force, ignore_schedule=bool(args.topic))
                    for t in topics]
-    for t in topics:
+    every_topic = load_topics(Path(args.topics))  # pages are cheap: regenerate all, not just this run's
+    for t in every_topic:
         write_topic_page(out, t)
-    write_root_redirect(out, load_topics(Path(args.topics)))  # always considers every topic
+    write_root_redirect(out, every_topic)
     if not args.topic:  # full run: forget topics whose YAML was removed or renamed
         for slug in prune_manifest(out, {t.slug for t in topics}):
             print(f"Removed stale topic {slug!r} from manifest (its data folder is left in place).")
