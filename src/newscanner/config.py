@@ -35,6 +35,7 @@ class Topic:
     keywords: dict[str, list[str]] = field(default_factory=dict)
     match_groups: list[str] = field(default_factory=list)
     exclude: list[str] = field(default_factory=list)
+    default: bool = False  # the site root redirects to this aggregator
     path: Path | None = None
 
 
@@ -75,6 +76,7 @@ def load_topic(path: Path) -> Topic:
         keywords=keywords,
         match_groups=list(match_groups),
         exclude=[str(t) for t in (raw.get("exclude") or [])],
+        default=bool(raw.get("default", False)),
         path=path,
     )
 

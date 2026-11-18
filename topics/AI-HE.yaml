@@ -8,6 +8,9 @@ description: Artificial intelligence coverage from higher-ed and education news 
 # filter = only store articles that match at least one keyword group
 mode: tag
 
+# The site root (/news-aggregator/) redirects to the aggregator marked default.
+default: true
+
 # Articles older than this (by publish date) move to monthly archive files
 # (data/<slug>/archive/YYYY-MM.json). The site loads the archive on demand.
 retention_days: 30

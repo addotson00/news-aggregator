@@ -10,7 +10,7 @@ A hub of config-driven news aggregators, built with the NewScanner engine in `sr
 
 ```
 topics/<slug>.yaml ──► newscanner run ──► docs/data/<slug>/*.json  +  docs/<slug>/index.html
-                                          docs/index.html (hub page listing every aggregator)
+                                          docs/index.html (redirects to the default aggregator)
 ```
 
 ## Quick start
@@ -40,10 +40,12 @@ uv run newscanner discover https://example.com/      # find a site's RSS/Atom/ne
 ## Adding an aggregator
 
 1. Copy `topics/AI-HE.yaml` to `topics/<Slug>.yaml`. Set a new `slug`, `title`, and `description`, then edit the sources and keywords. The slug becomes the URL path, so `slug: Grants` is served at `/news-aggregator/Grants/`. Use letters, digits, `-`, and `_`, and avoid `assets` and `data`.
-2. Run `newscanner run`. It fetches the new aggregator, generates `docs/<Slug>/index.html`, and adds it to the hub page and the topic switcher.
+2. Run `newscanner run`. It fetches the new aggregator, generates `docs/<Slug>/index.html`, and adds it to the switcher on every aggregator page.
 3. The next `publish.sh` pushes it live. The existing Hermes schedule already covers it, because `run` processes every YAML in `topics/`.
 
-To remove or rename an aggregator, delete or rename its YAML. The next full run drops it from the hub. Its data folder `docs/data/<old-slug>/` and page `docs/<old-slug>/` are left in place, so delete them by hand if you don't want them published anymore.
+The site root `/news-aggregator/` redirects to the aggregator with `default: true` in its YAML, or to the first one if none is marked.
+
+To remove or rename an aggregator, delete or rename its YAML. The next full run drops it from the switcher. Its data folder `docs/data/<old-slug>/` and page `docs/<old-slug>/` are left in place, so delete them by hand if you don't want them published anymore.
 
 The per-aggregator page is generated from `src/newscanner/site/topic.html`. Edit the template, not the generated copies.
 
@@ -104,7 +106,7 @@ For a Hermes agent, call the same two scripts. `publish.sh` exits non-zero if a 
 
 ## Publishing on GitHub Pages
 
-This repo deploys from a branch: **Settings → Pages → Deploy from a branch → `main` → `/docs`**. Each push redeploys within a minute or two. The hub is at `/news-aggregator/` and each aggregator at `/news-aggregator/<slug>/`.
+This repo deploys from a branch: **Settings → Pages → Deploy from a branch → `main` → `/docs`**. Each push redeploys within a minute or two. Each aggregator is at `/news-aggregator/<slug>/`, and the root redirects to the default one.
 
 On free accounts, every *public* repo can have its own Pages site at `<user>.github.io/<repo>/`. The one-site limit applies only to the user site, `<user>.github.io`. Hosting all aggregators in this one repo is a choice for shared code and a single schedule, not a requirement.
 
@@ -127,7 +129,7 @@ topics/                  one YAML per aggregator (slug = URL path)
 src/newscanner/          engine: config, fetchers, normalize, tagging, store, state, cli
 src/newscanner/site/     template for per-aggregator pages
 docs/                    GitHub Pages root
-  index.html             hub page (lists aggregators from data/manifest.json)
+  index.html             generated redirect to the default aggregator
   <slug>/index.html      generated aggregator page
   assets/                shared JS/CSS
   data/                  manifest.json + data/<slug>/articles.json, archive/
