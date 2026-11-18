@@ -6,7 +6,7 @@
     "last_modified": "Wed, 18 Nov 2026 18:30:38 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:31Z",
+   "last_ok": "2026-11-18T21:05:53Z",
    "seen_ids": [
     "66e9082e751b61ee",
     "6fd01b8544f3334e",
@@ -25,7 +25,7 @@
     "last_modified": "Wed, 18 Nov 2026 00:07:33 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:31Z",
+   "last_ok": "2026-11-18T21:05:54Z",
    "seen_ids": [
     "4dfdd73f45fb2b40",
     "6ea01ebe3de6ec31",
@@ -45,7 +45,7 @@
     "last_modified": "Wed, 18 Nov 2026 20:54:16 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:31Z",
+   "last_ok": "2026-11-18T21:05:54Z",
    "seen_ids": [
     "d807d7ce002bd518",
     "085d374c961c61fa",
@@ -72,7 +72,7 @@
   "edsurge": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:31Z",
+   "last_ok": "2026-11-18T21:05:54Z",
    "seen_ids": [
     "09a2c5323a0be22b",
     "e7d1321579d0730d",
@@ -129,7 +129,7 @@
   "thepienews": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:32Z",
+   "last_ok": "2026-11-18T21:05:54Z",
    "seen_ids": [
     "28f1d6162040bd2f",
     "0edda2ee3f360fa1",
@@ -168,7 +168,7 @@
   "nyt-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:35Z",
+   "last_ok": "2026-11-18T21:05:57Z",
    "seen_ids": [
     "14b26c6087b73929",
     "76e95097d0610936",
@@ -198,7 +198,7 @@
     "last_modified": "Thu, 05 Nov 2026 01:33:07 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:35Z",
+   "last_ok": "2026-11-18T21:05:58Z",
    "seen_ids": [
     "f56d4289a38a31eb",
     "c661519fdc96d7f8",
@@ -233,7 +233,7 @@
   "chronicle": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:36Z",
+   "last_ok": "2026-11-18T21:05:58Z",
    "seen_ids": [
     "96dcead89ebb32df",
     "22d16b5449d22dba",
@@ -253,7 +253,7 @@
     "etag": "W/\"d017-jLdmgyeZcUFx/KefUAheudjU+0I\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:36Z",
+   "last_ok": "2026-11-18T21:05:58Z",
    "seen_ids": [
     "909f3597fa23eca4",
     "510be5ded3394b19",
@@ -273,7 +273,7 @@
     "last_modified": "Wed, 18 Nov 2026 10:00:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:36Z",
+   "last_ok": "2026-11-18T21:05:59Z",
    "seen_ids": [
     "0f67db553807d331",
     "8d3796cbd6f151cb",
@@ -290,7 +290,7 @@
   "campustechnology": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:36Z",
+   "last_ok": "2026-11-18T21:05:59Z",
    "seen_ids": [
     "2ab25290d2f62d5e",
     "b413d9c2e33b44fb",
@@ -347,7 +347,7 @@
   "conversation-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:36Z",
+   "last_ok": "2026-11-18T21:05:59Z",
    "seen_ids": [
     "1d37dc92018d1757",
     "372c2945c9b2c81a",
@@ -381,7 +381,7 @@
     "last_modified": "Tue, 17 Nov 2026 18:20:39 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:36Z",
+   "last_ok": "2026-11-18T21:05:59Z",
    "seen_ids": [
     "a25844f853aee835",
     "41d9a5bb2a971503",
@@ -396,7 +396,7 @@
     "last_modified": "Wed, 18 Nov 2026 20:54:35 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-18T21:02:39Z",
+   "last_ok": "2026-11-18T21:06:02Z",
    "seen_ids": []
   }
  }

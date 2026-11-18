@@ -7,6 +7,7 @@ A hub of config-driven news aggregators, built with the NewScanner engine in `sr
 | Aggregator | Config | URL |
 |---|---|---|
 | AI in Higher Education | `topics/AI-HE.yaml` | [`/news-aggregator/AI-HE/`](https://addotson00.github.io/news-aggregator/AI-HE/) |
+| University of Alaska in the News | `topics/UA.yaml` | [`/news-aggregator/UA/`](https://addotson00.github.io/news-aggregator/UA/) |
 
 ```
 topics/<slug>.yaml ──► newscanner run ──► docs/data/<slug>/*.json  +  docs/<slug>/index.html
@@ -58,7 +59,12 @@ Key settings in a topic file:
 | `keywords` | Named groups of terms. Each group becomes a filter tag on the site. |
 | `match_groups` | Which groups decide whether an article is a "match". Other groups only add facet tags. |
 | `exclude` | Terms that veto a match. |
+| `fetch_every_minutes` | Default 0 (every run). With the hourly job, `120` makes a topic fetch every second run. `run --topic X` and `--force` ignore it. |
+| `text_check` | Also search article text, not just headlines (see below). |
+| `hidden_tags` | Tags hidden on the site by default. Viewers can show them again. |
 | `retention_days` | Default 30. Older articles move to `docs/data/<slug>/archive/YYYY-MM.json`. The site's **All time** option loads the archive on demand. |
+
+A keyword group is either a list of terms, or `{scope: headline, terms: [...]}`. A headline-scoped group only checks the title, summary, and categories, so a passing word deep in an article doesn't tag it (UA uses this for Sports and the other facet tags).
 
 Keyword syntax: plain text is case-insensitive and whole-word. A trailing `*` is a prefix wildcard. `/regex/` is a raw regex and is case-sensitive, which is how `/\bA\.?I\.?\b/` matches "AI" and "A.I." but not "ai".
 
@@ -73,6 +79,18 @@ Tags are recomputed for every stored article on each run, so keyword edits apply
 | `html` | Placeholder for future scrapers. Not implemented yet. |
 
 The fetcher identifies itself honestly (`NewScanner/x.y`), checks robots.txt, and sends conditional requests (ETag/Last-Modified), so unchanged feeds cost a `304` with no body. Only headlines, short excerpts, and links are stored.
+
+## Searching article text (`text_check: true`)
+
+Headlines often omit the detail you're tracking (for example, "…said a UAF researcher" in paragraph 9). With `text_check` on:
+
+1. If the feed includes full article text (many WordPress and Arc feeds do), that text is searched.
+2. Otherwise the article page is fetched **once**. Only recent articles (`text_check_days`, default 14) and at most `page_fetch_limit` pages per source per run are fetched, with 3 s between requests to the same host. robots.txt is honored, including wildcard rules (RFC 9309).
+3. Only short **snippets** around each match are stored (`mentions`), never the article. The site shows them under the headline with an "in article text" badge and a **Mentioned in** filter (Anywhere / Headline / Article text).
+
+If a host refuses or rate-limits page reads (401/403/429/503), the pipeline backs off from that host for the rest of the run and retries on later runs, refetching the source's feed until the backlog clears. Retries stop once an article is older than `text_check_days`. The ids of pages already read are kept in `state/<slug>.json`, so pages are never fetched twice.
+
+On the site, every tag has a **hide** toggle (for example, to switch off Sports), and hidden tags are kept in the URL.
 
 ## Completeness: feeds are rolling windows
 
@@ -122,11 +140,22 @@ On free accounts, every *public* repo can have its own Pages site at `<user>.git
 | The Conversation (Education) | Atom |
 | University World News | No feed found. Disabled until an HTML scraper exists. |
 
+## Status of current sources (UA)
+
+| Outlet | Method |
+|---|---|
+| ADN, Alaska Beacon, Alaska Current, Alaska's News Source, KTOO, Mat-Su Sentinel (formerly the Frontiersman) | RSS with full text |
+| News-Miner, Juneau Independent, Anchorage Press, Peninsula Clarion, Ketchikan Daily News, Nome Nugget, Must Read Alaska, Kodiak Daily Mirror, Your Alaska Link | RSS teaser + article page read. The News-Miner, Ketchikan, Kodiak, and Your Alaska Link run on the same newspaper platform (TownNews) and rate-limit page reads, so a backlog can take a few runs to clear. |
+| Alaska Public Media, KMXT | Google News sitemap. Alaska Public is headline-only because its robots.txt signals article pages are off-limits. |
+| Arctic Today, KVAK | Disabled: robots.txt disallows their feeds |
+| Alaska Landmine | Disabled: blocks automated clients (403) |
+| Daily Sitka Sentinel | Disabled: feeds return 403; news sitemap is ~1.4 MB and malformed |
+
 ## Layout
 
 ```
 topics/                  one YAML per aggregator (slug = URL path)
-src/newscanner/          engine: config, fetchers, normalize, tagging, store, state, cli
+src/newscanner/          engine: config, fetchers, robots, normalize, tagging, store, state, cli
 src/newscanner/site/     template for per-aggregator pages
 docs/                    GitHub Pages root
   index.html             generated redirect to the default aggregator

@@ -25,7 +25,7 @@ def article_id(url: str) -> str:
     return hashlib.sha1(canonical_url(url).encode()).hexdigest()[:16]
 
 
-WP_FOOTER_RE = re.compile(r"\s*(The post .{0,300}? appeared first on .{0,100}?\.?|\[(…|&#8230;|\.\.\.)\])\s*$")
+WP_FOOTER_RE = re.compile(r"\s*(The post .{0,300}? (?:appeared first|first appeared) on .{0,100}?\.?|\[(…|&#8230;|\.\.\.)\])\s*$")
 
 
 def clean_text(text: str | None, limit: int | None = None) -> str:
@@ -76,4 +76,5 @@ def build_article(raw: dict, source_id: str, source_name: str) -> dict | None:
         "published": iso(raw.get("published")),
         "source_id": source_id,
         "source_name": source_name,
+        "_fulltext": clean_text(raw.get("content")),  # transient; never stored
     }

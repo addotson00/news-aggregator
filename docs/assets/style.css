@@ -85,6 +85,21 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; }
 .more { display: block; margin: 16px auto; font: inherit; padding: 8px 20px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); color: var(--text); cursor: pointer; }
 .empty { text-align: center; color: var(--muted); padding: 40px 0; }
 
+/* Tag hide toggles */
+.facet li { display: flex; align-items: center; gap: 6px; }
+.facet li label { flex: 1; min-width: 0; }
+.facet .is-hidden { text-decoration: line-through; opacity: .55; }
+.hide-btn { font: inherit; font-size: .7rem; padding: 1px 6px; border-radius: 6px; border: 1px solid var(--border);
+  background: var(--surface); color: var(--muted); cursor: pointer; }
+.hide-btn[aria-pressed="true"] { background: var(--muted); color: var(--surface); border-color: var(--muted); }
+
+/* Keyword mentions inside article text */
+.badge { font-size: .7rem; padding: 0 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
+.mentions { list-style: none; margin: -2px 0 8px; padding: 0 0 0 10px; border-left: 3px solid var(--accent-soft);
+  display: grid; gap: 4px; font-size: .86rem; color: var(--muted); }
+mark.kw { background: none; color: var(--text); font-weight: 600; text-decoration: underline;
+  text-decoration-color: var(--accent); text-underline-offset: 2px; }
+
 /* Footer */
 .site-footer { padding-bottom: 32px; font-size: .9rem; }
 .site-footer summary { cursor: pointer; color: var(--muted); }

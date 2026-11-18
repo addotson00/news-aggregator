@@ -8,7 +8,11 @@
 
   // Each topic page declares its slug: <meta name="newscanner-topic" content="...">
   const PAGE_TOPIC = document.querySelector('meta[name="newscanner-topic"]')?.content;
-  const state = { topic: PAGE_TOPIC, q: "", show: "match", days: 0, tags: new Set(), sources: new Set(), limit: PAGE };
+  const state = { topic: PAGE_TOPIC, q: "", show: "match", days: 0, where: "", tags: new Set(), hide: new Set(),
+    sources: new Set(), limit: PAGE };
+  let urlHide = null;       // hide list from the URL; null = use the topic's default hidden_tags
+  const defaultHide = () => new Set(topicMeta?.hidden_tags || []);
+  const sameSet = (a, b) => a.size === b.size && [...a].every((x) => b.has(x));
   let manifest = null;
   let topicMeta = null;
   let articles = [];        // current window
@@ -19,7 +23,7 @@
     ...a,
     _time: Date.parse(a.published || a.first_seen) || 0,
     _hay: [a.title, a.summary, a.source_name, a.author, ...(a.tags || []), ...(a.categories || []),
-      ...(a.also_at || []).map((x) => x.source_name)].join(" \n ").toLowerCase(),
+      ...(a.also_at || []).map((x) => x.source_name), ...(a.mentions || [])].join(" \n ").toLowerCase(),
   });
   const pool = () => (state.days === -1 && archived ? articles.concat(archived) : articles);
 
@@ -29,14 +33,18 @@
     state.q = p.get("q") || "";
     state.show = p.get("show") === "all" ? "all" : "match";
     state.days = Number(p.get("days") || 0);
+    state.where = ["headline", "text"].includes(p.get("where")) ? p.get("where") : "";
+    urlHide = p.has("hide") ? new Set((p.get("hide") || "").split("|").filter((t) => t && t !== "none")) : null;
     state.tags = new Set((p.get("tags") || "").split("|").filter(Boolean));
     state.sources = new Set((p.get("sources") || "").split("|").filter(Boolean));
   }
   function writeUrl() {
     const p = new URLSearchParams();
     if (state.q) p.set("q", state.q);
-    if (state.show !== "match") p.set("show", state.show);
+    if (state.show !== "match" && topicMeta?.mode !== "filter") p.set("show", state.show);
     if (state.days) p.set("days", state.days);
+    if (state.where) p.set("where", state.where);
+    if (topicMeta && !sameSet(state.hide, defaultHide())) p.set("hide", state.hide.size ? [...state.hide].join("|") : "none");
     if (state.tags.size) p.set("tags", [...state.tags].join("|"));
     if (state.sources.size) p.set("sources", [...state.sources].join("|"));
     const qs = p.toString();
@@ -50,12 +58,20 @@
     q.replace(/"([^"]+)"|(\S+)/g, (_, phrase, word) => { terms.push((phrase || word).toLowerCase()); });
     return terms;
   }
-  function highlight(text, terms) {
-    if (!terms.length) return esc(text);
-    const pattern = terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  const reEsc = (t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  // Search terms: case-insensitive substrings. `exact` (keyword hits such as "UAF"): case-sensitive whole words.
+  function highlight(text, terms, exact = []) {
+    const parts = [];
     // split() with a capture group puts the matches at odd indices.
-    return String(text).split(new RegExp(`(${pattern})`, "gi"))
-      .map((part, i) => (i % 2 ? `<mark>${esc(part)}</mark>` : esc(part))).join("");
+    const exactRe = exact.length ? new RegExp(`(?<![\\w-])(${exact.map(reEsc).join("|")})(?![\\w-])`) : null;
+    const searchRe = terms.length ? new RegExp(`(${terms.map(reEsc).join("|")})`, "gi") : null;
+    const chunks = exactRe ? String(text).split(new RegExp(exactRe.source, "g")) : [String(text)];
+    chunks.forEach((chunk, i) => {
+      if (exactRe && i % 2) { parts.push(`<mark class="kw">${esc(chunk)}</mark>`); return; }
+      if (!searchRe) { parts.push(esc(chunk)); return; }
+      chunk.split(searchRe).forEach((p, j) => parts.push(j % 2 ? `<mark>${esc(p)}</mark>` : esc(p)));
+    });
+    return parts.join("");
   }
 
   // ---------- Filtering ----------
@@ -64,6 +80,8 @@
     if (state.days > 0 && a._time < Date.now() - state.days * 864e5) return false;
     if (skip !== "sources" && state.sources.size && !state.sources.has(a.source_id)) return false;
     if (skip !== "tags" && state.tags.size && !a.tags.some((t) => state.tags.has(t))) return false;
+    if (skip !== "tags" && state.hide.size && a.tags.some((t) => state.hide.has(t))) return false;
+    if (state.where && a.found_in !== state.where) return false;
     for (const t of terms) if (!a._hay.includes(t)) return false;
     return true;
   }
@@ -84,12 +102,18 @@
       if (passes(a, terms, "tags")) for (const t of a.tags) tagCounts[t] = (tagCounts[t] || 0) + 1;
       if (passes(a, terms, "sources")) srcCounts[a.source_id] = (srcCounts[a.source_id] || 0) + 1;
     }
-    $("tag-list").innerHTML = topicMeta.tags.map((t) => facetItem("tag", t, t, tagCounts[t] || 0, state.tags.has(t))).join("");
+    $("tag-list").innerHTML = topicMeta.tags.map((t) => {
+      const hidden = state.hide.has(t);
+      const item = facetItem("tag", t, t, tagCounts[t] || 0, state.tags.has(t), hidden);
+      return item.replace("</label></li>", `</label><button type="button" class="hide-btn" data-hide="${esc(t)}"
+        aria-pressed="${hidden}" title="${hidden ? "Show" : "Hide"} articles tagged ${esc(t)}">${hidden ? "hidden" : "hide"}</button></li>`);
+    }).join("");
     const srcs = topicMeta.sources.filter((s) => s.state !== "disabled");
     $("source-list").innerHTML = srcs.map((s) => facetItem("source", s.id, s.name, srcCounts[s.id] || 0, state.sources.has(s.id))).join("");
   }
-  function facetItem(kind, value, label, n, checked) {
-    return `<li><label class="${n || checked ? "" : "zero"}"><input type="checkbox" data-${kind}="${esc(value)}" ${checked ? "checked" : ""}>${esc(label)}<span class="n">${n}</span></label></li>`;
+  function facetItem(kind, value, label, n, checked, hidden = false) {
+    const cls = [n || checked ? "" : "zero", hidden ? "is-hidden" : ""].join(" ").trim();
+    return `<li><label class="${cls}"><input type="checkbox" data-${kind}="${esc(value)}" ${checked ? "checked" : ""} ${hidden ? "disabled" : ""}>${esc(label)}<span class="n">${n}</span></label></li>`;
   }
 
   function renderArticles(list, terms) {
@@ -97,23 +121,29 @@
       const chips = a.tags.map((t) => `<button type="button" class="chip${state.tags.has(t) ? " on" : ""}" data-chip="${esc(t)}">${esc(t)}</button>`).join("");
       const date = a._time ? `<time datetime="${esc(a.published || a.first_seen)}" title="${esc(new Date(a._time).toLocaleString())}">${relTime(a._time)}</time>` : "";
       const also = (a.also_at || []).map((x) => `<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.source_name)}</a>`).join(", ");
+      const kw = a.matched_terms || [];
+      const badge = a.found_in === "text" ? `<span class="badge" title="The keyword appears in the article body, not the headline">in article text</span>` : "";
+      const mentions = (a.mentions || []).length
+        ? `<ul class="mentions">${a.mentions.map((m) => `<li>${highlight(m, terms, kw)}</li>`).join("")}</ul>` : "";
       return `<li class="card">
-        <div class="meta"><span class="src">${esc(a.source_name)}</span>${date ? "<span>·</span>" + date : ""}${a.author ? `<span>·</span><span>${esc(a.author)}</span>` : ""}</div>
-        <h3><a href="${esc(a.url)}" target="_blank" rel="noopener">${highlight(a.title, terms)}</a></h3>
-        ${a.summary ? `<p>${highlight(a.summary, terms)}</p>` : ""}
+        <div class="meta"><span class="src">${esc(a.source_name)}</span>${date ? "<span>·</span>" + date : ""}${a.author ? `<span>·</span><span>${esc(a.author)}</span>` : ""}${badge}</div>
+        <h3><a href="${esc(a.url)}" target="_blank" rel="noopener">${highlight(a.title, terms, kw)}</a></h3>
+        ${a.summary ? `<p>${highlight(a.summary, terms, kw)}</p>` : ""}
+        ${mentions}
         ${also ? `<div class="also">Also at ${also}</div>` : ""}
         ${chips ? `<div class="chips">${chips}</div>` : ""}
       </li>`;
     }).join("");
     $("more").hidden = list.length <= state.limit;
     $("empty").hidden = list.length > 0;
-    const scope = state.show === "match" ? "keyword matches" : "articles";
+    const scope = state.show === "match" && topicMeta.mode !== "filter" ? "keyword matches" : "articles";
     $("count").textContent = `${list.length} ${scope}` + (list.length > state.limit ? ` · showing ${state.limit}` : "");
   }
 
   function renderControls() {
     for (const b of $("show-seg").querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset.show === state.show));
     for (const b of $("days-seg").querySelectorAll("button")) b.setAttribute("aria-pressed", String(Number(b.dataset.days) === state.days));
+    for (const b of $("where-seg").querySelectorAll("button")) b.setAttribute("aria-pressed", String(b.dataset.where === state.where));
     if ($("search").value !== state.q) $("search").value = state.q;
   }
 
@@ -177,6 +207,8 @@
     // "filter" topics only store matches, so the toggle is meaningless there.
     $("show-seg").closest(".filter-block").hidden = topicMeta.mode === "filter";
     if (topicMeta.mode === "filter") state.show = "all";
+    $("where-seg").closest(".filter-block").hidden = !topicMeta.text_check;
+    state.hide = urlHide ?? defaultHide();
 
     const res = await fetch(`data/${topicMeta.slug}/articles.json`, { cache: "no-cache" });
     const doc = await res.json();
@@ -221,6 +253,10 @@
     const b = e.target.closest("button"); if (!b) return;
     state.show = b.dataset.show; state.limit = PAGE; render();
   });
+  $("where-seg").addEventListener("click", (e) => {
+    const b = e.target.closest("button"); if (!b) return;
+    state.where = b.dataset.where; state.limit = PAGE; render();
+  });
   $("days-seg").addEventListener("click", (e) => {
     const b = e.target.closest("button"); if (!b) return;
     state.days = Number(b.dataset.days); state.limit = PAGE; render();
@@ -235,13 +271,24 @@
   document.addEventListener("click", (e) => {
     const chip = e.target.closest("[data-chip]");
     if (chip) { toggle(state.tags, chip.dataset.chip); state.limit = PAGE; render(); return; }
+    const hide = e.target.closest("[data-hide]");
+    if (hide) {
+      const t = hide.dataset.hide;
+      toggle(state.hide, t);
+      state.tags.delete(t);  // a tag can't be both required and hidden
+      state.limit = PAGE; render(); return;
+    }
     const clear = e.target.closest("[data-clear]");
-    if (clear) { state[clear.dataset.clear].clear(); state.limit = PAGE; render(); }
+    if (clear) {
+      state[clear.dataset.clear].clear();
+      if (clear.dataset.clear === "tags") state.hide = defaultHide();
+      state.limit = PAGE; render();
+    }
   });
   $("more").addEventListener("click", () => { state.limit += PAGE; render(); });
   $("reset").addEventListener("click", () => {
-    Object.assign(state, { q: "", show: topicMeta.mode === "filter" ? "all" : "match", days: 0, limit: PAGE });
-    state.tags.clear(); state.sources.clear(); render();
+    Object.assign(state, { q: "", show: topicMeta.mode === "filter" ? "all" : "match", days: 0, where: "", limit: PAGE });
+    state.tags.clear(); state.sources.clear(); state.hide = defaultHide(); render();
   });
   $("topic-select").addEventListener("change", (e) => {
     location.href = new URL(`${encodeURIComponent(e.target.value)}/`, document.baseURI).href;

@@ -13,15 +13,18 @@ import time
 from pathlib import Path
 
 from collections import Counter
+from datetime import datetime, timedelta, timezone
 
 from .config import Source, Topic, load_topics
-from .fetchers import FetchError, fetch_source, make_client
-from .normalize import build_article, now_iso
+from .fetchers import (FetchError, TransientFetchError, fetch_page_text, fetch_source, host_refusal,
+                       make_client)
+from .normalize import build_article, now_iso, parse_iso
 from .state import TopicState
 from .store import TopicStore, prune_manifest, update_manifest
 from .tagging import Tagger
 
 SEEN_IDS_KEEP = 400  # per source; must exceed the most entries one fetch can return
+TEXT_CHECKED_KEEP = 3000  # per source; ids whose article page was already read
 
 
 def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagger, st: dict, force: bool = False) -> dict:
@@ -47,14 +50,58 @@ def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagg
 
     counts: Counter[str] = Counter()
     ids, oldest = [], None
+    checked = st.get("text_checked", [])
+    checked_set = set(checked)
+    newly_checked: list[str] = []
+    budget = topic.page_fetch_limit
+    recent = datetime.now(timezone.utc) - timedelta(days=topic.text_check_days)
+    page_errors: Counter[str] = Counter()
     for r in res.entries:
         art = build_article(r, src.id, src.name)
         if not art:
             continue
+        feed_text = art.pop("_fulltext", "")
         ids.append(art["id"])
         if art["published"] and (oldest is None or art["published"] < oldest):
             oldest = art["published"]
-        tagger.apply(art)
+
+        text = None
+        if topic.text_check:
+            stored = store.articles.get(art["id"])
+            if stored and stored.get("mentions"):
+                art["mentions"] = stored["mentions"]  # keep evidence from an earlier page read
+            if feed_text:
+                text = feed_text
+                counts["text_feed"] += 1
+            elif src.text_check and art["id"] not in checked_set:
+                published = parse_iso(art["published"])
+                refused = host_refusal(art["url"])
+                if published and published < recent:
+                    counts["text_too_old"] += 1
+                elif refused:  # host already said no this run: no request, no budget used
+                    page_errors[f"host refused pages this run ({refused[0]})"] += 1
+                    if refused[1]:
+                        counts["text_pending"] += 1
+                    else:
+                        newly_checked.append(art["id"])
+                elif budget <= 0:
+                    counts["text_pending"] += 1
+                else:
+                    budget -= 1
+                    try:
+                        text = fetch_page_text(client, art["url"])
+                        counts["text_page"] += 1
+                        newly_checked.append(art["id"])
+                    except TransientFetchError as e:
+                        page_errors[str(e)] += 1
+                        counts["text_pending"] += 1  # retry next run
+                    except FetchError as e:
+                        page_errors[str(e)] += 1
+                        newly_checked.append(art["id"])  # permanent (404, robots): don't retry
+
+        tagger.apply(art, text)
+        if text is not None and art["found_in"] == "text":
+            counts["text_match"] += 1
         if topic.mode == "filter" and not art["match"]:
             counts["skipped"] += 1
             continue
@@ -69,6 +116,10 @@ def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagg
         st.setdefault("gaps", []).append(gap)
         st["gaps"] = st["gaps"][-20:]
     st["seen_ids"] = (ids + [i for i in seen if i not in set(ids)])[:SEEN_IDS_KEEP]
+    if topic.text_check:
+        st["text_checked"] = (newly_checked + checked)[:TEXT_CHECKED_KEEP]
+        if counts["text_pending"]:
+            st["validators"] = {}  # unread pages remain: refetch the feed next run instead of a 304
 
     new = counts["new"] + counts["archived_new"]
     extras = []
@@ -76,12 +127,21 @@ def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagg
         extras.append(f"{counts['duplicate']} dup")
     if counts["archived_new"]:
         extras.append(f"{counts['archived_new']} straight to archive")
+    if topic.text_check:
+        if counts["text_page"]:
+            extras.append(f"{counts['text_page']} pages read")
+        if counts["text_match"]:
+            extras.append(f"{counts['text_match']} matched in article text")
+        if counts["text_pending"]:
+            extras.append(f"{counts['text_pending']} pages pending")
     pages = f" over {res.pages_read} pages" if res.pages_read > 1 else ""
     print(
         f"  ✓ {src.name:<36} {len(ids):>3} entries{pages}, {counts['new']:>3} new"
         + (f" ({', '.join(extras)})" if extras else "")
         + f"  [{time.monotonic() - t0:.1f}s]"
     )
+    for err, n in page_errors.most_common(3):
+        print(f"    · article pages: {n}× {err}")
     if gap:
         print(f"    ⚠ possible gap: no overlap with previous fetch ({prev_ok}); oldest item now {oldest}."
               " Fetch more often or raise `pages`.")
@@ -92,14 +152,28 @@ def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagg
         "pages": res.pages_read,
         "new": new,
         "duplicates": counts["duplicate"],
+        "text": ("feed" if counts["text_feed"] else "pages" if src.text_check else "headline")
+        if topic.text_check else None,
+        "pages_read": counts["text_page"],
+        "pages_pending": counts["text_pending"],
         "gap": gap,
     }
 
 
-def run_topic(topic: Topic, out_dir: Path, state_dir: Path, client, force: bool = False) -> bool:
-    print(f"\n== {topic.title} ({topic.slug})")
-    store = TopicStore(out_dir, topic.slug, topic.retention_days)
+def run_topic(topic: Topic, out_dir: Path, state_dir: Path, client, force: bool = False,
+              ignore_schedule: bool = False) -> bool:
     state = TopicState(state_dir, topic.slug)
+    last_run = parse_iso(state.data.get("last_run"))
+    if topic.fetch_every_minutes and last_run and not (force or ignore_schedule):
+        # 10 min slack so an hourly job reliably hits a 120-min interval every 2nd run
+        due = last_run + timedelta(minutes=max(topic.fetch_every_minutes - 10, 0))
+        if datetime.now(timezone.utc) < due:
+            print(f"\n== {topic.title} ({topic.slug}): not due (every {topic.fetch_every_minutes} min,"
+                  f" last run {state.data['last_run']})")
+            return True
+    print(f"\n== {topic.title} ({topic.slug})")
+    state.data["last_run"] = now_iso()
+    store = TopicStore(out_dir, topic.slug, topic.retention_days)
     tagger = Tagger(topic)
     source_status = []
     any_ok = False
@@ -142,6 +216,9 @@ def run_topic(topic: Topic, out_dir: Path, state_dir: Path, client, force: bool 
             "retention_days": topic.retention_days,
             "tags": list(topic.keywords),
             "match_groups": topic.match_groups,
+            "hidden_tags": topic.hidden_tags,
+            "text_check": topic.text_check,
+            "fetch_every_minutes": topic.fetch_every_minutes,
             "article_count": len(arts),
             "match_count": matches,
             "archive": archive,
@@ -205,7 +282,8 @@ def cmd_run(args) -> int:
         return 1
     out = Path(args.out)
     with make_client() as client:
-        results = [run_topic(t, out, Path(args.state), client, args.force) for t in topics]
+        results = [run_topic(t, out, Path(args.state), client, args.force, ignore_schedule=bool(args.topic))
+                   for t in topics]
     for t in topics:
         write_topic_page(out, t)
     write_root_redirect(out, load_topics(Path(args.topics)))  # always considers every topic

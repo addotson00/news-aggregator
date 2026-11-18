@@ -1,0 +1,279 @@
+slug: UA
+title: University of Alaska in the News
+description: Alaska media coverage mentioning the University of Alaska system, UAA, UAF, or UAS.
+
+# filter = keep only articles that mention UA somewhere (headline or article text).
+mode: filter
+retention_days: 90
+
+# Alaska outlets publish at a slower pace than national higher-ed press; the
+# tightest feed (Alaska's News Source) covers ~7 hours, so every 2 hours keeps
+# overlap. The hourly Hermes fetch job skips this topic until it is due.
+fetch_every_minutes: 120
+
+# Search article text, not just headlines: use the feed's full text when it has
+# it; otherwise read the article page (recent articles only, once each, politely
+# paced). Only short snippets around matches are stored, never the article.
+text_check: true
+text_check_days: 14
+page_fetch_limit: 25
+
+# Tags hidden on the site until the viewer turns them back on (empty = show all).
+hidden_tags: []
+
+sources:
+  # --- Full article text in the feed ---
+  - id: adn
+    name: Anchorage Daily News
+    homepage: https://www.adn.com/
+    type: rss
+    url: https://www.adn.com/arc/outboundfeeds/rss/?outputType=xml
+
+  - id: alaskabeacon
+    name: Alaska Beacon
+    homepage: https://alaskabeacon.com/
+    type: rss
+    url: https://alaskabeacon.com/feed/
+
+  - id: alaskacurrent
+    name: The Alaska Current
+    homepage: https://thealaskacurrent.com/
+    type: rss
+    url: https://thealaskacurrent.com/feed/
+
+  - id: alaskasnewssource
+    name: Alaska's News Source
+    homepage: https://www.alaskasnewssource.com/
+    type: rss
+    url: https://www.alaskasnewssource.com/arc/outboundfeeds/rss/?outputType=xml
+
+  - id: ktoo
+    name: KTOO
+    homepage: https://www.ktoo.org/
+    type: rss
+    url: https://www.ktoo.org/feed/
+
+  - id: matsusentinel
+    name: Mat-Su Sentinel (formerly the Frontiersman)
+    homepage: https://www.matsusentinel.com/
+    type: rss
+    url: https://www.matsusentinel.com/rss/
+
+  # --- Teaser-only feeds: article pages are read to check the text ---
+  - id: newsminer
+    name: Fairbanks Daily News-Miner
+    homepage: https://www.newsminer.com/
+    type: rss
+    url: https://www.newsminer.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc
+
+  - id: juneauindependent
+    name: Juneau Independent
+    homepage: https://www.juneauindependent.com/
+    type: rss
+    url: https://www.juneauindependent.com/blog-feed.xml
+
+  - id: anchoragepress
+    name: Anchorage Press
+    homepage: https://anchoragepress.com/
+    type: rss
+    url: https://anchoragepress.com/rss.xml
+
+  - id: peninsulaclarion
+    name: Peninsula Clarion
+    homepage: https://www.peninsulaclarion.com/
+    type: rss
+    url: https://www.peninsulaclarion.com/feed/
+
+  - id: ketchikandailynews
+    name: Ketchikan Daily News
+    homepage: https://www.ketchikandailynews.com/
+    type: rss
+    url: https://www.ketchikandailynews.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc
+
+  - id: nomenugget
+    name: The Nome Nugget
+    homepage: http://www.nomenugget.com/
+    type: rss
+    url: https://www.nomenugget.com/rss.xml
+
+  - id: mustreadalaska
+    name: Must Read Alaska
+    homepage: https://mustreadalaska.com/
+    type: rss
+    url: https://mustreadalaska.com/feed/
+
+  - id: kodiakdailymirror
+    name: Kodiak Daily Mirror
+    homepage: https://www.kodiakdailymirror.com/
+    type: rss
+    url: https://www.kodiakdailymirror.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc
+
+  - id: youralaskalink
+    name: Your Alaska Link
+    homepage: https://www.youralaskalink.com/
+    type: rss
+    url: https://www.youralaskalink.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc
+    note: Returned HTTP 429 (rate limited) during setup; watch source status.
+
+  # --- Headlines only ---
+  - id: alaskapublic
+    name: Alaska Public Media
+    homepage: https://alaskapublic.org/
+    type: news_sitemap
+    url: https://alaskapublic.org/news-sitemap-content.xml
+    text_check: false  # robots.txt signals article pages are off-limits to bots
+
+  - id: kmxt
+    name: KMXT (Kodiak)
+    homepage: https://www.kmxt.org/
+    type: news_sitemap
+    url: https://www.kmxt.org/news-sitemap-content.xml
+
+  # --- Not collectable without scraping or against site rules ---
+  - id: arctictoday
+    name: Arctic Today
+    homepage: https://www.arctictoday.com/
+    type: rss
+    url: https://www.arctictoday.com/feed/
+    enabled: false
+    note: robots.txt disallows all feeds.
+
+  - id: kvak
+    name: KVAK Radio (Valdez)
+    homepage: https://www.kvakradio.com/
+    type: rss
+    url: https://www.kvakradio.com/feed/
+    enabled: false
+    note: robots.txt disallows the feed.
+
+  - id: alaskalandmine
+    name: Alaska Landmine
+    homepage: https://alaskalandmine.com/
+    type: rss
+    url: https://alaskalandmine.com/feed/
+    enabled: false
+    note: Blocks automated clients (HTTP 403).
+
+  - id: sitkasentinel
+    name: Daily Sitka Sentinel
+    homepage: https://sitkasentinel.com/
+    type: news_sitemap
+    url: https://sitkasentinel.com/sitemaps/sitemaps-r2-googlenews-sitka-sentinel-1.xml
+    enabled: false
+    note: News sitemap is ~1.4 MB and malformed; feeds return 403.
+
+# UA mentions. Acronyms are case-sensitive regexes so "UAF" matches but words
+# like "quality" don't. Note: "UAS" is also used for drones (unmanned aircraft
+# systems); UAF runs Alaska's drone program, so most such hits are still UA news.
+keywords:
+  UA system:
+    - University of Alaska
+    - /\bUA\b(?!\s+(?:[Ff]lights?|[Oo]utages?|[Aa]irlines?|[Pp]ilots?))/  # not United Airlines
+    - UA Foundation
+    - UA Board of Regents
+    - University of Alaska Board of Regents
+    - Alaska College of Education
+  UAA:
+    - /\bUAA\b/
+    - Seawolves
+    - Kenai Peninsula College
+    - Kachemak Bay Campus
+    - Kodiak College
+    - Matanuska-Susitna College
+    - Mat-Su College
+    - Prince William Sound College
+    - /\bANSEP\b/
+    - Alaska Native Science & Engineering Program
+    - Alaska Native Science and Engineering Program
+    - Institute of Social and Economic Research
+  UAF:
+    - /\bUAF\b/
+    - Nanooks
+    - Geophysical Institute
+    - International Arctic Research Center
+    - Poker Flat Research Range
+    - Museum of the North
+    - Alaska Earthquake Center
+    - Alaska Center for Energy and Power
+    - Institute of Arctic Biology
+    - Toolik Field Station
+    - Alaska Satellite Facility
+    - Alaska Sea Grant
+    - Alaska Native Language Center
+    - Fishery Industrial Technology Center
+    - Large Animal Research Station
+    - Kuskokwim Campus
+    - Northwest Campus
+    - Bristol Bay Campus
+    - Chukchi Campus
+    - Interior Alaska Campus
+    - Community and Technical College
+  UAS:
+    - /\bUAS\b/
+    - Ketchikan campus
+    - Sitka campus
+  # --- Facet tags (headline only, so a passing mention deep in a story doesn't tag it) ---
+  Sports:
+    scope: headline
+    terms:
+      - Seawolves
+      - Nanooks
+      - hockey
+      - basketball
+      - volleyball
+      - gymnastics
+      - skiing
+      - ski*
+      - rifle
+      - cross-country
+      - track and field
+      - /\bGNAC\b/
+      - /\bNCAA\b/
+      - Division II
+      - Governor's Cup
+      - Shootout
+      - coach*
+      - tournament
+      - playoff*
+  Budget & governance:
+    scope: headline
+    terms:
+      - budget
+      - funding
+      - regents
+      - legislature
+      - legislator*
+      - lawmakers
+      - tuition
+      - cuts
+      - accreditation
+      - president
+      - chancellor
+  Research & science:
+    scope: headline
+    terms:
+      - research*
+      - scientist*
+      - study
+      - studies
+      - data
+      - grant
+  Students & campus life:
+    scope: headline
+    terms:
+      - student*
+      - enrollment
+      - graduat*
+      - commencement
+      - scholarship*
+      - campus
+      - dorm*
+      - housing
+
+match_groups:
+  - UA system
+  - UAA
+  - UAF
+  - UAS
+
+exclude: []
