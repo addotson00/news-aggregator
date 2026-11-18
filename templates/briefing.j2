@@ -6,24 +6,116 @@
     <title>Higher Ed + AI Daily Briefing — {{ date }}</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            /* Light mode (default) */
+            --bg-primary: #f8f9fa;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f0f4f8;
+            --text-primary: #1a1a2e;
+            --text-secondary: #444444;
+            --text-muted: #666666;
+            --text-subtle: #888888;
+            --border-color: #e0e0e0;
+            --accent-primary: #2563eb;
+            --accent-hover: #1d4ed8;
+            --accent-bg: #f0f4f8;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
+            --shadow-md: 0 2px 4px rgba(0,0,0,0.05);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
+            --ai-badge-bg: #fef3c7;
+            --ai-badge-text: #92400e;
+            --top-signals-bg: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            --top-signals-text: #92400e;
+            --stats-bg: #f0f4f8;
+            --header-border: #e0e0e0;
+            --tag-bg: #f0f4f8;
+            --tag-text: #2563eb;
+            --ai-score-bg: #fef3c7;
+            --ai-score-text: #92400e;
+            --meta-bg: #f0f4f8;
+        }
+
+        [data-theme="dark"] {
+            /* Dark mode */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #e2e8f0;
+            --text-muted: #94a3b8;
+            --text-subtle: #64748b;
+            --border-color: #334155;
+            --accent-primary: #3b82f6;
+            --accent-hover: #60a5fa;
+            --accent-bg: #1e3a5f;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 2px 4px rgba(0,0,0,0.3);
+            --shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
+            --ai-badge-bg: #422006;
+            --ai-badge-text: #fde047;
+            --top-signals-bg: linear-gradient(135deg, #422006 0%, #78350f 100%);
+            --top-signals-text: #fde047;
+            --stats-bg: #1e293b;
+            --header-border: #334155;
+            --tag-bg: #1e3a5f;
+            --tag-text: #93c5fd;
+            --ai-score-bg: #422006;
+            --ai-score-text: #fde047;
+            --meta-bg: #1e293b;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
-            color: #1a1a2e;
-            background: #f8f9fa;
+            color: var(--text-primary);
+            background: var(--bg-primary);
             max-width: 900px;
             margin: 0 auto;
             padding: 2rem 1rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
+
         header {
             text-align: center;
             margin-bottom: 2rem;
             padding-bottom: 1.5rem;
-            border-bottom: 2px solid #e0e0e0;
+            border-bottom: 2px solid var(--header-border);
+            position: relative;
         }
-        h1 { font-size: 2.2rem; color: #1a1a2e; margin-bottom: 0.5rem; }
-        .subtitle { color: #666; font-size: 1.1rem; }
-        .meta { color: #888; font-size: 0.9rem; margin-top: 0.5rem; }
+
+        .theme-toggle {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--accent-primary);
+        }
+
+        .theme-toggle:focus {
+            outline: 2px solid var(--accent-primary);
+            outline-offset: 2px;
+        }
+
+        h1 { font-size: 2.2rem; color: var(--text-primary); margin-bottom: 0.5rem; }
+        .subtitle { color: var(--text-muted); font-size: 1.1rem; }
+        .meta { color: var(--text-subtle); font-size: 0.9rem; margin-top: 0.5rem; }
 
         .stats-bar {
             display: flex;
@@ -31,14 +123,14 @@
             gap: 2rem;
             margin: 1.5rem 0;
             padding: 1rem;
-            background: white;
+            background: var(--bg-secondary);
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-md);
             flex-wrap: wrap;
         }
         .stat { text-align: center; }
-        .stat-value { font-size: 1.5rem; font-weight: 700; color: #2563eb; }
-        .stat-label { font-size: 0.8rem; color: #666; text-transform: uppercase; letter-spacing: 0.5px; }
+        .stat-value { font-size: 1.5rem; font-weight: 700; color: var(--accent-primary); }
+        .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
         .section { margin: 2.5rem 0; }
         .section-header {
@@ -47,92 +139,85 @@
             gap: 0.75rem;
             margin-bottom: 1rem;
             padding-bottom: 0.5rem;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--header-border);
         }
-        .section-header h2 { font-size: 1.4rem; color: #1a1a2e; }
-        .theme-badge {
-            background: #2563eb;
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
+        .section-header h2 { font-size: 1.4rem; color: var(--text-primary); }
+        .theme-count { color: var(--text-subtle); font-size: 0.8rem; margin-left: 0.5rem; }
 
         .article-list { list-style: none; }
         .article-item {
-            background: white;
+            background: var(--bg-secondary);
             border-radius: 8px;
             padding: 1.25rem;
             margin-bottom: 1rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border-left: 4px solid #2563eb;
-            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: var(--shadow-sm);
+            border-left: 4px solid var(--accent-primary);
+            transition: transform 0.15s, box-shadow 0.15s, background-color 0.3s;
         }
         .article-item:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-lg);
         }
         .article-title {
             font-size: 1.05rem;
             font-weight: 600;
-            color: #1a1a2e;
+            color: var(--text-primary);
             margin-bottom: 0.5rem;
             line-height: 1.4;
         }
         .article-title a { color: inherit; text-decoration: none; }
-        .article-title a:hover { color: #2563eb; text-decoration: underline; }
+        .article-title a:hover { color: var(--accent-hover); text-decoration: underline; }
         .article-meta {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             font-size: 0.8rem;
-            color: #666;
+            color: var(--text-muted);
             margin-bottom: 0.5rem;
         }
         .meta-tag {
             display: inline-flex;
             align-items: center;
             gap: 0.3rem;
-            background: #f0f4f8;
+            background: var(--tag-bg);
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
             font-size: 0.7rem;
             font-weight: 500;
-            color: #2563eb;
+            color: var(--tag-text);
         }
         .ai-score {
-            background: #fef3c7;
-            color: #92400e;
+            background: var(--ai-score-bg);
+            color: var(--ai-score-text);
         }
         .article-summary {
             font-size: 0.9rem;
-            color: #444;
+            color: var(--text-secondary);
             line-height: 1.5;
         }
 
         .top-signals {
-            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            background: var(--top-signals-bg);
             border-radius: 12px;
             padding: 1.5rem;
             margin-bottom: 2rem;
         }
-        .top-signals h2 { color: #92400e; margin-bottom: 1rem; }
+        .top-signals h2 { color: var(--top-signals-text); margin-bottom: 1rem; }
 
         .stats-summary {
-            background: #f0f4f8;
+            background: var(--stats-bg);
             border-radius: 8px;
             padding: 1rem;
             margin: 1.5rem 0;
             font-size: 0.9rem;
-            color: #444;
+            color: var(--text-secondary);
         }
-        .stats-summary strong { color: #1a1a2e; }
+        .stats-summary strong { color: var(--text-primary); }
 
         .ai-badge {
             display: inline-block;
-            background: #fef3c7;
-            color: #92400e;
+            background: var(--ai-badge-bg);
+            color: var(--ai-badge-text);
             padding: 0.15rem 0.5rem;
             border-radius: 3px;
             font-size: 0.7rem;
@@ -143,26 +228,31 @@
         footer {
             margin-top: 3rem;
             padding-top: 1.5rem;
-            border-top: 2px solid #e0e0e0;
+            border-top: 2px solid var(--header-border);
             text-align: center;
-            color: #888;
+            color: var(--text-subtle);
             font-size: 0.85rem;
         }
-        footer a { color: #2563eb; text-decoration: none; }
+        footer a { color: var(--accent-primary); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
 
-        .theme-count { color: #888; font-size: 0.8rem; margin-left: 0.5rem; }
+        .theme-count { color: var(--text-subtle); font-size: 0.8rem; margin-left: 0.5rem; }
 
         @media (max-width: 600px) {
             body { padding: 1rem; }
             h1 { font-size: 1.8rem; }
             .stats-bar { gap: 1rem; }
             .article-item { padding: 1rem; }
+            .theme-toggle { font-size: 0.75rem; padding: 0.4rem 0.75rem; }
         }
     </style>
 </head>
 <body>
     <header>
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+            <span id="themeIcon">🌙</span>
+            <span id="themeText">Dark</span>
+        </button>
         <h1>Higher Ed + AI Daily Briefing</h1>
         <div class="subtitle">{{ date }}</div>
         <div class="meta">Generated {{ generated_utc }}</div>
@@ -259,5 +349,53 @@
         <p>Sources: {{ total_feeds }} RSS feeds | Taxonomy: {{ taxonomy_version if taxonomy_version else 'v1' }}</p>
         <p><a href="briefing.json" target="_blank">Raw JSON Data</a> | <a href="feeds.opml" target="_blank">Feed List (OPML)</a> | <a href="taxonomy.yaml" target="_blank">Taxonomy Config</a></p>
     </footer>
+
+    <script>
+        (function() {
+            const toggle = document.getElementById('themeToggle');
+            const icon = document.getElementById('themeIcon');
+            const text = document.getElementById('themeText');
+            const html = document.documentElement;
+
+            // Check for saved preference or system preference
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            function applyTheme(theme) {
+                html.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                if (theme === 'dark') {
+                    icon.textContent = '☀️';
+                    text.textContent = 'Light';
+                } else {
+                    icon.textContent = '🌙';
+                    text.textContent = 'Dark';
+                }
+            }
+
+            // Initialize
+            if (savedTheme) {
+                applyTheme(savedTheme);
+            } else if (prefersDark) {
+                applyTheme('dark');
+            } else {
+                applyTheme('light');
+            }
+
+            // Toggle handler
+            toggle.addEventListener('click', function() {
+                const currentTheme = html.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                applyTheme(newTheme);
+            });
+
+            // Listen for system preference changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    applyTheme(e.matches ? 'dark' : 'light');
+                }
+            });
+        })();
+    </script>
 </body>
 </html>
