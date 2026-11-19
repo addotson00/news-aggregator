@@ -158,7 +158,9 @@ class TopicStore:
     # ---- output ----------------------------------------------------------
     def save(self) -> list[dict]:
         arts = sorted(self.articles.values(), key=_sort_key, reverse=True)
-        write_json(self.path, {"topic": self.slug, "generated_at": now_iso(), "articles": arts})
+        # No timestamp here: the file only changes when articles do, which is what
+        # scripts/fetch.sh uses to decide whether a run is worth pushing.
+        write_json(self.path, {"topic": self.slug, "articles": arts})
         for month in sorted(self._dirty_months):
             items = sorted(self._archive[month].values(), key=_sort_key, reverse=True)
             write_json(self.dir / "archive" / f"{month}.json", {"month": month, "articles": items})

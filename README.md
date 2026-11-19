@@ -96,7 +96,7 @@ On the site, every tag has a **hide** toggle (for example, to switch off Sports)
 
 A feed only shows the latest N items. If an outlet publishes more than N between fetches, the extras slide off unseen. Three measures handle this:
 
-1. **Fetch often, publish daily.** `scripts/fetch.sh` runs hourly and `scripts/publish.sh` runs once a day.
+1. **Fetch often.** `scripts/fetch.sh` runs hourly. Topics with `fetch_every_minutes` skip runs until they're due.
 2. **Feed paging** (`pages:`) reads deeper into feeds that support it.
 3. **Gap detection.** Each run records the article ids it saw per source, in `state/<topic>.json`. If a later fetch shares *no* ids with the previous one, items may have been missed in between. The run logs a warning, and the site footer shows "possible gap" for 7 days. If a source keeps gapping, fetch more often or raise its `pages`.
 
@@ -111,14 +111,17 @@ A feed only shows the latest N items. If an outlet publishes more than N between
 
 ## Scheduling
 
-`scripts/fetch.sh` (hourly) and `scripts/publish.sh` (daily) share a lock, so they never overlap. Example crontab entries:
+- **`scripts/fetch.sh` (hourly)** fetches due topics and **pushes when any articles were added or changed**, so new stories reach the site within about an hour. Hours with nothing new make no commit. It also retries pushing commits left by an earlier failed push.
+- **`scripts/publish.sh` (daily)** fetches and pushes everything, including source-health timestamps that the hourly job only pushes alongside new articles. Hermes sends its daily summary from this job.
+
+Both share a lock, so they never overlap; publish waits up to 10 minutes for a running fetch. Example crontab entries:
 
 ```
 5 * * * *  cd /path/to/news-aggregator && scripts/fetch.sh   >> ~/newscanner.log 2>&1
 30 6 * * * cd /path/to/news-aggregator && scripts/publish.sh >> ~/newscanner.log 2>&1
 ```
 
-For a Hermes agent, call the same two scripts. `publish.sh` exits non-zero if a topic had no working sources. Per-source health (errors, last success, gaps) is in `docs/data/manifest.json`.
+For a Hermes agent, call the same two scripts. Both exit non-zero if a push failed or a topic had no working sources, and print a line starting with `✗` or `⚠` for anything worth an alert. Per-source health (errors, last success, gaps) is in `docs/data/manifest.json`.
 
 **GitHub Actions (optional):** `.github/workflows/aggregate.yml` runs the pipeline on GitHub's servers. Runners have no disk between runs, so each run commits. Its schedule (every 2 hours) is commented out so it won't race with a local job. Enable one scheduler, not both.
 
@@ -163,7 +166,7 @@ docs/                    GitHub Pages root
   assets/                shared JS/CSS
   data/                  manifest.json + data/<slug>/articles.json, archive/
 state/                   per-source fetch state (validators, seen ids, gaps); committed
-scripts/fetch.sh         hourly: fetch only
-scripts/publish.sh       daily: fetch + commit + push
+scripts/fetch.sh         hourly: fetch due topics; push if articles changed
+scripts/publish.sh       daily: fetch + commit + push everything (incl. source health)
 .github/workflows/       optional scheduled run on GitHub
 ```
