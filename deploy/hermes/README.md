@@ -6,7 +6,7 @@ How the aggregators are run in production, and how to rebuild that setup from th
 
 | Job | Schedule (America/Anchorage) | Runs | Delivers to Telegram |
 |---|---|---|---|
-| `newsagg-fetch` | `5 * * * *` (hourly) | `newsagg-fetch.sh` → `scripts/fetch.sh` | Only problems (`✗` failed source, `⚠` possible gap, failed push). Healthy runs are silent. |
+| `newsagg-fetch` | `5 * * * *` (hourly) | `newsagg-fetch.sh` → `scripts/fetch.sh` | Only problems: `✗` (a source failing for 12h+, at most daily per source, or a failed push) and `⚠` (possible gap). Healthy runs and short-lived rate limits are silent. |
 | `newsagg-publish` | `30 6 * * *` (daily) | `newsagg-publish.sh` → `scripts/publish.sh` | A one-line summary per aggregator, plus the push result |
 
 `fetch.sh` pushes to GitHub whenever a run finds new articles. `publish.sh` pushes once a day regardless, which refreshes source-health timestamps. Topics with `fetch_every_minutes` (UA: 120) skip hourly runs until they're due.
@@ -65,4 +65,4 @@ Both scripts exit non-zero if a push failed or a topic had no working sources, a
 - **Logs:** `~/.hermes/logs/newsagg.log` has full output of every run. `hermes cron runs <job-id>` shows run history.
 - **After editing a wrapper on Hermes,** copy it back into this folder and commit, so this folder stays the source of truth.
 - **Concurrency:** `scripts/_lock.sh` allows one pipeline run at a time. Publish waits up to 10 minutes for a running fetch.
-- **Rate limits:** TownNews-hosted outlets (News-Miner, Ketchikan, Kodiak, Your Alaska Link) throttle article-page reads. Backlogs clear over a few runs; lower `page_fetch_limit` in `topics/UA.yaml` if they keep failing.
+- **Rate limits:** Ketchikan and Your Alaska Link (TownNews) rate-limit hard, so they read 3 pages per run, 20 s apart, and rest 2–24 h after a 429. If one still alerts daily, lower its `page_fetch_limit` or raise `page_delay_seconds` in `topics/UA.yaml`.

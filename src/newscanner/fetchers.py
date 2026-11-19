@@ -73,9 +73,16 @@ def _get(client: httpx.Client, url: str, validators: dict | None = None) -> http
         r = client.get(url, headers=headers)
     except httpx.HTTPError as e:
         raise FetchError(f"network error: {e.__class__.__name__}: {e}") from e
+    if r.status_code in (429, 503):
+        raise TransientFetchError(f"HTTP {r.status_code}")
     if r.status_code not in (200, 304):
         raise FetchError(f"HTTP {r.status_code}")
     return r
+
+
+def is_rate_limit(error: str) -> bool:
+    """True for errors meaning 'slow down' (HTTP 429/503), as opposed to broken."""
+    return "HTTP 429" in error or "HTTP 503" in error
 
 
 def _validators(r: httpx.Response) -> dict:
@@ -274,15 +281,16 @@ def host_refusal(url: str) -> tuple[str, bool] | None:
     return _blocked_hosts.get(urlsplit(url).netloc.lower())
 
 
-def fetch_page_text(client: httpx.Client, url: str) -> str:
-    """Fetch one article page politely and return its text. Raises FetchError."""
+def fetch_page_text(client: httpx.Client, url: str, delay: float = PAGE_HOST_DELAY) -> str:
+    """Fetch one article page politely (at least `delay` s after the previous page
+    request to the same host) and return its text. Raises FetchError."""
     host = urlsplit(url).netloc.lower()
     if host in _blocked_hosts:
         reason, transient = _blocked_hosts[host]
         raise (TransientFetchError if transient else FetchError)(f"host refused pages this run ({reason})")
     if not robots_allows(client, url):
         raise FetchError("article page disallowed by robots.txt")
-    wait = PAGE_HOST_DELAY - (time.monotonic() - _last_page_hit.get(host, 0.0))
+    wait = delay - (time.monotonic() - _last_page_hit.get(host, 0.0))
     if wait > 0:
         time.sleep(wait)
     _last_page_hit[host] = time.monotonic()

@@ -214,10 +214,13 @@
       if (s.state === "ok") {
         detail = s.not_modified ? "no change at last check" : `${s.fetched} entries${s.pages > 1 ? ` (${s.pages} pages)` : ""}, ${s.new} new at last check`;
         if (s.last_ok) detail += ` · last OK ${relTime(Date.parse(s.last_ok))}`;
-      } else detail = s.state === "error" ? `${s.error}${s.last_ok ? ` · last OK ${relTime(Date.parse(s.last_ok))}` : ""}` : s.note || "disabled";
+      } else if (s.state === "error" || s.state === "cooldown") {
+        detail = `${s.error}${s.last_ok ? ` · last OK ${relTime(Date.parse(s.last_ok))}` : ""}`;
+      } else detail = s.note || "disabled";
       const gap = recentGap(s)
         ? `<span class="error">possible gap ${relTime(Date.parse(s.last_gap.detected))}: no overlap with the previous fetch</span>` : "";
-      return `<li><span class="${s.state}">${s.state === "ok" ? "●" : s.state === "error" ? "▲" : "○"}</span>
+      const icon = { ok: "●", error: "▲", cooldown: "◐" }[s.state] || "○";
+      return `<li><span class="${s.state}" title="${esc(s.state)}">${icon}</span>
         <a href="${esc(s.homepage)}" target="_blank" rel="noopener">${esc(s.name)}</a><span class="muted">${esc(detail)}</span>${gap}</li>`;
     }).join("");
     $("updated").textContent = new Date(topicMeta.updated_at).toLocaleString();

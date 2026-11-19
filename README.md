@@ -90,6 +90,14 @@ Headlines often omit the detail you're tracking (for example, "…said a UAF res
 
 If a host refuses or rate-limits page reads (401/403/429/503), the pipeline backs off from that host for the rest of the run and retries on later runs, refetching the source's feed until the backlog clears. Retries stop once an article is older than `text_check_days`. The ids of pages already read are kept in `state/<slug>.json`, so pages are never fetched twice.
 
+Per source, `page_fetch_limit` and `page_delay_seconds` override the topic's page budget and the default 3 s spacing, for sites with strict rate limits (UA uses 3 pages, 20 s apart for Ketchikan and Your Alaska Link).
+
+## Rate limits and alerts
+
+- When a source answers **429/503** (feed or article pages), it rests: the next runs skip it entirely for 2 h, then 4, 8, 16, and up to 24 h on repeats. A clean run resets the backoff. Gap detection still flags anything missed while it rested.
+- Failures print a `✗` line (which Hermes delivers as an alert) only when a source **hasn't succeeded for 12 hours**, and then at most once a day per source. Short-lived failures are logged as `~` (failed, will retry) or `⏸` (resting) and stay quiet.
+- The site's source-status footer shows resting sources as ◐ with the time they'll be retried.
+
 On the site, every tag has a **hide** toggle (for example, to switch off Sports), and hidden tags are kept in the URL.
 
 ## Completeness: feeds are rolling windows

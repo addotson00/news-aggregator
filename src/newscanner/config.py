@@ -23,6 +23,8 @@ class Source:
     pages: int = 1  # >1 reads extra feed pages via ?<page_param>=N (WordPress feeds)
     page_param: str = "paged"
     text_check: bool = True  # may fetch article pages when the topic checks article text
+    page_fetch_limit: int | None = None  # override the topic's pages-per-run limit for this source
+    page_delay_seconds: float | None = None  # seconds between this host's page requests (default 3)
 
 
 @dataclass

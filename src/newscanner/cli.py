@@ -17,8 +17,8 @@ from collections import Counter
 from datetime import datetime, timedelta, timezone
 
 from .config import Source, Topic, load_topics
-from .fetchers import (FetchError, TransientFetchError, fetch_page_text, fetch_source, host_refusal,
-                       make_client)
+from .fetchers import (PAGE_HOST_DELAY, FetchError, TransientFetchError, fetch_page_text, fetch_source,
+                       host_refusal, is_rate_limit, make_client)
 from .normalize import build_article, now_iso, parse_iso
 from .state import TopicState
 from .store import TopicStore, prune_manifest, update_manifest
@@ -26,19 +26,63 @@ from .tagging import Tagger
 
 SEEN_IDS_KEEP = 400  # per source; must exceed the most entries one fetch can return
 TEXT_CHECKED_KEEP = 3000  # per source; ids whose article page was already read
+COOLDOWN_FIRST_HOURS = 2  # after a 429/503, skip the source this long; doubles on repeats
+COOLDOWN_MAX_HOURS = 24
+ALERT_AFTER = timedelta(hours=12)  # only alert (✗) when a source hasn't succeeded for this long
+ALERT_REPEAT = timedelta(hours=24)  # and then at most once a day per source
+
+
+def start_cooldown(st: dict, now: datetime) -> int:
+    """Back off from a rate-limiting source: 2h, 4h, 8h ... up to 24h. Returns hours."""
+    hours = min(max(st.get("cooldown_hours", 0) * 2, COOLDOWN_FIRST_HOURS), COOLDOWN_MAX_HOURS)
+    st["cooldown_hours"] = hours
+    st["cooldown_until"] = (now + timedelta(hours=hours)).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return hours
+
+
+def should_alert(st: dict, now: datetime) -> bool:
+    """A failure is worth a ✗ (which Hermes delivers) only when the source has been
+    failing for a while, and then at most once per ALERT_REPEAT. One-off errors
+    and rate limits fix themselves and stay quiet."""
+    last_ok = parse_iso(st.get("last_ok"))
+    stale = (now - last_ok > ALERT_AFTER) if last_ok else st.get("consecutive_errors", 0) >= 3
+    if not stale:
+        return False
+    last_alert = parse_iso(st.get("last_alert"))
+    if last_alert and now - last_alert < ALERT_REPEAT:
+        return False
+    st["last_alert"] = now_iso()
+    return True
+
+
+def stale_note(st: dict) -> str:
+    return f" (no successful fetch since {st['last_ok']})" if st.get("last_ok") else " (has never succeeded)"
 
 
 def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagger, st: dict, force: bool = False) -> dict:
     """Fetch one source, ingest its entries, update its state. Returns a status dict for the manifest."""
     now = now_iso()
+    now_dt = datetime.now(timezone.utc)
     t0 = time.monotonic()
+
+    cooldown_until = parse_iso(st.get("cooldown_until"))
+    if cooldown_until and cooldown_until > now_dt and not force:
+        msg = f"rate limited; resting until {st['cooldown_until']}"
+        alert = should_alert(st, now_dt)
+        print(f"  {'✗' if alert else '⏸'} {src.name:<36} {msg}" + (stale_note(st) if alert else ""))
+        return {"state": "cooldown", "error": msg, "checked": now}
+
     try:
         res = fetch_source(client, src, None if force else st.get("validators"))
     except FetchError as e:
         st["consecutive_errors"] = st.get("consecutive_errors", 0) + 1
         st["last_error"] = {"at": now, "error": str(e)}
-        print(f"  ✗ {src.name:<36} {e}")
-        return {"state": "error", "error": str(e), "checked": now}
+        limited = is_rate_limit(str(e))
+        note = f" (rate limited; resting {start_cooldown(st, now_dt)}h)" if limited else ""
+        alert = should_alert(st, now_dt)
+        # "~" lines are logged but not delivered; "✗" lines reach Hermes/Telegram.
+        print(f"  {'✗' if alert else '~'} {src.name:<36} {e}{note}" + (stale_note(st) if alert else ""))
+        return {"state": "cooldown" if limited else "error", "error": f"{e}{note}", "checked": now}
 
     st["validators"] = res.validators
     st["consecutive_errors"] = 0
@@ -54,7 +98,8 @@ def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagg
     checked = st.get("text_checked", [])
     checked_set = set(checked)
     newly_checked: list[str] = []
-    budget = topic.page_fetch_limit
+    budget = src.page_fetch_limit if src.page_fetch_limit is not None else topic.page_fetch_limit
+    page_delay = src.page_delay_seconds if src.page_delay_seconds is not None else PAGE_HOST_DELAY
     recent = datetime.now(timezone.utc) - timedelta(days=topic.text_check_days)
     page_errors: Counter[str] = Counter()
     for r in res.entries:
@@ -90,7 +135,7 @@ def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagg
                 else:
                     budget -= 1
                     try:
-                        text = fetch_page_text(client, art["url"])
+                        text = fetch_page_text(client, art["url"], page_delay)
                         counts["text_page"] += 1
                         newly_checked.append(art["id"])
                     except TransientFetchError as e:
@@ -117,6 +162,14 @@ def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagg
         st.setdefault("gaps", []).append(gap)
         st["gaps"] = st["gaps"][-20:]
     st["seen_ids"] = (ids + [i for i in seen if i not in set(ids)])[:SEEN_IDS_KEEP]
+    # Pages rate-limited this run: rest the whole source (feed included) for a while,
+    # so the host's limit can reset. A clean run clears the backoff.
+    page_limited = any(is_rate_limit(err) for err in page_errors)
+    if page_limited:
+        rest = start_cooldown(st, now_dt)
+    else:
+        st.pop("cooldown_until", None)
+        st["cooldown_hours"] = 0
     if topic.text_check:
         st["text_checked"] = (newly_checked + checked)[:TEXT_CHECKED_KEEP]
         if counts["text_pending"]:
@@ -143,6 +196,8 @@ def fetch_one(src: Source, topic: Topic, client, store: TopicStore, tagger: Tagg
     )
     for err, n in page_errors.most_common(3):
         print(f"    · article pages: {n}× {err}")
+    if page_limited:
+        print(f"    · article pages rate limited; resting this source {rest}h")
     if gap:
         print(f"    ⚠ possible gap: no overlap with previous fetch ({prev_ok}); oldest item now {oldest}."
               " Fetch more often or raise `pages`.")

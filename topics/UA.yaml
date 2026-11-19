@@ -89,6 +89,10 @@ sources:
     homepage: https://www.ketchikandailynews.com/
     type: rss
     url: https://www.ketchikandailynews.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc
+    # Very strict rate limit (429 after a handful of requests, lasting hours):
+    # read few article pages per run, slowly.
+    page_fetch_limit: 3
+    page_delay_seconds: 20
 
   - id: nomenugget
     name: The Nome Nugget
@@ -113,7 +117,9 @@ sources:
     homepage: https://www.youralaskalink.com/
     type: rss
     url: https://www.youralaskalink.com/search/?f=rss&t=article&l=50&s=start_time&sd=desc
-    note: Returned HTTP 429 (rate limited) during setup; watch source status.
+    # Same strict rate limit as Ketchikan.
+    page_fetch_limit: 3
+    page_delay_seconds: 20
 
   # --- Headlines only ---
   - id: alaskapublic

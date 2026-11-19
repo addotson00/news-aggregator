@@ -129,6 +129,7 @@ mark.kw { background: none; color: var(--text); font-weight: 600; text-decoratio
 .health .ok { color: var(--ok); }
 .health .error { color: var(--err); }
 .health .disabled { color: var(--muted); }
+.health .cooldown { color: var(--muted); }
 
 /* ---------------------------------------------------------------------------
    Phones and narrow windows
