@@ -2,11 +2,11 @@
  "sources": {
   "adn": {
    "validators": {
-    "etag": "W/\"36e07-qi/KVuL/00KVUcDwsCxq5RGnZyo\"",
-    "last_modified": "Thu, 19 Nov 2026 14:06:03 GMT"
+    "etag": "W/\"36e07-OQBfsRJrWwL5B1FJ5n4uuOx/LJA\"",
+    "last_modified": "Thu, 19 Nov 2026 16:05:35 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:06:02Z",
+   "last_ok": "2026-11-19T16:06:02Z",
    "seen_ids": [
     "69bb61bfaf22b439",
     "088153bdc5621db2",
@@ -65,7 +65,7 @@
     "last_modified": "Thu, 19 Nov 2026 06:56:51 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:06:04Z",
+   "last_ok": "2026-11-19T16:06:03Z",
    "seen_ids": [
     "3738fc11912a5871",
     "f71ab85fff12e8e9",
@@ -181,7 +181,7 @@
     "etag": "\"8b459ecf1209d87d9fc154108bb06180\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:06:04Z",
+   "last_ok": "2026-11-19T16:06:03Z",
    "seen_ids": [
     "987d7cb38d426d4d",
     "1a8dcfcd04009a06",
@@ -198,12 +198,17 @@
   },
   "alaskasnewssource": {
    "validators": {
-    "etag": "W/\"22c47-ohoKSYwUyA0Q71D80hgUXC88toI\"",
-    "last_modified": "Thu, 19 Nov 2026 14:04:17 GMT"
+    "etag": "W/\"24e0f-QpGiRltYEloI1fnlT/t66rDqC2w\"",
+    "last_modified": "Thu, 19 Nov 2026 16:05:08 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:06:05Z",
+   "last_ok": "2026-11-19T16:06:04Z",
    "seen_ids": [
+    "58200c6bd559b406",
+    "61a3b69e73e9a5ac",
+    "ed102beb00bf8270",
+    "d63f99d1b63a53dd",
+    "ab65e60501d4f5e4",
     "1f8bffdf72b68a06",
     "79600541c78f9ca2",
     "3ffc51dd4f61f3aa",
@@ -261,7 +266,7 @@
     "last_modified": "Thu, 19 Nov 2026 14:01:27 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:06:06Z",
+   "last_ok": "2026-11-19T16:06:05Z",
    "seen_ids": [
     "50d646a5b466bc74",
     "17bc22f2043bc837",
@@ -297,11 +302,13 @@
   },
   "matsusentinel": {
    "validators": {
-    "etag": "W/\"ca490-/n02DQ5z2ok9/9VBusuJoiVYHmA\""
+    "etag": "W/\"cbf06-FERTnCjfWL0Q/RjhIKNzXCRVJ1M\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:06:06Z",
+   "last_ok": "2026-11-19T16:06:05Z",
    "seen_ids": [
+    "3e2ff7942a82fe13",
+    "14b8d11c6c778d2a",
     "fb16a8ecd39d6008",
     "4913ef115c0cfac5",
     "ba91d64d7ba73cf5",
@@ -411,22 +418,38 @@
   "newsminer": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:06:07Z",
+   "last_ok": "2026-11-19T16:06:06Z",
    "seen_ids": [
+    "a6f541e549e3dc5f",
+    "cfa68850fb585938",
+    "74c4eefe4ae42f30",
+    "1e814c3fc84d358c",
+    "f1987fcca83fd2b6",
+    "99ea356efe294ae2",
+    "c21ceff892fc4ecd",
+    "3110b0051bfacda9",
+    "c1dd6784a6decea3",
+    "07e7b7aa4df54a03",
+    "49eda008ab7009ef",
+    "98ecc04451426150",
+    "4172ba338769a934",
+    "83c3084b83df0f7d",
+    "4e68f1c6b84c70ca",
+    "25a92123a069e254",
     "67c45768e57d3fbe",
     "c58e2883a339f8da",
     "fb850f467af39b0a",
     "2e3c96a2f0ca26ce",
     "b6345f0b5bab3b63",
     "ae97fd1822af72ea",
+    "704c59c04abaad74",
     "e607a5cbbcdd0ccb",
     "758b757c439293b1",
-    "704c59c04abaad74",
     "32105d43c5d0f55b",
-    "650d36b6b2599c2e",
     "6f010d59baaeb175",
-    "f2c24496e1cc4778",
+    "650d36b6b2599c2e",
     "f6b42ae43ee755c3",
+    "f2c24496e1cc4778",
     "afc665a4bd95ca02",
     "4908a3c03a505961",
     "74ce606c5043dccd",
@@ -441,16 +464,16 @@
     "0e7b4cba2978d3e9",
     "372d3886c6f68b3d",
     "0d11f09f2745330f",
-    "0940820b2d63e513",
     "27594bb70236a7cc",
+    "0940820b2d63e513",
+    "457254a81ba32b76",
+    "dd0ffd0546d333b3",
     "ae39a975e3d3ecef",
     "ba5e0081181f4026",
     "168fb16d82281054",
     "799fc0f756e0927d",
     "10c35ef7a87f8382",
     "4ebd33991ff35df4",
-    "457254a81ba32b76",
-    "dd0ffd0546d333b3",
     "6c77f4235ad7db2b",
     "8efe4c9890bc3c7f",
     "f1ec3f9831c09b38",
@@ -517,6 +540,15 @@
     "98f6739b79b53eff"
    ],
    "text_checked": [
+    "a6f541e549e3dc5f",
+    "cfa68850fb585938",
+    "74c4eefe4ae42f30",
+    "1e814c3fc84d358c",
+    "f1987fcca83fd2b6",
+    "99ea356efe294ae2",
+    "c21ceff892fc4ecd",
+    "3110b0051bfacda9",
+    "c1dd6784a6decea3",
     "67c45768e57d3fbe",
     "c58e2883a339f8da",
     "fb850f467af39b0a",
@@ -609,11 +641,12 @@
   },
   "juneauindependent": {
    "validators": {
-    "last_modified": "Thu, 19 Nov 2026 07:46:33 GMT"
+    "last_modified": "Thu, 19 Nov 2026 16:06:34 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:07:19Z",
+   "last_ok": "2026-11-19T16:06:34Z",
    "seen_ids": [
+    "44b4676ab6719f8d",
     "2c952bdd3b1ed25a",
     "d64caac3936e9a67",
     "f312c2e4d540d563",
@@ -644,6 +677,7 @@
     "847342075fa8ae49"
    ],
    "text_checked": [
+    "44b4676ab6719f8d",
     "2c952bdd3b1ed25a",
     "d64caac3936e9a67",
     "f312c2e4d540d563",
@@ -672,14 +706,15 @@
     "608fb2d88865f2b5",
     "d33dea5341d62d78",
     "847342075fa8ae49"
-   ]
+   ],
+   "cooldown_hours": 0
   },
   "anchoragepress": {
    "validators": {
     "etag": "W/\"60686a322462c44bfc87ed852e5d1197\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:07:20Z",
+   "last_ok": "2026-11-19T16:06:34Z",
    "seen_ids": [
     "f1de6150c65a25da",
     "da67ce51e88e4b26",
@@ -1063,7 +1098,7 @@
     "last_modified": "Thu, 19 Nov 2026 11:30:12 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:07:20Z",
+   "last_ok": "2026-11-19T16:06:34Z",
    "seen_ids": [
     "0cdb2f49658ed5c6",
     "252bbdbd38025056",
@@ -1199,7 +1234,7 @@
   "nomenugget": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:07:23Z",
+   "last_ok": "2026-11-19T16:06:35Z",
    "seen_ids": [
     "a639b9cdb30a4e1f",
     "d239f8107ea7f2bc",
@@ -1242,7 +1277,7 @@
     "last_modified": "Thu, 19 Nov 2026 00:14:19 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:07:24Z",
+   "last_ok": "2026-11-19T16:06:36Z",
    "seen_ids": [
     "ac77d4be93287612",
     "e093f5fad5f36cfa",
@@ -1277,9 +1312,12 @@
    ]
   },
   "kodiakdailymirror": {
-   "validators": {},
+   "validators": {
+    "etag": "W/798547f7e4489d9e54310b3ee49bfda5",
+    "last_modified": "Thu, 19 Nov 2026 16:03:01 GMT"
+   },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:07:24Z",
+   "last_ok": "2026-11-19T16:06:36Z",
    "seen_ids": [
     "9b8b3394c303d061",
     "659e54d87149a3f1",
@@ -1383,6 +1421,29 @@
     "d201de668def37be"
    ],
    "text_checked": [
+    "1b8a4945ed58178c",
+    "fffe22c09fc6da95",
+    "5582770cb38369d8",
+    "67a82c8ae3907c57",
+    "dda02b83e2519cfc",
+    "e8465c9fc7b7802d",
+    "b6732f17c93fd531",
+    "592d29002020cb0b",
+    "feaeb1e0e0b02f98",
+    "ad578c320f8824a7",
+    "e61c2e44c71f7d23",
+    "d50f3ab50dabfcfa",
+    "0505f0b7e0084e1f",
+    "52d1fcdee5683f1a",
+    "9fcb1ef97b62776b",
+    "5877cd4f4494c0c8",
+    "d54e9a607f6019ba",
+    "7c083309b8cc56c3",
+    "120733ea79ec3e87",
+    "4c6f42b0b004f823",
+    "f87315b7c3bf1bc4",
+    "daea1f8be354615e",
+    "f261a98c4e54eb22",
     "9b8b3394c303d061",
     "659e54d87149a3f1",
     "150e60dbfdbfa028",
@@ -1620,7 +1681,7 @@
   "alaskapublic": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:08:57Z",
+   "last_ok": "2026-11-19T16:07:42Z",
    "seen_ids": [
     "5dc474603564153e",
     "7c7fa6c3259a147e",
@@ -1650,13 +1711,9 @@
   "kmxt": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T14:08:58Z",
+   "last_ok": "2026-11-19T16:07:43Z",
    "seen_ids": [
-    "42bdcdcecf7737e9",
-    "0eb617ed3c7cff84",
-    "ca0712d962239a11",
     "df3476054247734c",
-    "fbb3dbf493d08fc6",
     "1b385b26e8f92c1f",
     "2b1b2c3702785b32",
     "83b9e548aace04e4",
@@ -1687,7 +1744,7 @@
     "33945e549b88ef7d",
     "86db6162e428d52a",
     "5648335bbdb76de1",
-    "18d53ab101dd8722",
+    "df4375e90574e238",
     "c0695baebfebb20a",
     "6b96f1bb84741224",
     "d74c097010df68d0",
@@ -1697,6 +1754,16 @@
     "127e1c01a6693e94",
     "b554875d677c99e1",
     "b7a3ba9d166f070f",
+    "d11debdfde9309f1",
+    "1f8a5acf5e0ceb10",
+    "eb84b9ca6fcf1477",
+    "98f836e60a0f564d",
+    "03500d6bff6b3cc1",
+    "42bdcdcecf7737e9",
+    "0eb617ed3c7cff84",
+    "ca0712d962239a11",
+    "fbb3dbf493d08fc6",
+    "18d53ab101dd8722",
     "b7eb4d6a2456b821",
     "da9489be8e6f42d6",
     "f2cdd23f2450ae40",
@@ -1710,6 +1777,12 @@
     "7432812695451f7b"
    ],
    "text_checked": [
+    "df4375e90574e238",
+    "d11debdfde9309f1",
+    "1f8a5acf5e0ceb10",
+    "eb84b9ca6fcf1477",
+    "98f836e60a0f564d",
+    "03500d6bff6b3cc1",
     "b7eb4d6a2456b821",
     "b7a3ba9d166f070f",
     "b554875d677c99e1",
@@ -1770,5 +1843,5 @@
    "cooldown_hours": 0
   }
  },
- "last_run": "2026-11-19T14:06:02Z"
+ "last_run": "2026-11-19T16:06:02Z"
 }
