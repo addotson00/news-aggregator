@@ -2,11 +2,11 @@
  "sources": {
   "insidehighered": {
    "validators": {
-    "etag": "W/\"1795111886\"",
-    "last_modified": "Thu, 19 Nov 2026 18:11:26 GMT"
+    "etag": "W/\"1795122687\"",
+    "last_modified": "Thu, 19 Nov 2026 21:11:27 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:54Z",
+   "last_ok": "2026-11-19T22:05:54Z",
    "seen_ids": [
     "7b4a931179c977d0",
     "acf1fa3f77eef402",
@@ -37,7 +37,7 @@
     "last_modified": "Thu, 19 Nov 2026 05:10:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:54Z",
+   "last_ok": "2026-11-19T22:05:54Z",
    "seen_ids": [
     "1f7bc61b3793b9d0",
     "fb7f85980a6272ac",
@@ -60,7 +60,7 @@
     "last_modified": "Thu, 19 Nov 2026 06:00:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:54Z",
+   "last_ok": "2026-11-19T22:05:54Z",
    "seen_ids": [
     "dd8cce0b1fd2e7b9",
     "d293668c7ffce833",
@@ -89,7 +89,7 @@
   "edsurge": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:54Z",
+   "last_ok": "2026-11-19T22:05:54Z",
    "seen_ids": [
     "09a2c5323a0be22b",
     "e7d1321579d0730d",
@@ -147,7 +147,7 @@
   "thepienews": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:55Z",
+   "last_ok": "2026-11-19T22:05:55Z",
    "seen_ids": [
     "7bc3c0b39187aba8",
     "6bff9d7fe2c0227b",
@@ -195,7 +195,7 @@
   "nyt-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:58Z",
+   "last_ok": "2026-11-19T22:05:57Z",
    "seen_ids": [
     "67200fd255b3dcb9",
     "cb025945b716cc7d",
@@ -230,7 +230,7 @@
     "last_modified": "Thu, 05 Nov 2026 01:33:07 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:58Z",
+   "last_ok": "2026-11-19T22:05:58Z",
    "seen_ids": [
     "f56d4289a38a31eb",
     "c661519fdc96d7f8",
@@ -276,7 +276,7 @@
   "chronicle": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:58Z",
+   "last_ok": "2026-11-19T22:05:58Z",
    "seen_ids": [
     "e116ad924cd31b4c",
     "84fc6dc3445fcf36",
@@ -298,11 +298,12 @@
   },
   "diverse": {
    "validators": {
-    "etag": "W/\"fe64-BAGoFIXYdqO1WGePQ1TOlP0YiUc\""
+    "etag": "W/\"ff39-MQYuS4xNcpp2jCLQQFdFWePX+cc\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:59Z",
+   "last_ok": "2026-11-19T22:05:59Z",
    "seen_ids": [
+    "c526bd08c54aadcb",
     "ee5f340c5d5846cb",
     "92c407057803253e",
     "13aa4ae18258a42e",
@@ -327,7 +328,7 @@
     "last_modified": "Thu, 19 Nov 2026 16:10:41 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:59Z",
+   "last_ok": "2026-11-19T22:05:59Z",
    "seen_ids": [
     "0f67db553807d331",
     "8d3796cbd6f151cb",
@@ -345,8 +346,9 @@
   "campustechnology": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:59Z",
+   "last_ok": "2026-11-19T22:05:59Z",
    "seen_ids": [
+    "0c5afd94bd6685d1",
     "3b8ff4c24a56f779",
     "c3fa93e4286ea6a2",
     "0cad72ddbd361c3f",
@@ -406,7 +408,7 @@
   "conversation-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:59Z",
+   "last_ok": "2026-11-19T22:05:59Z",
    "seen_ids": [
     "1d37dc92018d1757",
     "372c2945c9b2c81a",
@@ -441,7 +443,7 @@
     "last_modified": "Thu, 19 Nov 2026 19:34:30 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:05:59Z",
+   "last_ok": "2026-11-19T22:06:00Z",
    "seen_ids": [
     "f17ad87cbf4a9909",
     "a25844f853aee835",
@@ -454,14 +456,14 @@
   },
   "ccrc": {
    "validators": {
-    "etag": "\"6ec8b36a4645b64cba43f2d0ff7e6a26\"",
-    "last_modified": "Thu, 19 Nov 2026 20:32:37 GMT"
+    "etag": "\"f78c8033a791eef43b223477d9e6fc36\"",
+    "last_modified": "Thu, 19 Nov 2026 21:21:01 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-19T21:06:02Z",
+   "last_ok": "2026-11-19T22:06:02Z",
    "seen_ids": [],
    "cooldown_hours": 0
   }
  },
- "last_run": "2026-11-19T21:05:54Z"
+ "last_run": "2026-11-19T22:05:54Z"
 }
