@@ -10,6 +10,7 @@
   const PAGE_TOPIC = document.querySelector('meta[name="newscanner-topic"]')?.content;
   const state = { topic: PAGE_TOPIC, q: "", show: "match", days: 0, where: "", tags: new Set(), hide: new Set(),
     sources: new Set(), limit: PAGE };
+  const expanded = new Set();  // cards whose extra mention snippets are open (survives re-render)
   let urlHide = null;       // hide list from the URL; null = use the topic's default hidden_tags
   const defaultHide = () => new Set(topicMeta?.hidden_tags || []);
   const sameSet = (a, b) => a.size === b.size && [...a].every((x) => b.has(x));
@@ -125,11 +126,12 @@
       const badge = a.found_in === "text" ? `<span class="badge" title="The keyword appears in the article body, not the headline">in article text</span>` : "";
       const mentions = (a.mentions || []).length
         ? `<ul class="mentions">${a.mentions.map((m) => `<li>${highlight(m, terms, kw)}</li>`).join("")}</ul>` : "";
-      return `<li class="card">
+      return `<li class="card${expanded.has(a.id) ? " expanded" : ""}" data-id="${esc(a.id)}">
         <div class="meta"><span class="src">${esc(a.source_name)}</span>${date ? "<span>·</span>" + date : ""}${a.author ? `<span>·</span><span>${esc(a.author)}</span>` : ""}${badge}</div>
         <h3><a href="${esc(a.url)}" target="_blank" rel="noopener">${highlight(a.title, terms, kw)}</a></h3>
-        ${a.summary ? `<p>${highlight(a.summary, terms, kw)}</p>` : ""}
-        ${mentions}
+        ${a.summary ? `<p class="summary">${highlight(a.summary, terms, kw)}</p>` : ""}
+        ${mentions}${(a.mentions || []).length > 1
+          ? `<button type="button" class="more-mentions" data-more-mentions>+${a.mentions.length - 1} more mention${a.mentions.length > 2 ? "s" : ""}</button>` : ""}
         ${also ? `<div class="also">Also at ${also}</div>` : ""}
         ${chips ? `<div class="chips">${chips}</div>` : ""}
       </li>`;
@@ -138,6 +140,33 @@
     $("empty").hidden = list.length > 0;
     const scope = state.show === "match" && topicMeta.mode !== "filter" ? "keyword matches" : "articles";
     $("count").textContent = `${list.length} ${scope}` + (list.length > state.limit ? ` · showing ${state.limit}` : "");
+  }
+
+  // Active filters as removable chips (and the count on the phone Filters button).
+  function activeFilters() {
+    const out = [];
+    const dayLabel = { 1: "Last 24h", 7: "Last 7 days", "-1": "All time (incl. archive)" };
+    if (state.show === "all" && topicMeta.mode !== "filter") out.push(["All articles", () => { state.show = "match"; }]);
+    if (state.where) out.push([state.where === "text" ? "In article text" : "In headline", () => { state.where = ""; }]);
+    if (dayLabel[state.days]) out.push([dayLabel[state.days], () => { state.days = 0; }]);
+    for (const t of state.tags) out.push([`Tag: ${t}`, () => state.tags.delete(t)]);
+    const defaults = defaultHide();
+    for (const t of state.hide) if (!defaults.has(t)) out.push([`Hiding: ${t}`, () => state.hide.delete(t)]);
+    for (const t of defaults) if (!state.hide.has(t)) out.push([`Showing: ${t}`, () => state.hide.add(t)]);
+    const names = Object.fromEntries(topicMeta.sources.map((s) => [s.id, s.name]));
+    for (const id of state.sources) out.push([`Source: ${names[id] || id}`, () => state.sources.delete(id)]);
+    return out;
+  }
+  let activeRemovers = [];
+  function renderActive() {
+    const items = activeFilters();
+    activeRemovers = items.map(([, remove]) => remove);
+    $("active-filters").hidden = !items.length;
+    $("active-filters").innerHTML = items.map(([label], i) =>
+      `<button type="button" class="active-chip" data-remove="${i}" aria-label="Remove filter: ${esc(label)}">${esc(label)}<span aria-hidden="true">×</span></button>`).join("");
+    const btn = $("filters-open");
+    btn.textContent = items.length ? `Filters · ${items.length}` : "Filters";
+    btn.classList.toggle("has-active", items.length > 0);
   }
 
   function renderControls() {
@@ -168,6 +197,8 @@
     renderControls();
     renderFacets(terms);
     renderArticles(list, terms);
+    renderActive();
+    $("filters-apply").textContent = `Show ${list.length} article${list.length === 1 ? "" : "s"}`;
     writeUrl();
   }
 
@@ -239,7 +270,11 @@
       $("topic-picker").hidden = false;
       $("topic-select").innerHTML = manifest.topics.map((t) => `<option value="${esc(t.slug)}">${esc(t.title)}</option>`).join("");
     }
-    if (window.matchMedia("(max-width: 760px)").matches) $("filters-details").open = false;
+    const phone = window.matchMedia("(max-width: 760px)");
+    $("sources-group").open = !phone.matches;  // phone: sources start collapsed inside the panel
+    if (phone.matches) $("search").placeholder = "Search articles";
+    const topbar = document.querySelector(".topbar");
+    new ResizeObserver(() => document.documentElement.style.setProperty("--topbar-h", `${topbar.offsetHeight}px`)).observe(topbar);
     await loadTopic(state.topic);
   }
 
@@ -271,6 +306,15 @@
   document.addEventListener("click", (e) => {
     const chip = e.target.closest("[data-chip]");
     if (chip) { toggle(state.tags, chip.dataset.chip); state.limit = PAGE; render(); return; }
+    const remove = e.target.closest("[data-remove]");
+    if (remove) { activeRemovers[Number(remove.dataset.remove)]?.(); state.limit = PAGE; render(); return; }
+    const moreMentions = e.target.closest("[data-more-mentions]");
+    if (moreMentions) {
+      const card = moreMentions.closest(".card");
+      expanded.add(card.dataset.id);
+      card.classList.add("expanded");
+      return;
+    }
     const hide = e.target.closest("[data-hide]");
     if (hide) {
       const t = hide.dataset.hide;
@@ -280,12 +324,27 @@
     }
     const clear = e.target.closest("[data-clear]");
     if (clear) {
+      e.preventDefault();  // the Sources "clear" sits inside a <summary>; don't toggle it
       state[clear.dataset.clear].clear();
       if (clear.dataset.clear === "tags") state.hide = defaultHide();
       state.limit = PAGE; render();
     }
   });
   $("more").addEventListener("click", () => { state.limit += PAGE; render(); });
+
+  // Phone filter panel
+  function setPanel(open) {
+    document.body.classList.toggle("filters-open", open);
+    $("filters-open").setAttribute("aria-expanded", String(open));
+    if (open) $("filters-panel").scrollTop = 0;
+    else window.scrollTo({ top: Math.min(window.scrollY, document.querySelector(".results").offsetTop - 80) });
+  }
+  $("filters-open").addEventListener("click", () => setPanel(true));
+  $("filters-close").addEventListener("click", () => setPanel(false));
+  $("filters-apply").addEventListener("click", () => setPanel(false));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && document.body.classList.contains("filters-open")) setPanel(false);
+  });
   $("reset").addEventListener("click", () => {
     Object.assign(state, { q: "", show: topicMeta.mode === "filter" ? "all" : "match", days: 0, where: "", limit: PAGE });
     state.tags.clear(); state.sources.clear(); state.hide = defaultHide(); render();

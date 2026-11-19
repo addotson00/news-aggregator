@@ -36,23 +36,41 @@ a { color: var(--accent); }
 .small { font-size: .85rem; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
-/* Header */
-.site-header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 5; }
+/* Header + search bar (desktop: whole top bar sticky; phone: see bottom of file) */
+.topbar { position: sticky; top: 0; z-index: 5; }
+.site-header, .searchbar { background: var(--surface); }
+.searchbar { border-bottom: 1px solid var(--border); }
 .header-row { display: flex; gap: 16px; align-items: center; justify-content: space-between; padding-top: 14px; }
 .brand h1 { margin: 0; font-size: 1.35rem; letter-spacing: -.01em; }
 .brand p { margin: 2px 0 0; font-size: .9rem; }
 .topic-picker select { font: inherit; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
-.search-row { padding-top: 10px; padding-bottom: 12px; }
-#search { width: 100%; font: inherit; font-size: 1rem; padding: 10px 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+.search-row { display: flex; gap: 8px; padding-top: 10px; padding-bottom: 12px; }
+#search { flex: 1; min-width: 0; font: inherit; font-size: 1rem; padding: 10px 14px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--bg); color: var(--text); }
 #search:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.filters-btn { display: none; font: inherit; font-size: .95rem; font-weight: 600; padding: 0 14px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--bg); color: var(--text); cursor: pointer; white-space: nowrap; }
+.filters-btn.has-active { border-color: var(--accent); color: var(--accent); }
+
+/* Active-filter chips under the search box */
+.active-row { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 10px; margin-top: -4px; }
+.active-chip { font: inherit; font-size: .78rem; padding: 3px 6px 3px 10px; border-radius: 999px; border: 1px solid var(--accent);
+  background: var(--accent-soft); color: var(--accent); cursor: pointer; display: inline-flex; align-items: center; gap: 4px; }
+.active-chip span[aria-hidden] { font-size: 1rem; line-height: 1; opacity: .8; }
 
 /* Layout */
 .layout { display: grid; grid-template-columns: 260px 1fr; gap: 24px; padding-top: 20px; padding-bottom: 20px; }
 @media (max-width: 760px) { .layout { grid-template-columns: 1fr; gap: 12px; } }
 
 /* Filters */
-.filters details > summary { font-weight: 600; cursor: pointer; padding: 4px 0; }
-@media (min-width: 761px) { .filters details > summary { display: none; } .filters { position: sticky; top: 130px; align-self: start; max-height: calc(100vh - 150px); overflow: auto; } }
+@media (min-width: 761px) {
+  .filters { position: sticky; top: calc(var(--topbar-h, 130px) + 16px); align-self: start;
+    max-height: calc(100vh - var(--topbar-h, 130px) - 32px); overflow: auto; }
+}
+.panel-head, .panel-foot { display: none; }
+.facet-group > summary { list-style: none; cursor: pointer; }
+.facet-group > summary::-webkit-details-marker { display: none; }
+.facet-group > summary h2::before { content: "▸ "; }
+.facet-group[open] > summary h2::before { content: "▾ "; }
 .filter-block { margin-bottom: 18px; }
 .filter-block h2 { font-size: .75rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 6px; display: flex; justify-content: space-between; align-items: baseline; }
 .seg { display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; background: var(--surface); }
@@ -100,6 +118,9 @@ mark { background: var(--mark); color: inherit; border-radius: 2px; }
 mark.kw { background: none; color: var(--text); font-weight: 600; text-decoration: underline;
   text-decoration-color: var(--accent); text-underline-offset: 2px; }
 
+.more-mentions { display: none; font: inherit; font-size: .8rem; border: 0; background: none; color: var(--accent);
+  cursor: pointer; padding: 0; margin: -4px 0 8px 13px; }
+
 /* Footer */
 .site-footer { padding-bottom: 32px; font-size: .9rem; }
 .site-footer summary { cursor: pointer; color: var(--muted); }
@@ -108,3 +129,57 @@ mark.kw { background: none; color: var(--text); font-weight: 600; text-decoratio
 .health .ok { color: var(--ok); }
 .health .error { color: var(--err); }
 .health .disabled { color: var(--muted); }
+
+/* ---------------------------------------------------------------------------
+   Phones and narrow windows
+   --------------------------------------------------------------------------- */
+@media (max-width: 760px) {
+  /* Only the search bar stays pinned; the title scrolls away. */
+  .topbar { display: contents; }
+  .searchbar { position: sticky; top: 0; z-index: 5; box-shadow: 0 1px 6px rgba(0, 0, 0, .12); }
+  .header-row { flex-direction: column; align-items: stretch; gap: 8px; padding-top: 12px; }
+  .brand h1 { font-size: 1.15rem; line-height: 1.3; }
+  #topic-desc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: .85rem; }
+  .topic-picker select { width: 100%; padding: 9px 10px; font-size: .95rem; }
+  .search-row { padding-top: 10px; padding-bottom: 10px; }
+  #search { min-height: 44px; }
+  .filters-btn { display: inline-flex; align-items: center; min-height: 44px; }
+  .layout { padding-top: 12px; }
+
+  /* Filters become a full-screen panel opened from the Filters button. */
+  .filters { display: none; }
+  body.filters-open { overflow: hidden; }
+  body.filters-open .filters {
+    display: block; position: fixed; inset: 0; z-index: 30; overflow-y: auto; background: var(--bg);
+    padding: 0 16px calc(84px + env(safe-area-inset-bottom));
+  }
+  .panel-head { display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1;
+    background: var(--bg); padding: 14px 0 10px; margin-bottom: 4px; border-bottom: 1px solid var(--border); }
+  .panel-head h2 { margin: 0; font-size: 1.1rem; }
+  .panel-head .link { font-size: 1rem; font-weight: 600; padding: 8px 0 8px 16px; }
+  .panel-foot { display: block; position: fixed; left: 0; right: 0; bottom: 0; z-index: 31; background: var(--surface);
+    border-top: 1px solid var(--border); padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
+  .apply-btn { width: 100%; min-height: 48px; font: inherit; font-size: 1rem; font-weight: 600; border: 0;
+    border-radius: var(--radius); background: var(--accent); color: #fff; cursor: pointer; }
+  .filter-block { margin: 16px 0 20px; }
+
+  /* Finger-sized targets (~44px). */
+  .seg button { min-height: 44px; font-size: .9rem; }
+  .facet label { padding: 10px 0; font-size: 1rem; }
+  .facet input { width: 20px; height: 20px; }
+  .hide-btn { min-height: 34px; padding: 4px 12px; font-size: .8rem; }
+  button.link { font-size: .85rem; padding: 6px 0; }
+  .chip { padding: 5px 11px; font-size: .8rem; }
+  .active-chip { padding: 6px 8px 6px 12px; font-size: .85rem; }
+  .more { padding: 12px 28px; }
+
+  /* Compact cards: 3-line summaries, first mention only until expanded. */
+  .card { padding: 12px 14px; }
+  .card h3 { font-size: 1.02rem; }
+  .card p.summary { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+  .card:not(.expanded) .mentions li:nth-child(n+2) { display: none; }
+  .more-mentions { display: inline-block; padding: 6px 0; }
+  .card.expanded .more-mentions { display: none; }
+  .site-footer { padding-top: 8px; }
+}
+

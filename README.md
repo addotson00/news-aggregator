@@ -121,7 +121,7 @@ Both share a lock, so they never overlap; publish waits up to 10 minutes for a r
 30 6 * * * cd /path/to/news-aggregator && scripts/publish.sh >> ~/newscanner.log 2>&1
 ```
 
-For a Hermes agent, call the same two scripts. Both exit non-zero if a push failed or a topic had no working sources, and print a line starting with `✗` or `⚠` for anything worth an alert. Per-source health (errors, last success, gaps) is in `docs/data/manifest.json`.
+**Production runs on a Hermes agent VM.** [`deploy/hermes/README.md`](deploy/hermes/README.md) has the job setup, copies of the wrapper scripts, and a step-by-step rebuild runbook. For a Hermes agent, call the same two scripts. Both exit non-zero if a push failed or a topic had no working sources, and print a line starting with `✗` or `⚠` for anything worth an alert. Per-source health (errors, last success, gaps) is in `docs/data/manifest.json`.
 
 **GitHub Actions (optional):** `.github/workflows/aggregate.yml` runs the pipeline on GitHub's servers. Runners have no disk between runs, so each run commits. Its schedule (every 2 hours) is commented out so it won't race with a local job. Enable one scheduler, not both.
 
@@ -168,5 +168,6 @@ docs/                    GitHub Pages root
 state/                   per-source fetch state (validators, seen ids, gaps); committed
 scripts/fetch.sh         hourly: fetch due topics; push if articles changed
 scripts/publish.sh       daily: fetch + commit + push everything (incl. source health)
+deploy/hermes/           Hermes wrapper scripts + rebuild runbook
 .github/workflows/       optional scheduled run on GitHub
 ```

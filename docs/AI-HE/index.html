@@ -8,68 +8,82 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AI in Higher Education</title>
   <meta name="description" content="Artificial intelligence coverage from higher-ed and education news outlets.">
-  <link rel="stylesheet" href="assets/style.css?v=9dc6a6a7f0">
+  <link rel="stylesheet" href="assets/style.css?v=8d55b2a9ff">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap header-row">
-      <div class="brand">
-        <h1 id="topic-title">AI in Higher Education</h1>
-        <p id="topic-desc" class="muted"></p>
+  <!-- Desktop: the whole top bar is sticky. Phone: only .searchbar sticks (see style.css). -->
+  <div class="topbar">
+    <header class="site-header">
+      <div class="wrap header-row">
+        <div class="brand">
+          <h1 id="topic-title">AI in Higher Education</h1>
+          <p id="topic-desc" class="muted"></p>
+        </div>
+        <label class="topic-picker" id="topic-picker" hidden>
+          <span class="sr-only">Switch aggregator</span>
+          <select id="topic-select"></select>
+        </label>
       </div>
-      <label class="topic-picker" id="topic-picker" hidden>
-        <span class="sr-only">Switch aggregator</span>
-        <select id="topic-select"></select>
-      </label>
+    </header>
+    <div class="searchbar">
+      <div class="wrap search-row">
+        <input id="search" type="search" placeholder="Search titles, summaries, sources… (use &quot;quotes&quot; for phrases)" autocomplete="off">
+        <button type="button" id="filters-open" class="filters-btn" aria-controls="filters-panel" aria-expanded="false">Filters</button>
+      </div>
+      <div class="wrap active-row" id="active-filters" hidden></div>
     </div>
-    <div class="wrap search-row">
-      <input id="search" type="search" placeholder="Search titles, summaries, sources… (use &quot;quotes&quot; for phrases)" autocomplete="off">
-    </div>
-  </header>
+  </div>
 
   <main class="wrap layout">
-    <aside class="filters">
-      <details id="filters-details" open>
-        <summary>Filters</summary>
+    <aside class="filters" id="filters-panel" aria-label="Filters">
+      <div class="panel-head">
+        <h2>Filters</h2>
+        <button type="button" class="link" id="filters-close">Done</button>
+      </div>
 
-        <section class="filter-block">
-          <h2>Show</h2>
-          <div class="seg" role="radiogroup" id="show-seg">
-            <button type="button" data-show="match" aria-pressed="true">Keyword matches</button>
-            <button type="button" data-show="all" aria-pressed="false">All articles</button>
-          </div>
-        </section>
+      <section class="filter-block">
+        <h2>Show</h2>
+        <div class="seg" role="radiogroup" id="show-seg">
+          <button type="button" data-show="match" aria-pressed="true">Keyword matches</button>
+          <button type="button" data-show="all" aria-pressed="false">All articles</button>
+        </div>
+      </section>
 
-        <section class="filter-block" hidden>
-          <h2>Mentioned in</h2>
-          <div class="seg" id="where-seg">
-            <button type="button" data-where="">Anywhere</button>
-            <button type="button" data-where="headline">Headline</button>
-            <button type="button" data-where="text">Article text</button>
-          </div>
-        </section>
+      <section class="filter-block" hidden>
+        <h2>Mentioned in</h2>
+        <div class="seg" id="where-seg">
+          <button type="button" data-where="">Anywhere</button>
+          <button type="button" data-where="headline">Headline</button>
+          <button type="button" data-where="text">Article text</button>
+        </div>
+      </section>
 
-        <section class="filter-block">
-          <h2>Published</h2>
-          <div class="seg seg-wrap" id="days-seg">
-            <button type="button" data-days="1">24h</button>
-            <button type="button" data-days="7">7 days</button>
-            <button type="button" data-days="0" id="days-current">30 days</button>
-            <button type="button" data-days="-1" title="Includes archived articles older than the current window">All time</button>
-          </div>
-          <p id="archive-note" class="muted small" hidden></p>
-        </section>
+      <section class="filter-block">
+        <h2>Published</h2>
+        <div class="seg seg-wrap" id="days-seg">
+          <button type="button" data-days="1">24h</button>
+          <button type="button" data-days="7">7 days</button>
+          <button type="button" data-days="0" id="days-current">30 days</button>
+          <button type="button" data-days="-1" title="Includes archived articles older than the current window">All time</button>
+        </div>
+        <p id="archive-note" class="muted small" hidden></p>
+      </section>
 
-        <section class="filter-block">
-          <h2>Tags <button type="button" class="link" data-clear="tags">clear</button></h2>
-          <ul id="tag-list" class="facet"></ul>
-        </section>
+      <section class="filter-block">
+        <h2>Tags <button type="button" class="link" data-clear="tags">clear</button></h2>
+        <ul id="tag-list" class="facet"></ul>
+      </section>
 
-        <section class="filter-block">
-          <h2>Sources <button type="button" class="link" data-clear="sources">clear</button></h2>
+      <section class="filter-block">
+        <details id="sources-group" class="facet-group">
+          <summary><h2>Sources <button type="button" class="link" data-clear="sources">clear</button></h2></summary>
           <ul id="source-list" class="facet"></ul>
-        </section>
-      </details>
+        </details>
+      </section>
+
+      <div class="panel-foot">
+        <button type="button" class="apply-btn" id="filters-apply">Show articles</button>
+      </div>
     </aside>
 
     <section class="results" aria-live="polite">
@@ -91,6 +105,6 @@
     <p class="muted small">Headlines and short excerpts link to the original publishers. Updated <span id="updated">—</span>.</p>
   </footer>
 
-  <script src="assets/app.js?v=9dc6a6a7f0"></script>
+  <script src="assets/app.js?v=8d55b2a9ff"></script>
 </body>
 </html>
