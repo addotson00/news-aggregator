@@ -2,11 +2,11 @@
  "sources": {
   "adn": {
    "validators": {
-    "etag": "W/\"3018d-XN3WDwF/DjndMxXwBgRtNx71ewM\"",
-    "last_modified": "Fri, 20 Nov 2026 06:05:32 GMT"
+    "etag": "W/\"3018d-hwWXIRKWnZVL55oDKqfP9hzV5Fk\"",
+    "last_modified": "Fri, 20 Nov 2026 08:03:05 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:03Z",
+   "last_ok": "2026-11-20T08:06:03Z",
    "seen_ids": [
     "05641facfda5d80e",
     "bda7168ef012e4b3",
@@ -97,7 +97,7 @@
     "last_modified": "Fri, 20 Nov 2026 01:51:09 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:03Z",
+   "last_ok": "2026-11-20T08:06:04Z",
    "seen_ids": [
     "f9cc684c84fb02cf",
     "bdfedd8d3e837e32",
@@ -223,7 +223,7 @@
     "etag": "\"32b23e53513bcd68cc63361b84fc238a\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:04Z",
+   "last_ok": "2026-11-20T08:06:04Z",
    "seen_ids": [
     "872aac75e8faf957",
     "3e883b07c3261f13",
@@ -243,13 +243,15 @@
   },
   "alaskasnewssource": {
    "validators": {
-    "etag": "W/\"1496b-d74Rv0U8NscvB+ADq3k3Hgudfic\"",
-    "last_modified": "Fri, 20 Nov 2026 06:03:44 GMT"
+    "etag": "W/\"14c47-vvdZMICCo+5dKvK98jyejM2NKkc\"",
+    "last_modified": "Fri, 20 Nov 2026 08:04:59 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:04Z",
+   "last_ok": "2026-11-20T08:06:05Z",
    "seen_ids": [
     "eb87d7dc134ce95e",
+    "92bdc04c256e9051",
+    "1796044255a963f1",
     "781df2d281e4ffd3",
     "094a97ade0618920",
     "7704cff1eb9aab4d",
@@ -339,7 +341,7 @@
     "last_modified": "Fri, 20 Nov 2026 02:00:59 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:05Z",
+   "last_ok": "2026-11-20T08:06:06Z",
    "seen_ids": [
     "e589de814cb904bb",
     "4eacf0d497ec887d",
@@ -384,7 +386,7 @@
     "etag": "W/\"cbf06-FERTnCjfWL0Q/RjhIKNzXCRVJ1M\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:05Z",
+   "last_ok": "2026-11-20T08:06:06Z",
    "seen_ids": [
     "3e2ff7942a82fe13",
     "14b8d11c6c778d2a",
@@ -497,7 +499,7 @@
   "newsminer": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:05Z",
+   "last_ok": "2026-11-20T08:06:06Z",
    "seen_ids": [
     "b72eb2f8e83868e8",
     "804e443dda3e82cf",
@@ -739,7 +741,7 @@
     "last_modified": "Fri, 20 Nov 2026 04:06:15 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:12Z",
+   "last_ok": "2026-11-20T08:06:06Z",
    "seen_ids": [
     "91e8f71530d49e8f",
     "d0982c558889d94a",
@@ -831,7 +833,7 @@
     "etag": "W/\"265b258f8808874884d97074b02eb09e\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:12Z",
+   "last_ok": "2026-11-20T08:06:07Z",
    "seen_ids": [
     "f7ee341e47d74c87",
     "f1de6150c65a25da",
@@ -1218,7 +1220,7 @@
     "last_modified": "Thu, 19 Nov 2026 23:52:51 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:12Z",
+   "last_ok": "2026-11-20T08:06:07Z",
    "seen_ids": [
     "b5bed6a574c221c4",
     "0cdb2f49658ed5c6",
@@ -1367,7 +1369,7 @@
   "nomenugget": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:12Z",
+   "last_ok": "2026-11-20T08:06:07Z",
    "seen_ids": [
     "47743e0022d9378f",
     "a639b9cdb30a4e1f",
@@ -1412,7 +1414,7 @@
     "last_modified": "Fri, 20 Nov 2026 01:22:34 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:13Z",
+   "last_ok": "2026-11-20T08:06:08Z",
    "seen_ids": [
     "6b75a35cf5cb4246",
     "c97854810b016a9c",
@@ -1884,7 +1886,7 @@
   "alaskapublic": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:13Z",
+   "last_ok": "2026-11-20T08:06:08Z",
    "seen_ids": [
     "5300cc94c91185b9",
     "eb4a806a2ccb08d2",
@@ -1921,7 +1923,7 @@
   "kmxt": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-20T06:06:13Z",
+   "last_ok": "2026-11-20T08:06:08Z",
    "seen_ids": [
     "d0b0ed8483003978",
     "37f84d011ef40cb2",
@@ -2073,5 +2075,5 @@
    "cooldown_hours": 0
   }
  },
- "last_run": "2026-11-20T06:06:03Z"
+ "last_run": "2026-11-20T08:06:03Z"
 }
