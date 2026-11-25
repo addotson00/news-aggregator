@@ -2,12 +2,22 @@
  "sources": {
   "insidehighered": {
    "validators": {
-    "etag": "W/\"1795576400\"",
-    "last_modified": "Wed, 25 Nov 2026 03:13:20 GMT"
+    "etag": "W/\"1795598004\"",
+    "last_modified": "Wed, 25 Nov 2026 09:13:24 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:54Z",
+   "last_ok": "2026-11-25T10:05:54Z",
    "seen_ids": [
+    "e32fc517ad052db1",
+    "b148682bb7fba58b",
+    "ad3dfb689e91a599",
+    "510005df2a3284c8",
+    "fbca22de7619a854",
+    "3299a9d6f1a54a1e",
+    "a4915d631e96107e",
+    "271b697964ebbc5a",
+    "9fa176bc46709673",
+    "c0800776025e7c63",
     "d1632c6ad8d3f6a1",
     "3c2ebb70fa564c91",
     "bdb5a69918f92c24",
@@ -76,6 +86,11 @@
      "detected": "2026-11-24T10:05:54Z",
      "previous_fetch": "2026-11-24T09:05:54Z",
      "oldest_item": "2026-11-24T08:00:00Z"
+    },
+    {
+     "detected": "2026-11-25T10:05:54Z",
+     "previous_fetch": "2026-11-25T09:05:54Z",
+     "oldest_item": "2026-11-25T08:00:00Z"
     }
    ]
   },
@@ -84,7 +99,7 @@
     "last_modified": "Tue, 24 Nov 2026 22:29:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:54Z",
+   "last_ok": "2026-11-25T10:05:54Z",
    "seen_ids": [
     "3c3042459b01ad70",
     "7c1c6aeeb99bff46",
@@ -119,7 +134,7 @@
     "last_modified": "Wed, 25 Nov 2026 06:00:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:54Z",
+   "last_ok": "2026-11-25T10:05:54Z",
    "seen_ids": [
     "7398c4b884bfc778",
     "befcbe7815992128",
@@ -153,7 +168,7 @@
   "edsurge": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:54Z",
+   "last_ok": "2026-11-25T10:05:54Z",
    "seen_ids": [
     "e15e3afab496308e",
     "0c9e20440a37de7c",
@@ -214,7 +229,7 @@
   "thepienews": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:55Z",
+   "last_ok": "2026-11-25T10:05:55Z",
    "seen_ids": [
     "0bb3fe277661c0f3",
     "93924f903a3b0367",
@@ -273,7 +288,7 @@
   "nyt-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:58Z",
+   "last_ok": "2026-11-25T10:05:57Z",
    "seen_ids": [
     "2500422cf8b0bdd0",
     "4e0e74aaa0cc89c5",
@@ -330,7 +345,7 @@
     "last_modified": "Thu, 05 Nov 2026 01:33:07 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:58Z",
+   "last_ok": "2026-11-25T10:05:58Z",
    "seen_ids": [
     "f56d4289a38a31eb",
     "c661519fdc96d7f8",
@@ -376,7 +391,7 @@
   "chronicle": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:58Z",
+   "last_ok": "2026-11-25T10:05:58Z",
    "seen_ids": [
     "d66fe540660c3639",
     "389bc877b5a272c4",
@@ -410,7 +425,7 @@
     "etag": "W/\"db64-GgpEttKWT+tBAto6bycFLj9oG04\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:59Z",
+   "last_ok": "2026-11-25T10:05:58Z",
    "seen_ids": [
     "e2b457280005aebd",
     "35a1e8687edc083f",
@@ -445,12 +460,13 @@
   },
   "ecampusnews": {
    "validators": {
-    "etag": "W/\"b7adf7fb0d3e4e4bac1456dd7fed1040\"",
-    "last_modified": "Tue, 24 Nov 2026 15:23:32 GMT"
+    "etag": "W/\"e9b5a7421cd6cd2507729d47be2a4180\"",
+    "last_modified": "Wed, 25 Nov 2026 10:00:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:59Z",
+   "last_ok": "2026-11-25T10:05:59Z",
    "seen_ids": [
+    "49cf4f5ad1716052",
     "6764c8c0195237de",
     "c211baafe7fc8bf2",
     "0f67db553807d331",
@@ -469,7 +485,7 @@
   "campustechnology": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:59Z",
+   "last_ok": "2026-11-25T10:06:00Z",
    "seen_ids": [
     "0c5afd94bd6685d1",
     "3b8ff4c24a56f779",
@@ -531,7 +547,7 @@
   "conversation-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:05:59Z",
+   "last_ok": "2026-11-25T10:06:00Z",
    "seen_ids": [
     "7aa5c6efc7b8f4cb",
     "1d37dc92018d1757",
@@ -567,7 +583,7 @@
     "last_modified": "Thu, 19 Nov 2026 19:34:30 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:06:00Z",
+   "last_ok": "2026-11-25T10:06:00Z",
    "seen_ids": [
     "f17ad87cbf4a9909",
     "a25844f853aee835",
@@ -584,10 +600,10 @@
     "last_modified": "Tue, 24 Nov 2026 17:01:14 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T09:06:02Z",
+   "last_ok": "2026-11-25T10:06:01Z",
    "seen_ids": [],
    "cooldown_hours": 0
   }
  },
- "last_run": "2026-11-25T09:05:54Z"
+ "last_run": "2026-11-25T10:05:54Z"
 }
