@@ -6,7 +6,7 @@
     "last_modified": "Wed, 25 Nov 2026 09:13:24 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:54Z",
+   "last_ok": "2026-11-25T11:05:54Z",
    "seen_ids": [
     "e32fc517ad052db1",
     "b148682bb7fba58b",
@@ -99,7 +99,7 @@
     "last_modified": "Tue, 24 Nov 2026 22:29:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:54Z",
+   "last_ok": "2026-11-25T11:05:54Z",
    "seen_ids": [
     "3c3042459b01ad70",
     "7c1c6aeeb99bff46",
@@ -134,7 +134,7 @@
     "last_modified": "Wed, 25 Nov 2026 06:00:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:54Z",
+   "last_ok": "2026-11-25T11:05:54Z",
    "seen_ids": [
     "7398c4b884bfc778",
     "befcbe7815992128",
@@ -168,8 +168,9 @@
   "edsurge": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:54Z",
+   "last_ok": "2026-11-25T11:05:54Z",
    "seen_ids": [
+    "1a7a4bbdd55d4852",
     "e15e3afab496308e",
     "0c9e20440a37de7c",
     "36be858849feb34e",
@@ -178,30 +179,30 @@
     "cc08cc0ec9d3a6ec",
     "af54e79f3722669a",
     "e48362ab7f568415",
-    "1a97ab9029f4f1c3",
     "8ea1eda74f93e752",
+    "1a97ab9029f4f1c3",
     "ca37abd71648ef41",
     "5374a506b8ec0a75",
-    "1af2e53530963f5c",
     "c46e82b6ce2c31e8",
+    "1af2e53530963f5c",
     "02aa7fe1a3a5182f",
     "8ac10116a95f1121",
+    "2b5a8057c9760317",
+    "eaeb6ea8e5f4abe9",
     "14aa507493193b26",
     "a92c338edaa2f6c8",
-    "eaeb6ea8e5f4abe9",
-    "2b5a8057c9760317",
     "975d8b629ad17b0d",
     "2bdcb08f359a3c5e",
-    "8d9b8693eb6ee58e",
     "a68de9e0341b1f34",
+    "8d9b8693eb6ee58e",
     "c3663843282281f4",
     "06cb67ce7f0cfd93",
+    "89f01cdc594d209f",
     "fcb6fabba5e6842a",
     "edf63b102201981c",
-    "89f01cdc594d209f",
-    "fb48505088b09c60",
-    "41d96f10f282e7f9",
     "232105efbfbcf9c5",
+    "41d96f10f282e7f9",
+    "fb48505088b09c60",
     "2baf9c53157e20ef",
     "3c157a223a0da30b",
     "80a8049471a7f7da",
@@ -217,8 +218,8 @@
     "4abf350f0609e35e",
     "4c84e2e840b86bb1",
     "fe444fd6bc6f013c",
-    "4ad5387a3478e5b0",
     "6dcc06161104e0de",
+    "4ad5387a3478e5b0",
     "35519509579530cc",
     "38375bec906fc552",
     "284acd7cb652ddf4",
@@ -229,8 +230,9 @@
   "thepienews": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:55Z",
+   "last_ok": "2026-11-25T11:05:55Z",
    "seen_ids": [
+    "e82f769fd52d5d5b",
     "0bb3fe277661c0f3",
     "93924f903a3b0367",
     "d96a1e29102952db",
@@ -288,7 +290,7 @@
   "nyt-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:57Z",
+   "last_ok": "2026-11-25T11:05:58Z",
    "seen_ids": [
     "2500422cf8b0bdd0",
     "4e0e74aaa0cc89c5",
@@ -345,7 +347,7 @@
     "last_modified": "Thu, 05 Nov 2026 01:33:07 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:58Z",
+   "last_ok": "2026-11-25T11:05:58Z",
    "seen_ids": [
     "f56d4289a38a31eb",
     "c661519fdc96d7f8",
@@ -391,7 +393,7 @@
   "chronicle": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:58Z",
+   "last_ok": "2026-11-25T11:05:59Z",
    "seen_ids": [
     "d66fe540660c3639",
     "389bc877b5a272c4",
@@ -425,7 +427,7 @@
     "etag": "W/\"db64-GgpEttKWT+tBAto6bycFLj9oG04\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:58Z",
+   "last_ok": "2026-11-25T11:05:59Z",
    "seen_ids": [
     "e2b457280005aebd",
     "35a1e8687edc083f",
@@ -464,7 +466,7 @@
     "last_modified": "Wed, 25 Nov 2026 10:00:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:05:59Z",
+   "last_ok": "2026-11-25T11:06:00Z",
    "seen_ids": [
     "49cf4f5ad1716052",
     "6764c8c0195237de",
@@ -485,7 +487,7 @@
   "campustechnology": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:06:00Z",
+   "last_ok": "2026-11-25T11:06:01Z",
    "seen_ids": [
     "0c5afd94bd6685d1",
     "3b8ff4c24a56f779",
@@ -547,7 +549,7 @@
   "conversation-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:06:00Z",
+   "last_ok": "2026-11-25T11:06:01Z",
    "seen_ids": [
     "7aa5c6efc7b8f4cb",
     "1d37dc92018d1757",
@@ -583,7 +585,7 @@
     "last_modified": "Thu, 19 Nov 2026 19:34:30 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:06:00Z",
+   "last_ok": "2026-11-25T11:06:01Z",
    "seen_ids": [
     "f17ad87cbf4a9909",
     "a25844f853aee835",
@@ -600,10 +602,10 @@
     "last_modified": "Tue, 24 Nov 2026 17:01:14 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-25T10:06:01Z",
+   "last_ok": "2026-11-25T11:06:03Z",
    "seen_ids": [],
    "cooldown_hours": 0
   }
  },
- "last_run": "2026-11-25T10:05:54Z"
+ "last_run": "2026-11-25T11:05:54Z"
 }
