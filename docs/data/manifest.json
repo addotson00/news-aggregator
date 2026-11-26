@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T12:09:24Z",
+ "generated_at": "2026-11-26T13:06:04Z",
  "topics": [
   {
    "slug": "AI-HE",
@@ -22,12 +22,12 @@
    "hidden_tags": [],
    "text_check": false,
    "fetch_every_minutes": 0,
-   "article_count": 410,
+   "article_count": 409,
    "match_count": 63,
    "archive": [
     {
      "month": "2026-10",
-     "count": 44
+     "count": 45
     },
     {
      "month": "2026-09",
@@ -38,7 +38,7 @@
      "count": 2
     }
    ],
-   "updated_at": "2026-11-26T12:06:04Z",
+   "updated_at": "2026-11-26T13:06:04Z",
    "sources": [
     {
      "id": "insidehighered",
@@ -47,10 +47,10 @@
      "type": "rss",
      "state": "ok",
      "not_modified": true,
-     "checked": "2026-11-26T12:05:54Z",
+     "checked": "2026-11-26T13:05:54Z",
      "fetched": 0,
      "new": 0,
-     "last_ok": "2026-11-26T12:05:54Z",
+     "last_ok": "2026-11-26T13:05:54Z",
      "gaps_total": 4,
      "last_gap": {
       "detected": "2026-11-25T10:05:54Z",
@@ -65,10 +65,10 @@
      "type": "rss",
      "state": "ok",
      "not_modified": true,
-     "checked": "2026-11-26T12:05:54Z",
+     "checked": "2026-11-26T13:05:54Z",
      "fetched": 0,
      "new": 0,
-     "last_ok": "2026-11-26T12:05:54Z",
+     "last_ok": "2026-11-26T13:05:54Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -79,10 +79,10 @@
      "type": "rss",
      "state": "ok",
      "not_modified": true,
-     "checked": "2026-11-26T12:05:54Z",
+     "checked": "2026-11-26T13:05:54Z",
      "fetched": 0,
      "new": 0,
-     "last_ok": "2026-11-26T12:05:54Z",
+     "last_ok": "2026-11-26T13:05:54Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -92,7 +92,7 @@
      "homepage": "https://www.edsurge.com/",
      "type": "rss",
      "state": "ok",
-     "checked": "2026-11-26T12:05:54Z",
+     "checked": "2026-11-26T13:05:54Z",
      "fetched": 50,
      "pages": 1,
      "new": 0,
@@ -100,7 +100,7 @@
      "text": null,
      "pages_read": 0,
      "pages_pending": 0,
-     "last_ok": "2026-11-26T12:05:54Z",
+     "last_ok": "2026-11-26T13:05:54Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -110,15 +110,15 @@
      "homepage": "https://thepienews.com/",
      "type": "rss",
      "state": "ok",
-     "checked": "2026-11-26T12:05:55Z",
+     "checked": "2026-11-26T13:05:56Z",
      "fetched": 30,
      "pages": 3,
-     "new": 3,
+     "new": 0,
      "duplicates": 0,
      "text": null,
      "pages_read": 0,
      "pages_pending": 0,
-     "last_ok": "2026-11-26T12:05:55Z",
+     "last_ok": "2026-11-26T13:05:56Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -128,7 +128,7 @@
      "homepage": "https://www.nytimes.com/section/education",
      "type": "rss",
      "state": "ok",
-     "checked": "2026-11-26T12:05:59Z",
+     "checked": "2026-11-26T13:05:58Z",
      "fetched": 20,
      "pages": 1,
      "new": 0,
@@ -136,7 +136,7 @@
      "text": null,
      "pages_read": 0,
      "pages_pending": 0,
-     "last_ok": "2026-11-26T12:05:59Z",
+     "last_ok": "2026-11-26T13:05:58Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -147,10 +147,10 @@
      "type": "news_sitemap",
      "state": "ok",
      "not_modified": true,
-     "checked": "2026-11-26T12:05:59Z",
+     "checked": "2026-11-26T13:05:59Z",
      "fetched": 0,
      "new": 0,
-     "last_ok": "2026-11-26T12:05:59Z",
+     "last_ok": "2026-11-26T13:05:59Z",
      "gaps_total": 1,
      "last_gap": {
       "detected": "2026-11-26T11:06:35Z",
@@ -164,7 +164,7 @@
      "homepage": "https://www.chronicle.com/",
      "type": "rss",
      "state": "ok",
-     "checked": "2026-11-26T12:05:59Z",
+     "checked": "2026-11-26T13:05:59Z",
      "fetched": 10,
      "pages": 1,
      "new": 0,
@@ -172,7 +172,7 @@
      "text": null,
      "pages_read": 0,
      "pages_pending": 0,
-     "last_ok": "2026-11-26T12:05:59Z",
+     "last_ok": "2026-11-26T13:05:59Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -183,10 +183,10 @@
      "type": "rss",
      "state": "ok",
      "not_modified": true,
-     "checked": "2026-11-26T12:06:00Z",
+     "checked": "2026-11-26T13:05:59Z",
      "fetched": 0,
      "new": 0,
-     "last_ok": "2026-11-26T12:06:00Z",
+     "last_ok": "2026-11-26T13:05:59Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -197,10 +197,10 @@
      "type": "rss",
      "state": "ok",
      "not_modified": true,
-     "checked": "2026-11-26T12:06:00Z",
+     "checked": "2026-11-26T13:06:00Z",
      "fetched": 0,
      "new": 0,
-     "last_ok": "2026-11-26T12:06:00Z",
+     "last_ok": "2026-11-26T13:06:00Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -210,7 +210,7 @@
      "homepage": "https://campustechnology.com/",
      "type": "rss",
      "state": "ok",
-     "checked": "2026-11-26T12:06:00Z",
+     "checked": "2026-11-26T13:06:00Z",
      "fetched": 50,
      "pages": 1,
      "new": 0,
@@ -218,7 +218,7 @@
      "text": null,
      "pages_read": 0,
      "pages_pending": 0,
-     "last_ok": "2026-11-26T12:06:00Z",
+     "last_ok": "2026-11-26T13:06:00Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -228,7 +228,7 @@
      "homepage": "https://theconversation.com/us/education",
      "type": "rss",
      "state": "ok",
-     "checked": "2026-11-26T12:06:00Z",
+     "checked": "2026-11-26T13:06:00Z",
      "fetched": 25,
      "pages": 1,
      "new": 0,
@@ -236,7 +236,7 @@
      "text": null,
      "pages_read": 0,
      "pages_pending": 0,
-     "last_ok": "2026-11-26T12:06:00Z",
+     "last_ok": "2026-11-26T13:06:00Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -247,10 +247,10 @@
      "type": "rss",
      "state": "ok",
      "not_modified": true,
-     "checked": "2026-11-26T12:06:01Z",
+     "checked": "2026-11-26T13:06:00Z",
      "fetched": 0,
      "new": 0,
-     "last_ok": "2026-11-26T12:06:01Z",
+     "last_ok": "2026-11-26T13:06:00Z",
      "gaps_total": 0,
      "last_gap": null
     },
@@ -261,10 +261,10 @@
      "type": "rss",
      "state": "ok",
      "not_modified": true,
-     "checked": "2026-11-26T12:06:03Z",
+     "checked": "2026-11-26T13:06:03Z",
      "fetched": 0,
      "new": 0,
-     "last_ok": "2026-11-26T12:06:03Z",
+     "last_ok": "2026-11-26T13:06:03Z",
      "gaps_total": 0,
      "last_gap": null
     },
