@@ -2,11 +2,11 @@
  "sources": {
   "insidehighered": {
    "validators": {
-    "etag": "W/\"1795741685\"",
-    "last_modified": "Fri, 27 Nov 2026 01:08:05 GMT"
+    "etag": "W/\"1795752485\"",
+    "last_modified": "Fri, 27 Nov 2026 04:08:05 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:54Z",
+   "last_ok": "2026-11-27T08:05:54Z",
    "seen_ids": [
     "e91939e15f3f7a06",
     "e32fc517ad052db1",
@@ -100,7 +100,7 @@
     "last_modified": "Wed, 25 Nov 2026 18:20:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:54Z",
+   "last_ok": "2026-11-27T08:05:54Z",
    "seen_ids": [
     "e4da96413382b587",
     "3c3042459b01ad70",
@@ -136,7 +136,7 @@
     "last_modified": "Wed, 25 Nov 2026 12:56:36 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:54Z",
+   "last_ok": "2026-11-27T08:05:54Z",
    "seen_ids": [
     "7398c4b884bfc778",
     "befcbe7815992128",
@@ -170,7 +170,7 @@
   "edsurge": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:54Z",
+   "last_ok": "2026-11-27T08:05:54Z",
    "seen_ids": [
     "49775ea58c157245",
     "1a7a4bbdd55d4852",
@@ -237,7 +237,7 @@
   "thepienews": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:55Z",
+   "last_ok": "2026-11-27T08:05:55Z",
    "seen_ids": [
     "8af368b912f7ba90",
     "d14139da2a4390b0",
@@ -306,7 +306,7 @@
   "nyt-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:58Z",
+   "last_ok": "2026-11-27T08:05:58Z",
    "seen_ids": [
     "bcb3eda08d15b573",
     "9ba6961f67ab7c84",
@@ -322,6 +322,7 @@
     "67200fd255b3dcb9",
     "cb025945b716cc7d",
     "d4344b2d009ac823",
+    "44c5a53e17144023",
     "a66d486d3418b723",
     "9bf6f622ae806de5",
     "3740979a879538ca",
@@ -367,7 +368,7 @@
     "last_modified": "Thu, 26 Nov 2026 02:11:38 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:58Z",
+   "last_ok": "2026-11-27T08:05:58Z",
    "seen_ids": [
     "c8ebd1a9b2f8abaf",
     "ccfca90ac7f8b524",
@@ -438,7 +439,7 @@
   "chronicle": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:58Z",
+   "last_ok": "2026-11-27T08:05:58Z",
    "seen_ids": [
     "aedf57824744495d",
     "d66fe540660c3639",
@@ -473,7 +474,7 @@
     "etag": "W/\"ce1e-h0S+utH708OYWxn0rgYrtMRo8Mw\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:58Z",
+   "last_ok": "2026-11-27T08:05:58Z",
    "seen_ids": [
     "9df7810a4923dc8c",
     "09359504c8713bab",
@@ -516,7 +517,7 @@
     "last_modified": "Wed, 25 Nov 2026 10:00:00 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:59Z",
+   "last_ok": "2026-11-27T08:05:59Z",
    "seen_ids": [
     "49cf4f5ad1716052",
     "6764c8c0195237de",
@@ -537,7 +538,7 @@
   "campustechnology": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:05:59Z",
+   "last_ok": "2026-11-27T08:05:59Z",
    "seen_ids": [
     "0c5afd94bd6685d1",
     "3b8ff4c24a56f779",
@@ -599,7 +600,7 @@
   "conversation-education": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:06:00Z",
+   "last_ok": "2026-11-27T08:06:00Z",
    "seen_ids": [
     "7019d4ba4cd581c1",
     "7aa5c6efc7b8f4cb",
@@ -636,7 +637,7 @@
     "last_modified": "Thu, 19 Nov 2026 19:34:30 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:06:00Z",
+   "last_ok": "2026-11-27T08:06:00Z",
    "seen_ids": [
     "f17ad87cbf4a9909",
     "a25844f853aee835",
@@ -653,7 +654,7 @@
     "last_modified": "Wed, 25 Nov 2026 15:04:51 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-27T05:06:02Z",
+   "last_ok": "2026-11-27T08:06:03Z",
    "seen_ids": [],
    "cooldown_hours": 0,
    "last_error": {
@@ -662,5 +663,5 @@
    }
   }
  },
- "last_run": "2026-11-27T05:05:54Z"
+ "last_run": "2026-11-27T08:05:54Z"
 }
