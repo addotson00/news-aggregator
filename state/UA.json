@@ -2,19 +2,22 @@
  "sources": {
   "adn": {
    "validators": {
-    "etag": "W/\"29c19-heI/c3IpLqbtNJTOCY+QKMYb4sU\"",
-    "last_modified": "Sat, 28 Nov 2026 00:05:42 GMT"
+    "etag": "W/\"29e91-LgBd57Y2t2hCM6np7aIKA/e58K8\"",
+    "last_modified": "Sat, 28 Nov 2026 04:04:09 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:02Z",
+   "last_ok": "2026-11-28T04:06:04Z",
    "seen_ids": [
+    "55d3e097ae6a06c1",
+    "e9d768119c8ad43c",
+    "aea8893350763686",
+    "d3c0793d0724cb3d",
     "84fa0596e503a518",
     "1e37be030009631f",
     "524b302ade6da6ec",
     "3ca6ad4b0258fde5",
     "5da7a311d4b9815a",
     "69b73c814c25bf78",
-    "d3c0793d0724cb3d",
     "93434a3354143454",
     "c60184a487ac366e",
     "e8c25481170cae51",
@@ -327,12 +330,14 @@
   },
   "alaskabeacon": {
    "validators": {
-    "etag": "W/\"b20809289df556b8eff4bf6a197214c1\"",
-    "last_modified": "Fri, 27 Nov 2026 22:49:39 GMT"
+    "etag": "W/\"40c4066b469168700510ebd0c9cadbe7\"",
+    "last_modified": "Sat, 28 Nov 2026 03:01:02 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:03Z",
+   "last_ok": "2026-11-28T04:06:05Z",
    "seen_ids": [
+    "2ff33687cf55fa2e",
+    "f1912900bcfbd7fc",
     "274aa044acfe5fae",
     "c20997951c63e479",
     "69e598debaa507ee",
@@ -485,7 +490,7 @@
     "etag": "\"15cd5880ddac65f2239540b425972839\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:05Z",
+   "last_ok": "2026-11-28T04:06:08Z",
    "seen_ids": [
     "3280e37fa74d25bc",
     "7e5b3b497a223878",
@@ -512,12 +517,17 @@
   },
   "alaskasnewssource": {
    "validators": {
-    "etag": "W/\"10225-2Xt1hlPEAQiFKVOviRWxklazqIY\"",
-    "last_modified": "Sat, 28 Nov 2026 00:05:20 GMT"
+    "etag": "W/\"10f7c-Vn0KDFpTSkf7k+67cF/Bkuxpkjk\"",
+    "last_modified": "Sat, 28 Nov 2026 04:03:33 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:06Z",
+   "last_ok": "2026-11-28T04:06:08Z",
    "seen_ids": [
+    "7fca62d1600be812",
+    "b20ca1c318b4ca0c",
+    "70332621e950d9bf",
+    "735bd1cf12b71d5d",
+    "e2a6c811860600c2",
     "29f6e29ec0683bb9",
     "aee5f6dfb76f8a1c",
     "fa402cb6caf3a186",
@@ -814,7 +824,7 @@
     "last_modified": "Fri, 27 Nov 2026 22:06:18 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:06Z",
+   "last_ok": "2026-11-28T04:06:09Z",
    "seen_ids": [
     "22b71145a35c9397",
     "d591aae91d2a5332",
@@ -884,7 +894,7 @@
     "etag": "W/\"c7e4a-8Jk6+P0H9mQCUZbrGA6ZqdVP+qY\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:07Z",
+   "last_ok": "2026-11-28T04:06:09Z",
    "seen_ids": [
     "6095186de01d5537",
     "0797013257bea702",
@@ -1005,7 +1015,7 @@
   "newsminer": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:07Z",
+   "last_ok": "2026-11-28T04:06:09Z",
    "seen_ids": [
     "0305f50236b62069",
     "3968947be0fef3df",
@@ -1974,7 +1984,7 @@
     "last_modified": "Sat, 28 Nov 2026 00:04:25 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:10Z",
+   "last_ok": "2026-11-28T04:06:10Z",
    "seen_ids": [
     "3f401cb88900ea36",
     "1289a2f93c6b39cf",
@@ -2188,7 +2198,7 @@
     "etag": "W/\"b05f80f1f80e39a41a40bf8e9ba31d99\""
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:10Z",
+   "last_ok": "2026-11-28T04:06:10Z",
    "seen_ids": [
     "73aca9c5c1054525",
     "6a65c4567d6caeb7",
@@ -2584,12 +2594,13 @@
   },
   "peninsulaclarion": {
    "validators": {
-    "etag": "W/\"25259a79c6b2883b8c8f64969eba795c\"",
-    "last_modified": "Fri, 27 Nov 2026 23:38:55 GMT"
+    "etag": "W/\"6af1a5c934dad1987553ed7c682d608c\"",
+    "last_modified": "Sat, 28 Nov 2026 00:25:50 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:11Z",
+   "last_ok": "2026-11-28T04:06:10Z",
    "seen_ids": [
+    "00330c7b07656667",
     "343b13a79cffac05",
     "2cb07cfcf6cd88ea",
     "98f5ea75fecd88b0",
@@ -2631,6 +2642,7 @@
     "53545cf0321570fc"
    ],
    "text_checked": [
+    "00330c7b07656667",
     "343b13a79cffac05",
     "98f5ea75fecd88b0",
     "2cb07cfcf6cd88ea",
@@ -2674,9 +2686,9 @@
    "cooldown_hours": 0
   },
   "ketchikandailynews": {
-   "consecutive_errors": 3,
+   "consecutive_errors": 4,
    "last_error": {
-    "at": "2026-11-27T18:06:11Z",
+    "at": "2026-11-28T04:06:10Z",
     "error": "HTTP 429"
    },
    "validators": {},
@@ -2815,14 +2827,14 @@
     "e1b0b9865482accb",
     "53ebf43df17d3212"
    ],
-   "cooldown_hours": 8,
-   "last_alert": "2026-11-27T04:06:09Z",
-   "cooldown_until": "2026-11-28T02:06:11Z"
+   "cooldown_hours": 16,
+   "last_alert": "2026-11-28T04:06:11Z",
+   "cooldown_until": "2026-11-28T20:06:10Z"
   },
   "nomenugget": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:14Z",
+   "last_ok": "2026-11-28T04:06:11Z",
    "seen_ids": [
     "e694bad29df4e491",
     "a011d5f7733d9756",
@@ -2873,12 +2885,16 @@
   },
   "mustreadalaska": {
    "validators": {
-    "etag": "W/\"bef621b57559d472edc66f94b01b3edf\"",
-    "last_modified": "Thu, 26 Nov 2026 19:00:00 GMT"
+    "etag": "W/\"8ce263e9136ea66cb5cfba842fc0789e\"",
+    "last_modified": "Sat, 28 Nov 2026 01:09:45 GMT"
    },
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:15Z",
+   "last_ok": "2026-11-28T04:06:12Z",
    "seen_ids": [
+    "6cc358d95ce75841",
+    "e37ea371b677ff92",
+    "0342a27146f2051c",
+    "30ea125294ac5ed0",
     "03150b514b7f5d7b",
     "b983980580faa991",
     "ab77b10267d5241f",
@@ -2915,6 +2931,10 @@
     "408ca218d4083668"
    ],
    "text_checked": [
+    "6cc358d95ce75841",
+    "e37ea371b677ff92",
+    "0342a27146f2051c",
+    "30ea125294ac5ed0",
     "03150b514b7f5d7b",
     "b983980580faa991",
     "ab77b10267d5241f",
@@ -2954,7 +2974,7 @@
   },
   "kodiakdailymirror": {
    "validators": {},
-   "consecutive_errors": 2,
+   "consecutive_errors": 3,
    "last_ok": "2026-11-27T18:06:12Z",
    "seen_ids": [
     "9d5fd4d3fc98f627",
@@ -3811,10 +3831,10 @@
     "59fb8f6756da5e86"
    ],
    "last_error": {
-    "at": "2026-11-27T22:06:22Z",
+    "at": "2026-11-28T04:06:21Z",
     "error": "HTTP 429"
    },
-   "cooldown_hours": 4,
+   "cooldown_hours": 8,
    "gaps": [
     {
      "detected": "2026-11-20T12:07:19Z",
@@ -3838,7 +3858,7 @@
     }
    ],
    "last_alert": "2026-11-27T12:07:20Z",
-   "cooldown_until": "2026-11-28T02:06:22Z"
+   "cooldown_until": "2026-11-28T12:06:21Z"
   },
   "youralaskalink": {
    "validators": {},
@@ -4299,11 +4319,11 @@
   "alaskapublic": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:15Z",
+   "last_ok": "2026-11-28T04:06:21Z",
    "seen_ids": [
-    "6d923fbb7d985678",
     "160ed4a1cc1bf273",
     "d8eb7dd55448e5ce",
+    "6d923fbb7d985678",
     "f8d64554f2e1e433",
     "a6f83b275b4089e2",
     "e36dd7ae6d198ecf",
@@ -4375,11 +4395,10 @@
   "kmxt": {
    "validators": {},
    "consecutive_errors": 0,
-   "last_ok": "2026-11-28T00:06:15Z",
+   "last_ok": "2026-11-28T04:06:21Z",
    "seen_ids": [
     "b09543405ffdb37e",
     "44a7531c4a724b9b",
-    "8a9b56453e54011b",
     "fc153c6e721c1e7c",
     "6cd2d51e1926e750",
     "6738efadd5b88d51",
@@ -4405,6 +4424,7 @@
     "916497c180f2ea51",
     "1af2925642a92a5b",
     "e05745875fb5ea9b",
+    "8a9b56453e54011b",
     "82385337c6a6e166",
     "c030cc4c6c577b2b",
     "1c51f466e49cda5b",
@@ -4815,5 +4835,5 @@
    "cooldown_hours": 0
   }
  },
- "last_run": "2026-11-28T00:06:02Z"
+ "last_run": "2026-11-28T04:06:04Z"
 }
